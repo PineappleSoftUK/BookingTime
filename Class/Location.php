@@ -6,12 +6,19 @@
 */
 namespace System;
 
-class BookingSystem
+class Location
 {
   //Object variables
   public $id;
   public $name;
   public $assets;
+
+  //Constructor
+  public function __construct($id, $name)
+  {
+    $this->id = $id;
+    $this->name = $name;
+  }
 
   /**
   * Get the value of Id
