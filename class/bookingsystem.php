@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * The booking system itself.
  *
  */
