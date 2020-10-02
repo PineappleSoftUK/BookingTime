@@ -6,7 +6,11 @@
  */
 
 namespace System;
+
+//Includes
+$includes = TRUE;
 include __DIR__ . '/bookingsystem.php';
+include_once __DIR__ . '/../open_db.php';
 
 class Coord
 {
