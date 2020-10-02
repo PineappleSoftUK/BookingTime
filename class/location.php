@@ -6,9 +6,6 @@
 
 namespace System;
 
-/**
- * The location class.
- */
 class Location
 {
   public $id;
@@ -18,5 +15,20 @@ class Location
   public function __construct($name)
   {
     $this->name = $name;
+  }
+
+  function setName($name)
+  {
+    $this->name = $name;
+  }
+
+  function getName()
+  {
+    return $this->name;
+  }
+
+  function toString()
+  {
+    return "Location name: " . $this->name;
   }
 }
