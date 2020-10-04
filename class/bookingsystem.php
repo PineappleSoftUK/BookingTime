@@ -30,4 +30,22 @@ class BookingSystem
     $stmt->bindValue(':name', $locationName);
     $result = $stmt->execute();
   }
+
+  /**
+  * Get all locations
+  *
+  * This returns all locations as an array.
+  *
+  */
+  public function getAllLocations()
+  {
+    $locationArray = array();
+    $res = $this->db->query('SELECT * FROM locations');
+    while ($row = $res->fetchArray())
+    {
+      $object = new Location($row['name']);
+      array_push($locationArray, $object);
+    }
+    return $locationArray;
+  }
 }

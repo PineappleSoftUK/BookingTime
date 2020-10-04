@@ -40,6 +40,15 @@ class Coord
     $this->bookingSystem->addLocation($location);
   }
 
+  /**
+  * Get all locations
+  *
+  */
+  public function getAllLocations()
+  {
+    return $this->bookingSystem->getAllLocations();
+  }
+
   public function toString()
   {
     return "A booking system coordination object";

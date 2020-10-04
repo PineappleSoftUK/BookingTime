@@ -24,5 +24,10 @@ $coord = new System\Coord($db);
 //Locations
 //New
 $coord->newLocation("Test Location 1");
+$coord->newLocation("Test Location 2");
 //Fetch all
 $locationArray = $coord->getAllLocations();
+foreach ($locationArray as $value) {
+  echo $value->getName();
+  echo '<br>';
+}
