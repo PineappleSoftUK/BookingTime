@@ -8,7 +8,7 @@
 namespace System;
 
 //Includes
-$includes = TRUE;
+$includes = true;
 include_once __DIR__ . '/bookingsystem.php';
 include_once __DIR__ . '/location.php';
 
@@ -18,7 +18,7 @@ class Coord
   public $db;
   private $bookingSystem;
 
-  function __construct($db)
+  public function __construct($db)
   {
     $this->db = $db;
     $this->bookingSystem = new BookingSystem($this->db);
@@ -31,7 +31,7 @@ class Coord
   * object so that it can add it to the database.
   *
   */
-  function newLocation($name)
+  public function newLocation($name)
   {
     //Create the location object
     $location = new Location($name);
@@ -40,7 +40,7 @@ class Coord
     $this->bookingSystem->addLocation($location);
   }
 
-  function toString()
+  public function toString()
   {
     return "A booking system coordination object";
   }

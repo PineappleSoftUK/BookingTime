@@ -17,17 +17,17 @@ class Location
     $this->name = $name;
   }
 
-  function setName($name)
+  public function setName($name)
   {
     $this->name = $name;
   }
 
-  function getName()
+  public function getName()
   {
     return $this->name;
   }
 
-  function toString()
+  public function toString()
   {
     return "Location name: " . $this->name;
   }

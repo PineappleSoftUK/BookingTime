@@ -11,7 +11,7 @@ class BookingSystem
   public $db;
   public $locations;
 
-  function __construct($db)
+  public function __construct($db)
   {
     $this->db = $db;
   }
