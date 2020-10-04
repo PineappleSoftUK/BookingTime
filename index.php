@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * A temporary index.php page to test function calls
+ * during development
+ *
+ */
+
 //Error reporting (Temporary during development)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -14,5 +20,9 @@ include __DIR__ . '/class/coord.php';
 $coord = new System\Coord($db);
 
 //Test function calls
-echo $coord->toString();
+
+//Locations
+//New
 $coord->newLocation("Test Location 1");
+//Fetch all
+$locationArray = $coord->getAllLocations();
