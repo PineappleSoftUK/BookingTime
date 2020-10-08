@@ -43,7 +43,7 @@ class BookingSystem
     $res = $this->db->query('SELECT * FROM locations');
     while ($row = $res->fetchArray())
     {
-      $object = new Location($row['name']);
+      $object = new Location($row['id'], $row['name']);
       array_push($locationArray, $object);
     }
     return $locationArray;

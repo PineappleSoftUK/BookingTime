@@ -34,7 +34,7 @@ class Coord
   public function newLocation($name)
   {
     //Create the location object
-    $location = new Location($name);
+    $location = new Location(0, $name);
 
     //Pass the object to the booking system to add to its records
     $this->bookingSystem->addLocation($location);

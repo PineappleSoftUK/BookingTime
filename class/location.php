@@ -12,8 +12,9 @@ class Location
   public $name;
   public $assets;
 
-  public function __construct($name)
+  public function __construct($id, $name)
   {
+    $this->id = $id;
     $this->name = $name;
   }
 
