@@ -25,6 +25,12 @@ $coord = new System\Coord($db);
 //New
 $coord->newLocation("Test Location 1");
 $coord->newLocation("Test Location 2");
+
+//Delete
+$someID = 1;
+
+$coord->deleteLocation($someID);
+
 //Fetch all
 $locationArray = $coord->getAllLocations();
 ?>

@@ -41,11 +41,23 @@ class BookingSystem
   {
     $locationArray = array();
     $res = $this->db->query('SELECT * FROM locations');
-    while ($row = $res->fetchArray())
-    {
+    while ($row = $res->fetchArray()) {
       $object = new Location($row['id'], $row['name']);
       array_push($locationArray, $object);
     }
     return $locationArray;
+  }
+
+  /**
+  * Delete location function.
+  *
+  * This takes a location id and removes it from the database.
+  *
+  */
+  public function deleteLocation($locationID)
+  {
+    $stmt = $this->db->prepare('DELETE FROM locations WHERE id = :id');
+    $stmt->bindValue(':id', $locationID);
+    $result = $stmt->execute();
   }
 }

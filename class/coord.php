@@ -49,6 +49,15 @@ class Coord
     return $this->bookingSystem->getAllLocations();
   }
 
+  /**
+  * Delete a location
+  *
+  */
+  public function deleteLocation($locationID)
+  {
+    $this->bookingSystem->deleteLocation($locationID);
+  }
+
   public function toString()
   {
     return "A booking system coordination object";
