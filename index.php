@@ -27,7 +27,17 @@ $coord->newLocation("Test Location 1");
 $coord->newLocation("Test Location 2");
 //Fetch all
 $locationArray = $coord->getAllLocations();
+?>
+<form action="/action_page.php">
+  <label for="locations">Choose a locations:</label>
+  <select id="locations" name="locations">
+    <?php
 foreach ($locationArray as $value) {
-  echo $value->getName();
-  echo '<br>';
+  ?>
+    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
+  <?php
 }
+?>
+  </select>
+  <input type="submit">
+</form>
