@@ -10,7 +10,6 @@ class Location
 {
   public $id;
   public $name;
-  public $assets;
 
   public function __construct($id, $name)
   {
@@ -18,26 +17,48 @@ class Location
     $this->name = $name;
   }
 
+  /**
+  * Setter for id.
+  *
+  */
   public function setID($id)
   {
     $this->id = $id;
   }
 
+  /**
+  * Getter for id.
+  *
+  */
   public function getID()
   {
     return $this->id;
   }
 
+
+  /**
+  * Setter for name.
+  *
+  */
   public function setName($name)
   {
     $this->name = $name;
   }
 
+  /**
+  * Getter for name.
+  *
+  */
   public function getName()
   {
     return $this->name;
   }
 
+
+  /**
+  * toString method.
+  *
+  */
   public function toString()
   {
     return "Location name: " . $this->name;
