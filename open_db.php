@@ -30,6 +30,9 @@ if ($tableCheck->fetchArray() === false)
 {
   //Locations table
   $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255))');
-  
+
+  //Assets table
+  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), location INTEGER, capacity VARCHAR(255))');
+
 }
 ?>

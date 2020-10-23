@@ -31,7 +31,10 @@ $someID = 1;
 
 $coord->deleteLocation($someID);
 
-//Fetch all
+//Get one location
+echo "Here is the location name for ID=2: " . $coord->getALocation(2)->getName();
+
+//Get all locations
 $locationArray = $coord->getAllLocations();
 ?>
 <form action="/action_page.php">
@@ -47,3 +50,9 @@ foreach ($locationArray as $value) {
   </select>
   <input type="submit">
 </form>
+
+<?php
+//Assets
+//New
+$coord->newAsset("Test Asset 1", 2, 10);
+$coord->newAsset("Test Asset 2", 2, 1);

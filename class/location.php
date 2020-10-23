@@ -8,11 +8,13 @@ namespace System;
 
 class Location
 {
+  public $db;
   public $id;
   public $name;
 
-  public function __construct($id, $name)
+  public function __construct($db, $id, $name)
   {
+    $this->db = $db;
     $this->id = $id;
     $this->name = $name;
   }
@@ -52,6 +54,19 @@ class Location
   public function getName()
   {
     return $this->name;
+  }
+
+  /**
+  * Add asset.
+  *
+  */
+  public function addAsset($asset)
+  {
+    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity) VALUES (:name, :location, :capacity)');
+    $stmt->bindValue(':name', $asset->getName());
+    $stmt->bindValue(':location', $asset->getLocation());
+    $stmt->bindValue(':capacity', $asset->getCapacity());
+    $result = $stmt->execute();
   }
 
 

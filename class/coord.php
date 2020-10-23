@@ -11,6 +11,7 @@ namespace System;
 $includes = true;
 include_once __DIR__ . '/bookingsystem.php';
 include_once __DIR__ . '/location.php';
+include_once __DIR__ . '/asset.php';
 
 
 class Coord
@@ -24,6 +25,8 @@ class Coord
     $this->bookingSystem = new BookingSystem($this->db);
   }
 
+  // LOCATIONS...
+
   /**
   * New location function.
   *
@@ -34,7 +37,7 @@ class Coord
   public function newLocation($name)
   {
     //Create the location object
-    $location = new Location(0, $name);
+    $location = new Location($this->db, 0, $name);
 
     //Pass the object to the booking system to add to its records
     $this->bookingSystem->addLocation($location);
@@ -50,12 +53,40 @@ class Coord
   }
 
   /**
+  * Get a location
+  *
+  */
+  public function getALocation($locationID)
+  {
+    return $this->bookingSystem->getALocation($locationID);
+  }
+
+  /**
   * Delete a location
   *
   */
   public function deleteLocation($locationID)
   {
     $this->bookingSystem->deleteLocation($locationID);
+  }
+
+  // ASSETS...
+
+  /**
+  * New asset function.
+  *
+  * This creates a new asset object and then passes to the bookingsystem
+  * object so that it can add it to the database.
+  *
+  */
+  public function newAsset($name, $locationID, $capacity)
+  {
+    //Create the objects
+    $asset = new Asset(0, $name, $locationID, $capacity);
+    $location = $this->getALocation($locationID);
+
+    //Pass the object to the location to add to its records
+    $location->addAsset($asset);
   }
 
   public function toString()

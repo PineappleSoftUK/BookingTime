@@ -32,6 +32,23 @@ class BookingSystem
   }
 
   /**
+  * Get a location
+  *
+  * This returns one location based on id provided.
+  *
+  */
+  public function getALocation($locationID)
+  {
+    $stmt = $this->db->prepare('SELECT * FROM locations WHERE id = :id');
+    $stmt->bindValue(':id', $locationID);
+    $result = $stmt->execute();
+
+    $array = $result->fetchArray();
+    $location = new Location($this->db, $array['id'], $array['name']);
+    return $location;
+  }
+
+  /**
   * Get all locations
   *
   * This returns all locations as an array.
@@ -42,7 +59,7 @@ class BookingSystem
     $locationArray = array();
     $res = $this->db->query('SELECT * FROM locations');
     while ($row = $res->fetchArray()) {
-      $object = new Location($row['id'], $row['name']);
+      $object = new Location($this->db, $row['id'], $row['name']);
       array_push($locationArray, $object);
     }
     return $locationArray;

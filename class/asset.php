@@ -102,6 +102,6 @@ class Asset
   */
   public function toString()
   {
-    return "Asset ID: " . $this->id .  ", Asset name: " . $this->name . ", Asset capacity: " . $this->capacity;
+    return "Asset ID: " . $this->id .  ", Asset name: " . $this->name . ", Asset Location: " . $this->location . ", Asset capacity: " . $this->capacity;
   }
 }
