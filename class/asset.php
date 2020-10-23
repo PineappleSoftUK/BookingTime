@@ -11,12 +11,14 @@ class Asset
 {
   public $id;
   public $name;
+  public $location;
   public $capacity;
 
-  public function __construct($id, $name, $capacity)
+  public function __construct($id, $name, $location, $capacity)
   {
     $this->id = $id;
     $this->name = $name;
+    $this->location = $location;
     $this->capacity = $capacity;
   }
 
@@ -55,6 +57,24 @@ class Asset
   public function getName()
   {
     return $this->name;
+  }
+
+  /**
+  * Setter for location.
+  *
+  */
+  public function setLocation($location)
+  {
+    $this->location = $location;
+  }
+
+  /**
+  * Getter for location.
+  *
+  */
+  public function getLocation()
+  {
+    return $this->location;
   }
 
   /**
