@@ -23,7 +23,7 @@ class ConstructDB extends SQLite3
 
 $db = new ConstructDB();
 
-//Check for faults table and if needed create the set of tables
+//Check for exisiting table and if needed create the set of tables
 $tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='locations'");
 
 if ($tableCheck->fetchArray() === false)
@@ -32,7 +32,7 @@ if ($tableCheck->fetchArray() === false)
   $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255))');
 
   //Assets table
-  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), location INTEGER, capacity VARCHAR(255))');
+  //$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), location INTEGER, capacity VARCHAR(255))');
 
 }
 ?>
