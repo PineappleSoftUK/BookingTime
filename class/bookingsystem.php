@@ -17,15 +17,13 @@ class BookingSystem
   }
 
   /**
-  * Add location function.
+  * New Location function.
   *
-  * This takes a location object and adds it to the database.
+  * This adds a new location to the database.
   *
   */
-  public function addLocation($location)
+  public function newLocation($locationName)
   {
-    $locationName = $location->getName();
-
     $stmt = $this->db->prepare('INSERT INTO locations (name) VALUES (:name)');
     $stmt->bindValue(':name', $locationName);
     $result = $stmt->execute();

@@ -30,17 +30,13 @@ class Coord
   /**
   * New location function.
   *
-  * This creates a new location object and then passes to the bookingsystem
-  * object so that it can add it to the database.
+  * This passes the location name to the BookingSystem object
   *
   */
   public function newLocation($name)
   {
-    //Create the location object
-    $location = new Location($this->db, 0, $name);
-
     //Pass the object to the booking system to add to its records
-    $this->bookingSystem->addLocation($location);
+    $this->bookingSystem->newLocation($name);
   }
 
   /**
