@@ -91,6 +91,19 @@ class Location
   }
 
   /**
+  * Delete asset function.
+  *
+  * This takes a asset object and removes it from the database.
+  *
+  */
+  public function deleteAsset($assetToDelete)
+  {
+    $stmt = $this->db->prepare('DELETE FROM assets WHERE id = :id');
+    $stmt->bindValue(':id', $assetToDelete->getID());
+    $result = $stmt->execute();
+  }
+
+  /**
   * toString method.
   *
   */

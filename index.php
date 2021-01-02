@@ -87,3 +87,13 @@ $assetArray = $coord->getAllAssets($locationForAsset);
   </select>
   <input type="submit">
 </form>
+
+<?php
+
+//Delete an asset
+$assetToDelete = $assetArray[0];
+$locationForAsset = $locationArray[1];
+
+$coord->deleteAsset($assetToDelete, $locationForAsset);
+
+?>

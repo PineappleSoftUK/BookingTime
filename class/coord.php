@@ -93,6 +93,16 @@ class Coord
   }
 
 
+  /**
+  * Delete an asset
+  *
+  */
+  public function deleteAsset($assetToDelete, $locationForAsset)
+  {
+    $locationForAsset->deleteAsset($assetToDelete);
+  }
+
+
   public function toString()
   {
     return "A booking system coordination object";
