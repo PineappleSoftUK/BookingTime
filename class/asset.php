@@ -9,13 +9,15 @@ namespace System;
 
 class Asset
 {
+  public $db;
   public $id;
   public $name;
   public $location;
   public $capacity;
 
-  public function __construct($id, $name, $location, $capacity)
+  public function __construct($db, $id, $name, $location, $capacity)
   {
+    $this->db = $db;
     $this->id = $id;
     $this->name = $name;
     $this->location = $location;

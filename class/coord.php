@@ -75,20 +75,21 @@ class Coord
   /**
   * New asset function.
   *
-  * This creates a new asset object and then passes to the bookingsystem
-  * object so that it can add it to the database.
+  * Asks the location object to add an asset
   *
   */
-  public function newAsset($name, $location, $capacity)
+  public function newAsset($name, $locationForAsset, $capacity)
   {
-    /*
-    //Create the objects
-    $asset = new Asset(0, $name, $locationID, $capacity);
-    $location = $this->getALocation($locationID);
+    $locationForAsset->newAsset($name, $capacity);
+  }
 
-    //Pass the object to the location to add to its records
-    */
-    $location->newAsset($name, $capacity);
+  /**
+  * Get all assets
+  *
+  */
+  public function getAllAssets($locationForAsset)
+  {
+    return $locationForAsset->getAllAssets();
   }
 
 

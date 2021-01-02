@@ -30,7 +30,7 @@ $coord->newLocation("Test Location 2");
 $locationArray = $coord->getAllLocations();
 ?>
 <form action="/action_page.php">
-  <label for="locations">Choose a locations:</label>
+  <label for="locations">Choose a location:</label>
   <select id="locations" name="locations">
     <?php
     foreach ($locationArray as $value) {
@@ -68,4 +68,22 @@ $locationForAsset = $locationArray[1];
 $coord->newAsset("Test Asset 1", $locationForAsset, 10);
 $coord->newAsset("Test Asset 2", $locationForAsset, 1);
 
+//Get all assets
+$locationForAsset = $locationArray[1];
+$assetArray = $coord->getAllAssets($locationForAsset);
 ?>
+<form action="/action_page.php">
+  <label for="assets">Choose an asset:</label>
+  <select id="assets" name="assets">
+    <?php
+    foreach ($assetArray as $value) {
+    ?>
+
+    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
+
+    <?php
+    }
+    ?>
+  </select>
+  <input type="submit">
+</form>

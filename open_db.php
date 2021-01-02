@@ -29,10 +29,10 @@ $tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='locations'"
 if ($tableCheck->fetchArray() === false)
 {
   //Locations table
-  $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255))');
+  $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
 
   //Assets table
-  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), location INTEGER, capacity VARCHAR(255))');
+  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER)');
 
 }
 ?>

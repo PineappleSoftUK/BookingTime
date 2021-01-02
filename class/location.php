@@ -59,7 +59,7 @@ class Location
   /**
   * New asset
   *
-  * ##### For future use #####
+  * Adds the asset provided to the database
   *
   */
   public function newAsset($name, $capacity)
@@ -69,6 +69,25 @@ class Location
     $stmt->bindValue(':location', $this->id);
     $stmt->bindValue(':capacity', $capacity);
     $result = $stmt->execute();
+  }
+
+  /**
+  * Get all assets
+  *
+  * This returns an array of all asset objects linked this location.
+  *
+  */
+  public function getAllAssets()
+  {
+    $assetArray = array();
+    $stmt = $this->db->prepare('SELECT * FROM assets WHERE location = :location');
+    $stmt->bindValue(':location', $this->id);
+    $res = $stmt->execute();
+    while ($row = $res->fetchArray()) {
+      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity']);
+      array_push($assetArray, $object);
+    }
+    return $assetArray;
   }
 
   /**
