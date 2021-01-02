@@ -46,12 +46,13 @@ $locationArray = $coord->getAllLocations();
 </form>
 
 <?php
-/*
-//Delete
+
+//Delete a location
 $someID = 1;
 
 $coord->deleteLocation($someID);
 
+/*
 //Get one location
 echo "Here is the location name for ID=2: " . $coord->getALocation(2)->getName();
 

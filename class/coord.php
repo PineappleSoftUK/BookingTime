@@ -65,12 +65,10 @@ class Coord
   * Delete a location
   *
   */
-  /*
   public function deleteLocation($locationID)
   {
     $this->bookingSystem->deleteLocation($locationID);
   }
-  */
 
   // ASSETS...
 
