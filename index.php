@@ -26,6 +26,27 @@ $coord = new System\Coord($db);
 $coord->newLocation("Test Location 1");
 $coord->newLocation("Test Location 2");
 
+//Get all locations
+$locationArray = $coord->getAllLocations();
+?>
+<form action="/action_page.php">
+  <label for="locations">Choose a locations:</label>
+  <select id="locations" name="locations">
+    <?php
+    foreach ($locationArray as $value) {
+    ?>
+
+    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
+
+    <?php
+    }
+    ?>
+  </select>
+  <input type="submit">
+</form>
+
+<?php
+/*
 //Delete
 $someID = 1;
 
@@ -34,25 +55,12 @@ $coord->deleteLocation($someID);
 //Get one location
 echo "Here is the location name for ID=2: " . $coord->getALocation(2)->getName();
 
-//Get all locations
-$locationArray = $coord->getAllLocations();
-?>
-<form action="/action_page.php">
-  <label for="locations">Choose a locations:</label>
-  <select id="locations" name="locations">
-    <?php
-foreach ($locationArray as $value) {
-  ?>
-    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
-  <?php
-}
-?>
-  </select>
-  <input type="submit">
-</form>
 
-<?php
+
+
 //Assets
 //New
 $coord->newAsset("Test Asset 1", 2, 10);
 $coord->newAsset("Test Asset 2", 2, 1);
+*/
+?>

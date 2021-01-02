@@ -9,7 +9,6 @@ namespace System;
 class BookingSystem
 {
   public $db;
-  public $locations;
 
   public function __construct($db)
   {
@@ -34,7 +33,10 @@ class BookingSystem
   *
   * This returns one location based on id provided.
   *
+  * ##### Reference only, consider removing. #####
+  *
   */
+  /*
   public function getALocation($locationID)
   {
     $stmt = $this->db->prepare('SELECT * FROM locations WHERE id = :id');
@@ -45,11 +47,12 @@ class BookingSystem
     $location = new Location($this->db, $array['id'], $array['name']);
     return $location;
   }
+  */
 
   /**
   * Get all locations
   *
-  * This returns all locations as an array.
+  * This returns an array of all location objects.
   *
   */
   public function getAllLocations()
@@ -68,11 +71,15 @@ class BookingSystem
   *
   * This takes a location id and removes it from the database.
   *
+  * ##### For future use #####
+  *
   */
+  /*
   public function deleteLocation($locationID)
   {
     $stmt = $this->db->prepare('DELETE FROM locations WHERE id = :id');
     $stmt->bindValue(':id', $locationID);
     $result = $stmt->execute();
   }
+  */
 }

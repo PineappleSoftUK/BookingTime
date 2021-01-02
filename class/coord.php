@@ -51,20 +51,26 @@ class Coord
   /**
   * Get a location
   *
+  * ##### For reference, consider deleting.
+  *
   */
+  /*
   public function getALocation($locationID)
   {
     return $this->bookingSystem->getALocation($locationID);
   }
+  */
 
   /**
   * Delete a location
   *
   */
+  /*
   public function deleteLocation($locationID)
   {
     $this->bookingSystem->deleteLocation($locationID);
   }
+  */
 
   // ASSETS...
 
@@ -75,6 +81,7 @@ class Coord
   * object so that it can add it to the database.
   *
   */
+  /*
   public function newAsset($name, $locationID, $capacity)
   {
     //Create the objects
@@ -84,6 +91,7 @@ class Coord
     //Pass the object to the location to add to its records
     $location->addAsset($asset);
   }
+  */
 
   public function toString()
   {

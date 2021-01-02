@@ -59,7 +59,10 @@ class Location
   /**
   * Add asset.
   *
+  * ##### For future use #####
+  *
   */
+  /*
   public function addAsset($asset)
   {
     $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity) VALUES (:name, :location, :capacity)');
@@ -68,7 +71,7 @@ class Location
     $stmt->bindValue(':capacity', $asset->getCapacity());
     $result = $stmt->execute();
   }
-
+  */
 
   /**
   * toString method.
