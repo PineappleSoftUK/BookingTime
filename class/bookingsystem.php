@@ -72,10 +72,10 @@ class BookingSystem
   * This takes a location id and removes it from the database.
   *
   */
-  public function deleteLocation($locationID)
+  public function deleteLocation($locationToDelete)
   {
     $stmt = $this->db->prepare('DELETE FROM locations WHERE id = :id');
-    $stmt->bindValue(':id', $locationID);
+    $stmt->bindValue(':id', $locationToDelete->getID());
     $result = $stmt->execute();
   }
 }

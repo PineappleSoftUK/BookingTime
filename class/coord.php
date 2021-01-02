@@ -65,9 +65,9 @@ class Coord
   * Delete a location
   *
   */
-  public function deleteLocation($locationID)
+  public function deleteLocation($locationToDelete)
   {
-    $this->bookingSystem->deleteLocation($locationID);
+    $this->bookingSystem->deleteLocation($locationToDelete);
   }
 
   // ASSETS...

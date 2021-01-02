@@ -48,9 +48,9 @@ $locationArray = $coord->getAllLocations();
 <?php
 
 //Delete a location
-$someID = 1;
+$locationToDelete = $locationArray[0];
 
-$coord->deleteLocation($someID);
+$coord->deleteLocation($locationToDelete);
 
 /*
 //Get one location
