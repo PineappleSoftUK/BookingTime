@@ -79,17 +79,18 @@ class Coord
   * object so that it can add it to the database.
   *
   */
-  /*
-  public function newAsset($name, $locationID, $capacity)
+  public function newAsset($name, $location, $capacity)
   {
+    /*
     //Create the objects
     $asset = new Asset(0, $name, $locationID, $capacity);
     $location = $this->getALocation($locationID);
 
     //Pass the object to the location to add to its records
-    $location->addAsset($asset);
+    */
+    $location->newAsset($name, $capacity);
   }
-  */
+
 
   public function toString()
   {

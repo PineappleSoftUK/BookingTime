@@ -55,13 +55,17 @@ $coord->deleteLocation($someID);
 /*
 //Get one location
 echo "Here is the location name for ID=2: " . $coord->getALocation(2)->getName();
-
+*/
 
 
 
 //Assets
 //New
-$coord->newAsset("Test Asset 1", 2, 10);
-$coord->newAsset("Test Asset 2", 2, 1);
-*/
+
+//Location object
+$locationForAsset = $locationArray[1];
+
+$coord->newAsset("Test Asset 1", $locationForAsset, 10);
+$coord->newAsset("Test Asset 2", $locationForAsset, 1);
+
 ?>

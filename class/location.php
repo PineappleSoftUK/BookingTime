@@ -57,21 +57,19 @@ class Location
   }
 
   /**
-  * Add asset.
+  * New asset
   *
   * ##### For future use #####
   *
   */
-  /*
-  public function addAsset($asset)
+  public function newAsset($name, $capacity)
   {
     $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity) VALUES (:name, :location, :capacity)');
-    $stmt->bindValue(':name', $asset->getName());
-    $stmt->bindValue(':location', $asset->getLocation());
-    $stmt->bindValue(':capacity', $asset->getCapacity());
+    $stmt->bindValue(':name', $name);
+    $stmt->bindValue(':location', $this->id);
+    $stmt->bindValue(':capacity', $capacity);
     $result = $stmt->execute();
   }
-  */
 
   /**
   * toString method.
