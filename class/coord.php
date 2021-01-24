@@ -12,6 +12,7 @@ $includes = true;
 include_once __DIR__ . '/bookingsystem.php';
 include_once __DIR__ . '/location.php';
 include_once __DIR__ . '/asset.php';
+include_once __DIR__ . '/booking.php';
 
 
 class Coord
@@ -102,6 +103,36 @@ class Coord
     $locationForAsset->deleteAsset($assetToDelete);
   }
 
+  // Bookings...
+
+  /**
+  * New booking function.
+  *
+  * Asks the asset object to add a new booking
+  *
+  */
+  public function newBooking($assetForBooking)
+  {
+    $assetForBooking->newBooking();
+  }
+
+  /**
+  * Get all bookings
+  *
+  */
+  public function getAllbookings($assetForBooking)
+  {
+    return $assetForBooking->getAllbookings();
+  }
+
+  /**
+  * Delete a booking
+  *
+  */
+  public function deletebooking($bookingToDelete, $assetForBooking)
+  {
+    $assetForBooking->deletebooking($bookingToDelete);
+  }
 
   public function toString()
   {

@@ -1,0 +1,68 @@
+<?php
+/**
+ * A booking is an object linked to an asset that will hold details
+ * of a booker and a will contain a timeslot.
+ *
+ */
+
+namespace System;
+
+class Booking
+{
+  public $db;
+  public $id;
+  public $asset;
+
+  public function __construct($db, $id, $asset)
+  {
+    $this->db = $db;
+    $this->id = $id;
+    $this->asset = $asset;
+  }
+
+  /**
+  * Setter for id.
+  *
+  */
+  public function setID($id)
+  {
+    $this->id = $id;
+  }
+
+  /**
+  * Getter for id.
+  *
+  */
+  public function getID()
+  {
+    return $this->id;
+  }
+
+
+  /**
+  * Setter for asset.
+  *
+  */
+  public function setasset($asset)
+  {
+    $this->asset = $asset;
+  }
+
+  /**
+  * Getter for asset.
+  *
+  */
+  public function getasset()
+  {
+    return $this->asset;
+  }
+
+  /**
+  * toString method.
+  *
+  */
+  public function toString()
+  {
+    return "Booking ID: " . $this->id .  ", Asset id: " . $this->asset;
+  }
+}

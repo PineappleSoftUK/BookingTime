@@ -96,4 +96,40 @@ $locationForAsset = $locationArray[1];
 
 $coord->deleteAsset($assetToDelete, $locationForAsset);
 
+
+//Booking
+//New
+
+//Asset object
+$assetForBooking = $assetArray[1];
+
+$coord->newBooking($assetForBooking);
+$coord->newBooking($assetForBooking);
+
+//Get all assets
+$assetForBooking = $assetArray[1];
+$bookingArray = $coord->getAllBookings($assetForBooking);
 ?>
+<form action="/action_page.php">
+  <label for="bookings">Choose an booking:</label>
+  <select id="bookings" name="bookings">
+    <?php
+    foreach ($bookingArray as $value) {
+    ?>
+
+    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getID(); ?></option>
+
+    <?php
+    }
+    ?>
+  </select>
+  <input type="submit">
+</form>
+
+<?php
+
+//Delete an booking
+$bookingToDelete = $bookingArray[0];
+$assetForBooking = $assetArray[1];
+
+$coord->deletebooking($bookingToDelete, $assetForBooking);
