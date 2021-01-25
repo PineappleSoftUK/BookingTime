@@ -37,5 +37,8 @@ if ($tableCheck->fetchArray() === false)
   //Bookings table
   $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER)');
 
+} else {
+  echo "An existing database table has been found, setup will now be aborted to preserve any existing data, no changed should have been made";
+  exit();
 }
 ?>
