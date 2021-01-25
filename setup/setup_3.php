@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main system page
+ * Initial setup - step 3, setup complete.
  *
  */
 
@@ -12,11 +12,24 @@ error_reporting(E_ALL);
 
 //Includes
 $includes = true;
-include_once __DIR__ . '/open_db.php';
-//include __DIR__ . '/class/coord.php';
 
-//Create the coordinator
-//$coord = new System\Coord($db);
+//If form is submitted..
+if (isset($_POST['submit']))
+{
+  //Set timetslot type to minutes
+  $type = "minutes";
+
+  //Set timeslot duration
+  $timeslotDuration = $_POST['duration'];
+
+  //Setup tables
+  include_once __DIR__ . '/create_initial_tables.php';
+  include_once __DIR__ . '/create_setup_table.php';
+} else {
+  echo "Error, please rerun setup";
+  exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +50,10 @@ include_once __DIR__ . '/open_db.php';
 </head>
 
 <body>
-  <h1>Booking Time</h1>
+
+  <h1>Booking Time - Initial Setup Complete</h1>
+  <p>Setup is now complete.</p>
+  <p><a href="../index.php">Proceed to homepage</a></p>
+
 </body>
 </html>

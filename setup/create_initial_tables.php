@@ -17,18 +17,25 @@ class ConstructDB extends SQLite3
 {
   function __construct()
   {
-    $this->open(__DIR__ . '/bookingtime.db');
+    $this->open(__DIR__ . '/../bookingtime.db');
   }
 }
 
 $db = new ConstructDB();
 
 //Check for exisiting table and if needed create the set of tables
-$tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='setup'");
+$tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='locations'");
 
 if ($tableCheck->fetchArray() === false)
 {
-  include_once __DIR__ . '/setup/index.php';
-  exit();
+  //Locations table
+  $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
+
+  //Assets table
+  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER)');
+
+  //Bookings table
+  $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER)');
+
 }
 ?>

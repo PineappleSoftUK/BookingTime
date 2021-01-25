@@ -9,26 +9,17 @@ if(!$includes) {
   exit();
 }
 
-//Security for includes
-$includes = TRUE;
-
-//Open or create database file
-class ConstructDB extends SQLite3
-{
-  function __construct()
-  {
-    $this->open(__DIR__ . '/bookingtime.db');
-  }
-}
-
-$db = new ConstructDB();
-
 //Check for exisiting table and if needed create the set of tables
 $tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='setup'");
 
 if ($tableCheck->fetchArray() === false)
 {
-  include_once __DIR__ . '/setup/index.php';
-  exit();
+  //Setup table
+  $db->exec('CREATE TABLE IF NOT EXISTS setup (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT)');
+
+  //Set chosen timeslot type:
+  $stmt = $db->prepare('INSERT INTO setup (type) VALUES (:type)');
+  $stmt->bindValue(':type', $type);
+  $result = $stmt->execute();
 }
 ?>

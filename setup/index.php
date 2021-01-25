@@ -41,7 +41,7 @@ $includes = true;
     setup please follow the link below. If you were not expecting to see this
     page then please read the next section.</p>
 
-  <p><a href="setup_1.php">Start initial setup</a></p>
+  <p><a href="setup/setup_1.php">Start initial setup</a></p>
 
   <h2>Not expecting to see this page?</h2>
   <p>You are seeing this page because the system cannot find the table 'setup'
