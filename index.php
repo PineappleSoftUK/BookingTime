@@ -37,6 +37,6 @@ $coord = new System\Coord($db);
 </head>
 
 <body>
-  <!-- page content -->
+  <h1>Booking Time</h1>
 </body>
 </html>
