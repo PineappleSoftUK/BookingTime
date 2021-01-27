@@ -38,5 +38,9 @@ include_once __DIR__ . '/open_db.php';
 
 <body>
   <h1>Booking Time</h1>
+
+  <h2>Administrator</h2>
+  <h2>Manager</h2>
+  <h2>Client</h2>
 </body>
 </html>
