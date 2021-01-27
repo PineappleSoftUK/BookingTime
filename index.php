@@ -13,10 +13,10 @@ error_reporting(E_ALL);
 //Includes
 $includes = true;
 include_once __DIR__ . '/open_db.php';
-//include __DIR__ . '/class/coord.php';
+include __DIR__ . '/class/coord.php';
 
 //Create the coordinator
-//$coord = new System\Coord($db);
+$coord = new System\Coord($db);
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +40,8 @@ include_once __DIR__ . '/open_db.php';
   <h1>Booking Time</h1>
 
   <h2>Administrator</h2>
+  <p><a href="settings/index.php">Update settings</a></p>
+
   <h2>Manager</h2>
   <h2>Client</h2>
 </body>

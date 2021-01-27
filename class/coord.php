@@ -26,6 +26,32 @@ class Coord
     $this->bookingSystem = new BookingSystem($this->db);
   }
 
+  // Settings...
+
+  /**
+  * Set time slot duration.
+  *
+  * This passes the time slot duration to the BookingSystem object
+  *
+  */
+  public function setTimeSlotDuration($timeSlotDuration)
+  {
+    //Pass the object to the booking system to update its attribute
+    $this->bookingSystem->setTimeSlotDuration($timeSlotDuration);
+  }
+
+  /**
+  * Get time slot duration.
+  *
+  * This returns the time slot duration to the GUI
+  *
+  */
+  public function getTimeSlotDuration()
+  {
+    //Pass the object to the booking system to update its attribute
+    return $this->bookingSystem->getTimeSlotDuration();
+  }
+
   // LOCATIONS...
 
   /**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Initial setup - step 3, setup complete.
+ * Administrator menu - update settings.
  *
  */
 
@@ -12,22 +12,19 @@ error_reporting(E_ALL);
 
 //Includes
 $includes = true;
+include_once __DIR__ . '/../open_db.php';
+include __DIR__ . '/../class/coord.php';
+
+//Create the coordinator
+$coord = new System\Coord($db);
 
 //If form is submitted..
 if (isset($_POST['submit']))
 {
-  //Set timetslot type to minutes
-  $type = "minutes";
-
   //Set timeslot duration
   $timeSlotDuration = $_POST['duration'];
 
-  //Setup tables
-  include_once __DIR__ . '/create_initial_tables.php';
-  include_once __DIR__ . '/create_setup_table.php';
-} else {
-  echo "Error, please rerun setup";
-  exit();
+  $coord->setTimeSlotDuration($timeSlotDuration);
 }
 
 ?>
@@ -50,10 +47,13 @@ if (isset($_POST['submit']))
 </head>
 
 <body>
+  <h1>Booking Time - Update Settings</h1>
 
-  <h1>Booking Time - Initial Setup Complete</h1>
-  <p>Setup is now complete.</p>
-  <p><a href="../index.php">Proceed to homepage</a></p>
+  <form action="index.php" method="post">
+    <label for="duration">Timeslot duration (between 1 and 1439):</label>
+    <input type="number" id="duration" name="duration" min="1" max="1439" value="<?php echo $coord->getTimeSlotDuration(); ?>"><br>
 
+    <input type="submit" name="submit" value="Submit">
+  </form>
 </body>
 </html>
