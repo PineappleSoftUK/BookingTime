@@ -10,14 +10,13 @@ class TimeSlot
 {
   public $db;
   public $id;
-  public $name;
-  public $location;
-  public $capacity;
+  public $bookingID;
 
-  public function __construct($db, $id, $name, $location, $capacity)
+  public function __construct($db, $id, $bookingID)
   {
     $this->db = $db;
     $this->id = $id;
+    $this->bookingID = $bookingID;
   }
 
   /**
@@ -36,6 +35,24 @@ class TimeSlot
   public function getID()
   {
     return $this->id;
+  }
+
+  /**
+  * Setter for bookingID.
+  *
+  */
+  public function setbookingID($bookingID)
+  {
+    $this->bookingID = $bookingID;
+  }
+
+  /**
+  * Getter for bookingID.
+  *
+  */
+  public function getbookingID()
+  {
+    return $this->bookingID;
   }
 
 
