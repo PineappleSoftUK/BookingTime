@@ -106,7 +106,7 @@ $assetForBooking = $assetArray[1];
 $coord->newBooking($assetForBooking);
 $coord->newBooking($assetForBooking);
 
-//Get all assets
+//Get all bookings
 $assetForBooking = $assetArray[1];
 $bookingArray = $coord->getAllBookings($assetForBooking);
 ?>
@@ -133,3 +133,29 @@ $bookingToDelete = $bookingArray[0];
 $assetForBooking = $assetArray[1];
 
 $coord->deletebooking($bookingToDelete, $assetForBooking);
+
+
+//Time Slots
+
+//Get all bookings
+$assetForBooking = $assetArray[1];
+$aGivenDay = "2021-01-28";
+$timeSlotArray = $coord->getListOfTimeSlots($assetForBooking, $aGivenDay);
+?>
+<form action="/action_page.php">
+  <label for="timeSlots">Choose a time slot:</label>
+  <select id="timeSlots" name="bookings">
+    <?php
+    foreach ($timeSlotArray as $value) {
+    ?>
+
+    <option value="<?php echo $value->getID(); ?>"><?php echo $value->getTime(); ?></option>
+
+    <?php
+    }
+    ?>
+  </select>
+  <input type="submit">
+</form>
+
+<?php

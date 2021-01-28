@@ -13,6 +13,7 @@ include_once __DIR__ . '/bookingsystem.php';
 include_once __DIR__ . '/location.php';
 include_once __DIR__ . '/asset.php';
 include_once __DIR__ . '/booking.php';
+include_once __DIR__ . '/timeslot.php';
 
 
 class Coord
@@ -159,6 +160,20 @@ class Coord
   {
     $assetForBooking->deletebooking($bookingToDelete);
   }
+
+  // Time Slots...
+
+
+  /**
+  * Get time slots
+  *
+  */
+  public function getListOfTimeSlots($assetForBooking, $aGivenDay)
+  {
+    $timeSlotDuration = $this->getTimeSlotDuration();
+    return $assetForBooking->getListOfTimeSlots($aGivenDay, $timeSlotDuration);
+  }
+
 
   public function toString()
   {

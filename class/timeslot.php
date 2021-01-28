@@ -11,12 +11,14 @@ class TimeSlot
   public $db;
   public $id;
   public $bookingID;
+  public $time;
 
-  public function __construct($db, $id, $bookingID)
+  public function __construct($db, $id, $bookingID, $dateTime)
   {
     $this->db = $db;
     $this->id = $id;
     $this->bookingID = $bookingID;
+    $this->time = $dateTime->format('H:i');
   }
 
   /**
@@ -53,6 +55,15 @@ class TimeSlot
   public function getbookingID()
   {
     return $this->bookingID;
+  }
+
+  /**
+  * Getter for time
+  *
+  */
+  public function getTime()
+  {
+    return $this->time;
   }
 
 
@@ -100,6 +111,7 @@ class TimeSlot
     $stmt->bindValue(':id', $bookingToDelete->getID());
     $result = $stmt->execute();
   }
+
 
   /**
   * toString method.

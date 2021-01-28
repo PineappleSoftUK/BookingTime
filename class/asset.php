@@ -7,6 +7,9 @@
 
 namespace System;
 
+use DateTime;
+use DateInterval;
+
 class Asset
 {
   public $db;
@@ -140,6 +143,51 @@ class Asset
     $stmt = $this->db->prepare('DELETE FROM bookings WHERE id = :id');
     $stmt->bindValue(':id', $bookingToDelete->getID());
     $result = $stmt->execute();
+  }
+
+  /**
+  * Get list of timeslots
+  *
+  * This returns a list of available time slots for a given day.
+  *
+  */
+  public function getListOfTimeSlots($aGivenDay, $timeSlotDuration)
+  {
+    $listOfTimeSlots = array();
+    $timeSlotDurationObject = new DateInterval('PT' . $timeSlotDuration . 'M');
+    $slotsInDay = 1440/$timeSlotDuration;
+
+    //Convert date to a DateTime object
+    $dateObject = new DateTime($aGivenDay);
+
+    //Get day of the week (MON=1)
+    $dayOfWeek = $dateObject->format('w');
+
+    //Perform check on day of week, if dissalowed return empty array.
+    // TODO
+
+    //Look up restricted days, i.e is this a bank holiday?
+    // TODO
+
+    //Get a list of bookings and check timeslots against $capacity
+    // TODO
+
+    //Create the time slot objects
+    $i = 1;
+    while($i <= $slotsInDay) {
+      //Create a new time slot object then add to list
+
+      $object = new TimeSlot($this->db, 0, 0, $dateObject);
+      array_push($listOfTimeSlots, $object);
+
+      //Increase the date object by the time slot $timeSlotDuration
+      $dateObject->add($timeSlotDurationObject);
+
+      $i++;
+    }
+
+    return $listOfTimeSlots;
+
   }
 
   /**
