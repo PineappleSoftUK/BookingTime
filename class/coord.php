@@ -79,15 +79,13 @@ class Coord
   /**
   * Get a location
   *
-  * ##### For reference, consider deleting.
+  * Returns a location from a given location ID
   *
   */
-  /*
   public function getALocation($locationID)
   {
     return $this->bookingSystem->getALocation($locationID);
   }
-  */
 
   /**
   * Delete a location

@@ -78,6 +78,22 @@ class BookingSystem
   }
 
   /**
+  * Get a location
+  *
+  * This returns one location based on id provided.
+  *
+  */
+ public function getALocation($locationID)
+ {
+   $stmt = $this->db->prepare('SELECT * FROM locations WHERE id = :id');
+   $stmt->bindValue(':id', $locationID);
+   $result = $stmt->execute();
+   $array = $result->fetchArray();
+   $location = new Location($this->db, $array['id'], $array['name']);
+   return $location;
+ }
+
+  /**
   * Delete location function.
   *
   * This takes a location id and removes it from the database.

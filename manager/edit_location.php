@@ -20,9 +20,15 @@ $coord = new System\Coord($db);
 
 //Get single location
 
-//TODO IF Below....
-$locationID = $_POST['locationID'];
-$locationID = filter_input(INPUT_GET, 'locationID', FILTER_SANITIZE_SPECIAL_CHARS);
+if (isset($_POST['submit'])) {
+  $locationID = $_POST['locationID'];
+} else {
+  $locationID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+  if (!isset($locationID)) {
+    echo "Invalid ID, the ID passed in the URI does not exist in the system";
+    exit();
+  }
+}
 
 $location = $coord->getALocation($locationID);
 
@@ -56,7 +62,9 @@ if (isset($_POST['submit'])) {
 
   <form action="edit_location.php" method="post">
     <label for="locationName">Location Name:</label>
-    <input type="text" id="locationName" name="locationName"><br>
+    <input type="text" id="locationName" name="locationName" value="<?php echo $location->getName(); ?>"><br>
+
+    <input type="hidden" id="locationID" name="locationID" value="<?php echo $location->getID(); ?>">
 
     <input type="submit" name="submit" value="Submit">
   </form>
