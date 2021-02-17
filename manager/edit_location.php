@@ -19,12 +19,17 @@ include __DIR__ . '/../class/coord.php';
 $coord = new System\Coord($db);
 
 //Get single location
-$locationArray = $coord->getAllLocations();
+
+//TODO IF Below....
+$locationID = $_POST['locationID'];
+$locationID = filter_input(INPUT_GET, 'locationID', FILTER_SANITIZE_SPECIAL_CHARS);
+
+$location = $coord->getALocation($locationID);
 
 //If new location form is submitted..
 if (isset($_POST['submit'])) {
-  $locationName = $_POST['locationName'];
-  $coord->newLocation($locationName);
+  $updatedLocationName = $_POST['locationName'];
+  $coord->editLocation($location, $updatedLocationName);
 }
 
 ?>
@@ -47,43 +52,14 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-  <h1>Booking Time - Location Manager</h1>
+  <h1>Booking Time - Edit Location</h1>
 
-  <h2>Add new location</h2>
-
-  <form action="manage_location.php" method="post">
-    <label for="newLocationName">Location Name:</label>
-    <input type="text" id="newLocationName" name="newLocationName"><br>
+  <form action="edit_location.php" method="post">
+    <label for="locationName">Location Name:</label>
+    <input type="text" id="locationName" name="locationName"><br>
 
     <input type="submit" name="submit" value="Submit">
   </form>
-
-  <h2>Existing locations</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Location ID</th>
-        <th>Location Name</th>
-        <th>Edit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-      foreach ($locationArray as $value) {
-        ?>
-
-        <tr>
-          <td><?php echo $value->getID(); ?></td>
-          <td><?php echo $value->getName(); ?></td>
-          <td><a href="edit_location.php?id=<?php echo $value->getID(); ?>">Edit/Delete</a></td>
-        </tr>
-
-      <?php
-      }
-      ?>
-    </tbody>
-  </table>
 
 </body>
 </html>
