@@ -43,6 +43,8 @@ $coord = new System\Coord($db);
   <p><a href="settings/index.php">Update settings</a></p>
 
   <h2>Manager</h2>
+  <p><a href="manager/index.php">Visit manager hub</a></p>
+
   <h2>Client</h2>
 </body>
 </html>
