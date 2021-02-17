@@ -93,6 +93,20 @@ class BookingSystem
    return $location;
  }
 
+ /**
+ * Edit location function.
+ *
+ * Updated the atributes of a location.
+ *
+ */
+ public function editLocation($location, $updatedLocationName)
+ {
+   $stmt = $this->db->prepare('UPDATE locations SET name = :name WHERE id = :id');
+   $stmt->bindValue(':name', $updatedLocationName);
+   $stmt->bindValue(':id', $location->getID());
+   $result = $stmt->execute();
+ }
+
   /**
   * Delete location function.
   *

@@ -19,7 +19,6 @@ include __DIR__ . '/../class/coord.php';
 $coord = new System\Coord($db);
 
 //Get single location
-
 if (isset($_POST['submit'])) {
   $locationID = $_POST['locationID'];
 } else {
@@ -32,10 +31,14 @@ if (isset($_POST['submit'])) {
 
 $location = $coord->getALocation($locationID);
 
+//Blank span
+$span = "";
+
 //If new location form is submitted..
 if (isset($_POST['submit'])) {
   $updatedLocationName = $_POST['locationName'];
   $coord->editLocation($location, $updatedLocationName);
+  $span = "<p class='green'>Location has been updated successfully</p>";
 }
 
 ?>
@@ -59,6 +62,8 @@ if (isset($_POST['submit'])) {
 
 <body>
   <h1>Booking Time - Edit Location</h1>
+
+  <?php echo $span; ?>
 
   <form action="edit_location.php" method="post">
     <label for="locationName">Location Name:</label>

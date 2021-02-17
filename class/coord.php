@@ -88,6 +88,15 @@ class Coord
   }
 
   /**
+  * Edit a location
+  *
+  */
+  public function editLocation($location, $updatedLocationName)
+  {
+    $this->bookingSystem->editLocation($location, $updatedLocationName);
+  }
+
+  /**
   * Delete a location
   *
   */
