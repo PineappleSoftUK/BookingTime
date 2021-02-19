@@ -71,6 +71,7 @@ $locationArray = $coord->getAllLocations();
       <tr>
         <th>Location ID</th>
         <th>Location Name</th>
+        <th>Status</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -82,6 +83,7 @@ $locationArray = $coord->getAllLocations();
         <tr>
           <td><?php echo $value->getID(); ?></td>
           <td><?php echo $value->getName(); ?></td>
+          <td><?php echo $value->getStatus(); ?></td>
           <td><a href="edit_location.php?id=<?php echo $value->getID(); ?>">Edit/Delete</a></td>
         </tr>
 
