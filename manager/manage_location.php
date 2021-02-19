@@ -18,14 +18,18 @@ include __DIR__ . '/../class/coord.php';
 //Create the coordinator
 $coord = new System\Coord($db);
 
-//Get all locations
-$locationArray = $coord->getAllLocations();
+//Blank span
+$span = "";
 
 //If new location form is submitted..
 if (isset($_POST['submit'])) {
   $locationName = $_POST['newLocationName'];
   $coord->newLocation($locationName);
+  $span = "<p class='green'>Location has been added successfully</p>";
 }
+
+//Get all locations
+$locationArray = $coord->getAllLocations();
 
 ?>
 
@@ -48,6 +52,8 @@ if (isset($_POST['submit'])) {
 
 <body>
   <h1>Booking Time - Location Manager</h1>
+
+  <?php echo $span; ?>
 
   <h2>Add new location</h2>
 
