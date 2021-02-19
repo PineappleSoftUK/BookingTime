@@ -64,7 +64,7 @@ class Location
   */
   public function newAsset($name, $capacity)
   {
-    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity) VALUES (:name, :location, :capacity)');
+    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, status) VALUES (:name, :location, :capacity, "Live")');
     $stmt->bindValue(':name', $name);
     $stmt->bindValue(':location', $this->id);
     $stmt->bindValue(':capacity', $capacity);

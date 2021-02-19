@@ -55,7 +55,7 @@ class BookingSystem
   */
   public function newLocation($locationName)
   {
-    $stmt = $this->db->prepare('INSERT INTO locations (name) VALUES (:name)');
+    $stmt = $this->db->prepare('INSERT INTO locations (name, status) VALUES (:name, "Live")');
     $stmt->bindValue(':name', $locationName);
     $result = $stmt->execute();
   }
