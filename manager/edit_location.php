@@ -39,18 +39,21 @@ if (isset($_POST['editSubmit'])) {
   $updatedLocationName = $_POST['locationName'];
   $coord->editLocation($location, $updatedLocationName);
   $span = "<p class='green'>Location has been updated successfully</p>";
+  $location = $coord->getALocation($locationID);
 }
 
 //If delete location form is submitted..
 if (isset($_POST['deleteSubmit'])) {
   $coord->deleteLocation($location);
   $span = "<p class='green'>Location has been marked as deleted</p>";
+  $location = $coord->getALocation($locationID);
 }
 
 //If restore location form is submitted..
 if (isset($_POST['restoreSubmit'])) {
   $coord->restoreLocation($location);
   $span = "<p class='green'>Location has been marked as live</p>";
+  $location = $coord->getALocation($locationID);
 }
 
 
@@ -109,7 +112,7 @@ if (isset($_POST['restoreSubmit'])) {
 
     <input type="hidden" id="locationID" name="locationID" value="<?php echo $location->getID(); ?>">
 
-    <input type="submit" name="restoreSubmit" value="Delete">
+    <input type="submit" name="restoreSubmit" value="Restore">
   </form>
 
   <?php
