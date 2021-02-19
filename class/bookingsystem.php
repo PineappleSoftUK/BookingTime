@@ -71,7 +71,7 @@ class BookingSystem
     $locationArray = array();
     $res = $this->db->query('SELECT * FROM locations');
     while ($row = $res->fetchArray()) {
-      $object = new Location($this->db, $row['id'], $row['name']);
+      $object = new Location($this->db, $row['id'], $row['name'], $row['status']);
       array_push($locationArray, $object);
     }
     return $locationArray;
@@ -89,7 +89,7 @@ class BookingSystem
    $stmt->bindValue(':id', $locationID);
    $result = $stmt->execute();
    $array = $result->fetchArray();
-   $location = new Location($this->db, $array['id'], $array['name']);
+   $location = new Location($this->db, $array['id'], $array['name'], $array['status']);
    return $location;
  }
 
@@ -110,13 +110,26 @@ class BookingSystem
   /**
   * Delete location function.
   *
-  * This takes a location id and removes it from the database.
+  * This takes a location id and marks its status as Deleted.
   *
   */
   public function deleteLocation($locationToDelete)
   {
-    $stmt = $this->db->prepare('DELETE FROM locations WHERE id = :id');
+    $stmt = $this->db->prepare('UPDATE locations SET status = "Deleted" WHERE id = :id');
     $stmt->bindValue(':id', $locationToDelete->getID());
+    $result = $stmt->execute();
+  }
+
+  /**
+  * Restore location function.
+  *
+  * This takes a location id and marks its status as Live.
+  *
+  */
+  public function restoreLocation($locationToRestore)
+  {
+    $stmt = $this->db->prepare('UPDATE locations SET status = "Live" WHERE id = :id');
+    $stmt->bindValue(':id', $locationToRestore->getID());
     $result = $stmt->execute();
   }
 

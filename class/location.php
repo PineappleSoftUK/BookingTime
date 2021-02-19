@@ -11,12 +11,14 @@ class Location
   public $db;
   public $id;
   public $name;
+  public $status;
 
-  public function __construct($db, $id, $name)
+  public function __construct($db, $id, $name, $status)
   {
     $this->db = $db;
     $this->id = $id;
     $this->name = $name;
+    $this->status = $status;
   }
 
   /**
@@ -57,6 +59,24 @@ class Location
   }
 
   /**
+  * Setter for status.
+  *
+  */
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+
+  /**
+  * Getter for status.
+  *
+  */
+  public function getStatus()
+  {
+    return $this->status;
+  }
+
+  /**
   * New asset
   *
   * Adds the asset provided to the database
@@ -84,7 +104,7 @@ class Location
     $stmt->bindValue(':location', $this->id);
     $res = $stmt->execute();
     while ($row = $res->fetchArray()) {
-      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity']);
+      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity'], $row['status']);
       array_push($assetArray, $object);
     }
     return $assetArray;
@@ -98,8 +118,21 @@ class Location
   */
   public function deleteAsset($assetToDelete)
   {
-    $stmt = $this->db->prepare('DELETE FROM assets WHERE id = :id');
+    $stmt = $this->db->prepare('UPDATE assets SET status = "Deleted" WHERE id = :id');
     $stmt->bindValue(':id', $assetToDelete->getID());
+    $result = $stmt->execute();
+  }
+
+  /**
+  * Restore asset function.
+  *
+  * This takes a asset id and marks its status as Live.
+  *
+  */
+  public function restoreAsset($assetToRestore)
+  {
+    $stmt = $this->db->prepare('UPDATE assets SET status = "Live" WHERE id = :id');
+    $stmt->bindValue(':id', $assetToRestore->getID());
     $result = $stmt->execute();
   }
 

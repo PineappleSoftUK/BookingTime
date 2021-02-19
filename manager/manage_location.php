@@ -23,7 +23,7 @@ $locationArray = $coord->getAllLocations();
 
 //If new location form is submitted..
 if (isset($_POST['submit'])) {
-  $locationName = $_POST['locationName'];
+  $locationName = $_POST['newLocationName'];
   $coord->newLocation($locationName);
 }
 

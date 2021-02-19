@@ -105,6 +105,15 @@ class Coord
     $this->bookingSystem->deleteLocation($locationToDelete);
   }
 
+  /**
+  * Restore a location
+  *
+  */
+  public function restoreLocation($locationToRestore)
+  {
+    $this->bookingSystem->restoreLocation($locationToRestore);
+  }
+
   // ASSETS...
 
   /**

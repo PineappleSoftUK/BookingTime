@@ -17,14 +17,16 @@ class Asset
   public $name;
   public $location;
   public $capacity;
+  public $status;
 
-  public function __construct($db, $id, $name, $location, $capacity)
+  public function __construct($db, $id, $name, $location, $capacity, $status)
   {
     $this->db = $db;
     $this->id = $id;
     $this->name = $name;
     $this->location = $location;
     $this->capacity = $capacity;
+    $this->status = $status;
   }
 
   /**
@@ -101,6 +103,24 @@ class Asset
   }
 
   /**
+  * Setter for status.
+  *
+  */
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+
+  /**
+  * Getter for status.
+  *
+  */
+  public function getStatus()
+  {
+    return $this->status;
+  }
+
+  /**
   * New booking
   *
   * Adds a new booking to the database
@@ -126,7 +146,7 @@ class Asset
     $stmt->bindValue(':asset', $this->id);
     $res = $stmt->execute();
     while ($row = $res->fetchArray()) {
-      $object = new booking($this->db, $row['id'], $row['asset']);
+      $object = new booking($this->db, $row['id'], $row['asset'], $row['status']);
       array_push($bookingArray, $object);
     }
     return $bookingArray;
@@ -140,8 +160,21 @@ class Asset
   */
   public function deletebooking($bookingToDelete)
   {
-    $stmt = $this->db->prepare('DELETE FROM bookings WHERE id = :id');
+    $stmt = $this->db->prepare('UPDATE bookings SET status = "Deleted" WHERE id = :id');
     $stmt->bindValue(':id', $bookingToDelete->getID());
+    $result = $stmt->execute();
+  }
+
+  /**
+  * Restore booking function.
+  *
+  * This takes a booking id and marks its status as Live.
+  *
+  */
+  public function restoreBooking($bookingToRestore)
+  {
+    $stmt = $this->db->prepare('UPDATE bookings SET status = "Live" WHERE id = :id');
+    $stmt->bindValue(':id', $bookingToRestore->getID());
     $result = $stmt->execute();
   }
 

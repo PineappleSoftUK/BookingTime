@@ -12,12 +12,14 @@ class Booking
   public $db;
   public $id;
   public $asset;
+  public $status;
 
-  public function __construct($db, $id, $asset)
+  public function __construct($db, $id, $asset, $status)
   {
     $this->db = $db;
     $this->id = $id;
     $this->asset = $asset;
+    $this->status = $status;
   }
 
   /**
@@ -55,6 +57,24 @@ class Booking
   public function getasset()
   {
     return $this->asset;
+  }
+
+  /**
+  * Setter for status.
+  *
+  */
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+
+  /**
+  * Getter for status.
+  *
+  */
+  public function getStatus()
+  {
+    return $this->status;
   }
 
   /**
