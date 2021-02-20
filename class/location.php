@@ -111,6 +111,37 @@ class Location
   }
 
   /**
+  * Get an asset
+  *
+  * This returns one asset based on id provided.
+  *
+  */
+ public function getAnAsset($assetID)
+ {
+   $stmt = $this->db->prepare('SELECT * FROM assets WHERE id = :id');
+   $stmt->bindValue(':id', $assetID);
+   $result = $stmt->execute();
+   $array = $result->fetchArray();
+   $asset = new asset($this->db, $array['id'], $array['name'], $array['location'], $array['capacity'], $array['status']);
+   return $asset;
+ }
+
+ /**
+ * Edit asset function.
+ *
+ * Updated the atributes of a location.
+ *
+ */
+ public function editAsset($asset, $updatedAssetName, $updatedCapacity)
+ {
+   $stmt = $this->db->prepare('UPDATE assets SET name = :name, capacity = :capacity WHERE id = :id');
+   $stmt->bindValue(':name', $updatedAssetName);
+   $stmt->bindValue(':capacity', $updatedCapacity);
+   $stmt->bindValue(':id', $asset->getID());
+   $result = $stmt->execute();
+ }
+
+  /**
   * Delete asset function.
   *
   * This takes a asset object and removes it from the database.

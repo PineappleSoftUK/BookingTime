@@ -109,7 +109,7 @@ $assetArray = $coord->getAllAssets($selectedLocation);
           <td><?php echo $value->getName(); ?></td>
           <td><?php echo $value->getCapacity(); ?></td>
           <td><?php echo $value->getStatus(); ?></td>
-          <td><a href="edit_asset.php?id=<?php echo $value->getID(); ?>">Edit/Delete</a></td>
+          <td><a href="edit_asset.php?id=<?php echo $value->getID(); ?>&loc=<?php echo $value->getLocation(); ?>">Edit/Delete</a></td>
         </tr>
 
       <?php

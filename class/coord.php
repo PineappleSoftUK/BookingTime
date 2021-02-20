@@ -136,6 +136,26 @@ class Coord
     return $locationForAsset->getAllAssets();
   }
 
+  /**
+  * Get an asset
+  *
+  * Returns a single asset from a given asset ID
+  *
+  */
+  public function getAnAsset($locationForAsset, $assetID)
+  {
+    return $locationForAsset->getAnAsset($assetID);
+  }
+
+  /**
+  * Edit an asset
+  *
+  */
+  public function editAsset($locationForAsset, $asset, $updatedAssetName, $updatedCapacity)
+  {
+    $locationForAsset->editAsset($asset, $updatedAssetName, $updatedCapacity);
+  }
+
 
   /**
   * Delete an asset
@@ -144,6 +164,15 @@ class Coord
   public function deleteAsset($assetToDelete, $locationForAsset)
   {
     $locationForAsset->deleteAsset($assetToDelete);
+  }
+
+  /**
+  * Restore an asset
+  *
+  */
+  public function restoreAsset($assetToDelete, $locationForAsset)
+  {
+    $locationForAsset->restoreAsset($assetToDelete);
   }
 
   // Bookings...
