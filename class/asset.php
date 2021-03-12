@@ -17,15 +17,19 @@ class Asset
   public $name;
   public $location;
   public $capacity;
+  public $days;
+  public $times;
   public $status;
 
-  public function __construct($db, $id, $name, $location, $capacity, $status)
+  public function __construct($db, $id, $name, $location, $capacity, $days, $times, $status)
   {
     $this->db = $db;
     $this->id = $id;
     $this->name = $name;
     $this->location = $location;
     $this->capacity = $capacity;
+    $this->days = $days;
+    $this->times = $times;
     $this->status = $status;
   }
 
@@ -94,12 +98,52 @@ class Asset
   }
 
   /**
-  * Setter for capacity.
+  * Getter for capacity.
   *
   */
   public function getCapacity()
   {
     return $this->capacity;
+  }
+
+  /**
+  * Setter for days.
+  *
+  */
+  public function setDays($days)
+  {
+    foreach ($days as $key => $value) {
+      $this->days[$key] = $value;
+    }
+  }
+
+  /**
+  * Getter for days.
+  *
+  */
+  public function getDays()
+  {
+    return $this->days;
+  }
+
+  /**
+  * Setter for times.
+  *
+  */
+  public function settimes($times)
+  {
+    foreach ($times as $key => $value) {
+      $this->times[$key] = $value;
+    }
+  }
+
+  /**
+  * Getter for times.
+  *
+  */
+  public function gettimes()
+  {
+    return $this->times;
   }
 
   /**

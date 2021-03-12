@@ -122,9 +122,9 @@ class Coord
   * Asks the location object to add an asset
   *
   */
-  public function newAsset($name, $locationForAsset, $capacity)
+  public function newAsset($name, $locationForAsset, $capacity, $days, $times)
   {
-    $locationForAsset->newAsset($name, $capacity);
+    $locationForAsset->newAsset($name, $capacity, $days, $times);
   }
 
   /**

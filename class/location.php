@@ -82,12 +82,14 @@ class Location
   * Adds the asset provided to the database
   *
   */
-  public function newAsset($name, $capacity)
+  public function newAsset($name, $capacity, $days, $times)
   {
-    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, status) VALUES (:name, :location, :capacity, "Live")');
+    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, days, times, status) VALUES (:name, :location, :capacity, :days, :times, "Live")');
     $stmt->bindValue(':name', $name);
     $stmt->bindValue(':location', $this->id);
     $stmt->bindValue(':capacity', $capacity);
+    $stmt->bindValue(':days', serialize($days));
+    $stmt->bindValue(':times', serialize($times));
     $result = $stmt->execute();
   }
 
@@ -104,7 +106,7 @@ class Location
     $stmt->bindValue(':location', $this->id);
     $res = $stmt->execute();
     while ($row = $res->fetchArray()) {
-      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity'], $row['status']);
+      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity'], unserialize($row['days']), unserialize($row['times']), $row['status']);
       array_push($assetArray, $object);
     }
     return $assetArray;

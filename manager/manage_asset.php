@@ -36,7 +36,15 @@ if (isset($_POST['submit'])) {
 
   $assetCapacity = $_POST['capacity'];
 
-  $coord->newAsset($assetName, $selectedLocation, $assetCapacity);
+  foreach ($_POST['days']  as $key => $value) {
+    $days[$key] = $value;
+  }
+
+  foreach ($_POST['times']  as $key => $value) {
+    $times[$key] = $value;
+  }
+
+  $coord->newAsset($assetName, $selectedLocation, $assetCapacity, $days, $times);
   $span = "<p class='green'>Asset has been added successfully</p>";
 }
 
@@ -82,6 +90,26 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <label for="capacity">Asset capacity:</label>
     <input type="number" id="capacity" name="capacity" value="1">
+
+    <input type="checkbox" id="monday" name="days[]" value="monday" checked>
+    <label for="monday"> Monday</label><br>
+    <input type="checkbox" id="tuesday" name="days[]" value="tuesday" checked>
+    <label for="tuesday"> Tuesday</label><br>
+    <input type="checkbox" id="wednesday" name="days[]" value="wednesday" checked>
+    <label for="wednesday"> Wednesday</label><br>
+    <input type="checkbox" id="thursday" name="days[]" value="thursday" checked>
+    <label for="thursday"> Thursday</label><br>
+    <input type="checkbox" id="friday" name="days[]" value="friday" checked>
+    <label for="friday"> Friday</label><br>
+    <input type="checkbox" id="saturday" name="days[]" value="saturday" checked>
+    <label for="saturday"> Saturday</label><br>
+    <input type="checkbox" id="sunday" name="days[]" value="sunday" checked>
+    <label for="sunday"> Sunday</label><br>
+
+    <br>
+
+    <input type="checkbox" id="00" name="times[]" value="00" checked>
+    <label for="00"> 00:00</label><br>
 
     <input type="hidden" id="locationID" name="locationID" value="<?php echo $selectedLocation->getID(); ?>">
 
