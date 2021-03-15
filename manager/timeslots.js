@@ -20,7 +20,7 @@ class TimeString extends Date {
 function removeTimeslots() {
 
   //Find any element with the attribute: name="timeslot"
-  var timeSlotElements = document.querySelectorAll('[name="timeslot"]');
+  var timeSlotElements = document.querySelectorAll('[name="timeslot"],[name="timeslot[]"]');
 
   //Loop through and remove the element
   for (var i = 0; i < timeSlotElements.length; i++) {
@@ -54,6 +54,7 @@ function showTimeslots() {
 
   //The form
   var form = document.getElementById("form");
+  var submitButton = document.getElementById("submitBreak");
 
   //Set the clock to zero
   var clock = new TimeString();
@@ -66,24 +67,28 @@ function showTimeslots() {
   //Add the checkboxes to the form
   for (i = 0; i < numberOfTimeslots; i++) {
 
+  	//Get the time for checkbox
+    var checkboxTime = clock.timeAsString();
+
     //Start with a br
     var brElement = document.createElement("br");
     brElement.setAttribute("name", "timeslot");
-    form.appendChild(brElement);
+    submitButton.before(form.appendChild(brElement));
 
     //The checkbox
     var inputElement = document.createElement("input");
     inputElement.type = "checkbox";
-    inputElement.name = "timeslot";
-    form.appendChild(inputElement);
+    inputElement.name = "timeslot[]";
+    inputElement.value = checkboxTime;
+    submitButton.before(form.appendChild(inputElement));
 
     //The checkbox label
     var labelElement = document.createElement("LABEL");
-    var labelText = document.createTextNode(clock.timeAsString());
+    var labelText = document.createTextNode(checkboxTime);
     labelElement.setAttribute("for", "timeslot");
     labelElement.setAttribute("name", "timeslot");
     labelElement.appendChild(labelText);
-    form.appendChild(labelElement);
+    submitButton.before(form.appendChild(labelElement));
 
     //Increment the clock by the timeslot duration
     clock.setMinutes(clock.getMinutes() + selection);
