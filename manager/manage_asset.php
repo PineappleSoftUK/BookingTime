@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
     $days[$key] = $value;
   }
 
-  foreach ($_POST['times']  as $key => $value) {
+  foreach ($_POST['timeslot']  as $key => $value) {
     $times[$key] = $value;
   }
 
@@ -71,9 +71,9 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
   <!--
   <link rel="stylesheet" href="style.css">
+-->
 
-  <script src="script.js"></script>
-  -->
+  <script src="timeslots.js"></script>
 </head>
 
 <body>
@@ -84,12 +84,14 @@ $assetArray = $coord->getAllAssets($selectedLocation);
   <p>You are working with location: "<?php echo $selectedLocation->getName(); ?>"</p>
 
   <h2>Add a new asset</h2>
-  <form action="manage_asset.php" method="post">
+  <form id="form" action="manage_asset.php" method="post">
     <label for="newAssetName">Asset Name:</label>
     <input type="text" id="newAssetName" name="newAssetName"><br>
 
     <label for="capacity">Asset capacity:</label>
     <input type="number" id="capacity" name="capacity" value="1">
+
+    <br>
 
     <input type="checkbox" id="monday" name="days[]" value="monday" checked>
     <label for="monday"> Monday</label><br>
@@ -108,11 +110,15 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <br>
 
-    <input type="checkbox" id="00" name="times[]" value="00" checked>
-    <label for="00"> 00:00</label><br>
+    <input type="checkbox" id="daily" onChange="allDay()">
+    <label for="daily">All day</label>
+    <br><br>
+    <input type="number" id="timeslotFrequency" min="1" max="1440" value="60">
+    <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()">
 
     <input type="hidden" id="locationID" name="locationID" value="<?php echo $selectedLocation->getID(); ?>">
 
+    <br id="submitBreak">
     <input type="submit" name="submit" value="Submit">
   </form>
 
