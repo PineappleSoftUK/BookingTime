@@ -37,13 +37,6 @@ if ($tableCheck->fetchArray() === false)
   //Bookings table
   $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, status TEXT)');
 
-  //Settings table
-  $db->exec('CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY AUTOINCREMENT, timeSlotDuration INTEGER)');
-
-  //Populate initial settings
-  $stmt = $db->prepare('INSERT INTO settings (timeSlotDuration) VALUES (:timeSlotDuration)');
-  $stmt->bindValue(':timeSlotDuration', $timeSlotDuration);
-  $result = $stmt->execute();
 
 } else {
   echo "An existing database table has been found, setup will now be aborted to preserve any existing data, no changed should have been made";

@@ -3,6 +3,9 @@
 /**
  * Administrator menu - update settings.
  *
+ * IMPORTANT: At the moment this page is just a placeholder, its contents are
+ * irrelevent
+ *
  */
 
 //Error reporting (Temporary during development)
