@@ -18,18 +18,6 @@ $includes = true;
 include_once __DIR__ . '/../open_db.php';
 include __DIR__ . '/../class/coord.php';
 
-//Create the coordinator
-$coord = new System\Coord($db);
-
-//If form is submitted..
-if (isset($_POST['submit']))
-{
-  //Set timeslot duration
-  $timeSlotDuration = $_POST['duration'];
-
-  $coord->setTimeSlotDuration($timeSlotDuration);
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -52,11 +40,7 @@ if (isset($_POST['submit']))
 <body>
   <h1>Booking Time - Update Settings</h1>
 
-  <form action="index.php" method="post">
-    <label for="duration">Timeslot duration (between 1 and 1439):</label>
-    <input type="number" id="duration" name="duration" min="1" max="1439" value="<?php echo $coord->getTimeSlotDuration(); ?>"><br>
+  <p>This page is currently acting as a placeholder for future use</p>
 
-    <input type="submit" name="submit" value="Submit">
-  </form>
 </body>
 </html>
