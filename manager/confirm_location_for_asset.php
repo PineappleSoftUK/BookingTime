@@ -33,10 +33,10 @@ $locationArray = $coord->getAllLocations();
   <meta name="description" content="PHP, HTML5 and JavaScript flexible calendar booking system">
   <meta name="author" content="PineappleSoft">
 
-  <!--
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../styles/main.css">
 
-  <script src="script.js"></script>
+  <!--
+    <script src="script.js"></script>
   -->
 </head>
 
