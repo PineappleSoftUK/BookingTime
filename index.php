@@ -41,7 +41,7 @@ $coord = new System\Coord($db);
 
   <ul class="breadcrumb">
     <li>Home</li>
-  </ul
+  </ul>
 
   <h2>Administrator</h2>
   <p><a href="settings/index.php">Update settings</a></p>
