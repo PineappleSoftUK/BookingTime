@@ -43,6 +43,12 @@ $locationArray = $coord->getAllLocations();
 <body>
   <h1>Booking Time - Asset Manager</h1>
 
+  <ul class="breadcrumb">
+    <li><a href="../">Home</a></li>
+    <li><a href="index.php">Manager Hub</a></li>
+    <li>Confirm Locations</li>
+  </ul>
+
   <h2>Confirm location</h2>
 
   <p>Please choose a location to work with:</p>

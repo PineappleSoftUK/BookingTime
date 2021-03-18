@@ -26,6 +26,10 @@ $coord = new System\Coord($db);
 
   <title>Booking Time</title>
 
+  <ul class="breadcrumb">
+    <li>Home</li>
+  </ul
+
   <meta name="description" content="PHP, HTML5 and JavaScript flexible calendar booking system">
   <meta name="author" content="PineappleSoft">
 
