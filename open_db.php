@@ -28,7 +28,7 @@ $tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='setup'");
 
 if ($tableCheck->fetchArray() === false)
 {
-  include_once __DIR__ . '/setup/index.php';
+  include_once __DIR__ . '/setup/create_initial_tables.php';
   exit();
 }
 ?>
