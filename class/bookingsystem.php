@@ -9,42 +9,11 @@ namespace System;
 class BookingSystem
 {
   public $db;
-  public $timeSlotDuration;
 
   public function __construct($db)
   {
     //Set the database attribute
     $this->db = $db;
-
-    //Set remaining attributes from settings table:
-    $res = $this->db->query('SELECT * FROM settings');
-    while ($row = $res->fetchArray()) {
-      $this->timeSlotDuration = $row['timeSlotDuration'];
-    }
-  }
-
-  /**
-  * Setter for $timeSlotDuration
-  *
-  */
-  public function setTimeSlotDuration($timeSlotDuration)
-  {
-    //Update db table
-    $stmt = $this->db->prepare('UPDATE settings SET timeSlotDuration = :timeSlotDuration WHERE id = 1');
-    $stmt->bindValue(':timeSlotDuration', $timeSlotDuration);
-    $result = $stmt->execute();
-
-    //Update object attribute
-    $this->timeSlotDuration = $timeSlotDuration;
-  }
-
-  /**
-  * Getter for $timeSlotDuration
-  *
-  */
-  public function getTimeSlotDuration()
-  {
-    return $this->timeSlotDuration;
   }
 
   /**

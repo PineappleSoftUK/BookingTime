@@ -12,34 +12,13 @@ if(!$includes) {
 //Security for includes
 $includes = TRUE;
 
-//Open or create database file
-class ConstructDB extends SQLite3
-{
-  function __construct()
-  {
-    $this->open(__DIR__ . '/../bookingtime.db');
-  }
-}
+//Locations table
+$db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, status TEXT)');
 
-$db = new ConstructDB();
+//Assets table
+$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, days TEXT, times TEXT, status TEXT)');
 
-//Check for exisiting table and if needed create the set of tables
-$tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='locations'");
+//Bookings table
+$db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, status TEXT)');
 
-if ($tableCheck->fetchArray() === false)
-{
-  //Locations table
-  $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, status TEXT)');
-
-  //Assets table
-  $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, days TEXT, times TEXT, status TEXT)');
-
-  //Bookings table
-  $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, status TEXT)');
-
-
-} else {
-  echo "An existing database table has been found, setup will now be aborted to preserve any existing data, no changed should have been made";
-  exit();
-}
 ?>

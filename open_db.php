@@ -24,11 +24,10 @@ class ConstructDB extends SQLite3
 $db = new ConstructDB();
 
 //Check for exisiting table and if needed create the set of tables
-$tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='setup'");
+$tableCheck = $db->query("SELECT name FROM sqlite_master WHERE name='locations'");
 
 if ($tableCheck->fetchArray() === false)
 {
   include_once __DIR__ . '/setup/create_initial_tables.php';
-  exit();
 }
 ?>
