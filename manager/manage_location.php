@@ -40,12 +40,6 @@ $locationArray = $coord->getAllLocations();
 
   <title>Booking Time</title>
 
-  <ul class="breadcrumb">
-    <li><a href="../">Home</a></li>
-    <li><a href="index.php">Manager Hub</a></li>
-    <li>Manage Loctions</li>
-  </ul>
-
   <meta name="description" content="PHP, HTML5 and JavaScript flexible calendar booking system">
   <meta name="author" content="PineappleSoft">
 
@@ -58,6 +52,12 @@ $locationArray = $coord->getAllLocations();
 
 <body>
   <h1>Booking Time - Location Manager</h1>
+
+  <ul class="breadcrumb">
+    <li><a href="../">Home</a></li>
+    <li><a href="index.php">Manager Hub</a></li>
+    <li>Manage Loctions</li>
+  </ul>
 
   <?php echo $span; ?>
 
