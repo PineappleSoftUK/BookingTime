@@ -1,3 +1,11 @@
+//Select all
+function toggle(source, element) {
+  checkboxes = document.getElementsByName(element);
+  for (var i = 0, n = checkboxes.length; i < n; i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+
 //Returns the current time of the object as a string
 class TimeString extends Date {
 
@@ -38,9 +46,11 @@ function allDay() {
   //Disable the input and button
   if (document.getElementById("daily").checked) {
     document.getElementById("timeslotFrequency").disabled = true;
+    document.getElementById("timeslotStart").disabled = true;
     document.getElementById("showTimeslotsButton").disabled = true;
   } else {
     document.getElementById("timeslotFrequency").disabled = false;
+    document.getElementById("timeslotStart").disabled = false;
     document.getElementById("showTimeslotsButton").disabled = false;
   }
 
@@ -58,16 +68,32 @@ function showTimeslots() {
 
   //Set the clock to zero
   var clock = new TimeString();
-  clock.setHours(0, 0, 0);
+  //clock.setHours(0, 0, 0);
+  clock.setHours(0, parseInt(document.getElementById("timeslotStart").value), 0);
 
   //Get text box value then calculate number of timeslots for the day
   var selection = parseInt(document.getElementById("timeslotFrequency").value);
   var numberOfTimeslots = 1440 / selection;
 
+  //Add toggle
+  var toggleElement = document.createElement("input");
+  toggleElement.type = "checkbox";
+  toggleElement.id = "toggleTimeslots";
+  submitButton.before(form.appendChild(toggleElement));
+
+  var toggleLabelElement = document.createElement("LABEL");
+  var toggleLabelText = document.createTextNode("Select All/None");
+  toggleLabelElement.setAttribute("for", "toggleTimeslots");
+  toggleLabelElement.setAttribute("style", "font-weight: bold;");
+  toggleLabelElement.appendChild(toggleLabelText);
+  submitButton.before(form.appendChild(toggleLabelElement));
+
+  document.getElementById('toggleTimeslots').setAttribute('onclick', "toggle(this, 'timeslot[]')");
+
   //Add the checkboxes to the form
   for (i = 0; i < numberOfTimeslots; i++) {
 
-  	//Get the time for checkbox
+    //Get the time for checkbox
     var checkboxTime = clock.timeAsString();
 
     //Start with a br
@@ -80,12 +106,13 @@ function showTimeslots() {
     inputElement.type = "checkbox";
     inputElement.name = "timeslot[]";
     inputElement.value = checkboxTime;
+    inputElement.id = checkboxTime;
     submitButton.before(form.appendChild(inputElement));
 
     //The checkbox label
     var labelElement = document.createElement("LABEL");
     var labelText = document.createTextNode(checkboxTime);
-    labelElement.setAttribute("for", "timeslot");
+    labelElement.setAttribute("for", checkboxTime);
     labelElement.setAttribute("name", "timeslot");
     labelElement.appendChild(labelText);
     submitButton.before(form.appendChild(labelElement));
