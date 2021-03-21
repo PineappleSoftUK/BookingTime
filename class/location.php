@@ -124,7 +124,7 @@ class Location
    $stmt->bindValue(':id', $assetID);
    $result = $stmt->execute();
    $array = $result->fetchArray();
-   $asset = new asset($this->db, $array['id'], $array['name'], $array['location'], $array['capacity'], $array['status']);
+   $asset = new asset($this->db, $array['id'], $array['name'], $array['location'], $array['capacity'], unserialize($array['days']), unserialize($array['times']), $array['status']);
    return $asset;
  }
 
