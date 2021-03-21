@@ -1,3 +1,11 @@
+Notes:
+
+TODO:
+* Populate the form fields
+* Get days and times and store them in html head as js ready for the js script
+  to use.
+* Think about managing All Day, again as a js var in html head perhaps.
+
 <?php
 
 /**
@@ -62,7 +70,7 @@ if (isset($_POST['deleteSubmit'])) {
 //If restore asset form is submitted..
 if (isset($_POST['restoreSubmit'])) {
   $coord->restoreAsset($asset, $location);
-  
+
   $span = "<p class='green'>Asset has been marked as live</p>";
 
   $location = $coord->getALocation($locationID);
