@@ -18,7 +18,7 @@ include __DIR__ . '/../class/coord.php';
 //Create the coordinator
 $coord = new System\Coord($db);
 
-//Blank span
+//Blank span for error/success message on form processing
 $span = "";
 
 //If location is newly selected
@@ -31,19 +31,26 @@ $selectedLocation = $coord->getALocation($confirmedLocation);
 if (isset($_POST['submit'])) {
   $assetName = $_POST['newAssetName'];
 
-  $formLocation = $_POST['locationID'];
-  $selectedLocation = $coord->getALocation($formLocation);
+  $formLocation = $_POST['locationID'];//Get location ID
+  $selectedLocation = $coord->getALocation($formLocation);//Retrieve this as object
 
   $assetCapacity = $_POST['capacity'];
 
+  //Set days of the week
   foreach ($_POST['days']  as $key => $value) {
     $days[$key] = $value;
   }
 
-  foreach ($_POST['timeslot']  as $key => $value) {
-    $times[$key] = $value;
+  //Set timeslots, or mark arr[0] as 'all day'
+  if (isset($_POST['allDayCheckbox'])) {
+    $times[0] = "All Day";
+  } else {
+    foreach ($_POST['timeslot']  as $key => $value) {
+      $times[$key] = $value;
+    }
   }
 
+  //Create the object
   $coord->newAsset($assetName, $selectedLocation, $assetCapacity, $days, $times);
   $span = "<p class='green'>Asset has been added successfully</p>";
 }
@@ -117,7 +124,7 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <br>
 
-    <input type="checkbox" id="daily" onChange="allDay()">
+    <input type="checkbox" id="daily" name="allDayCheckbox" onChange="allDay()">
     <label for="daily">All day</label>
 
     <br><br>
