@@ -1,6 +1,6 @@
 //Select all
 function toggle(source, element) {
-  checkboxes = document.getElementsByName(element);
+  var checkboxes = document.getElementsByName(element);
   for (var i = 0, n = checkboxes.length; i < n; i++) {
     checkboxes[i].checked = source.checked;
   }
@@ -28,7 +28,7 @@ class TimeString extends Date {
 function removeTimeslots() {
 
   //Find any element with the attribute: name="timeslot"
-  var timeSlotElements = document.querySelectorAll('[name="timeslot"],[name="timeslot[]"]');
+  var timeSlotElements = document.querySelectorAll('[name="timeslot"],[name="timeslot[]"],[name="toggleTimeslots"]');
 
   //Loop through and remove the element
   for (var i = 0; i < timeSlotElements.length; i++) {
@@ -46,11 +46,19 @@ function allDay() {
   //Disable the input and button
   if (document.getElementById("daily").checked) {
     document.getElementById("timeslotFrequency").disabled = true;
+    document.getElementById("timeslotFrequencyLabel").setAttribute("style", "color: #ccc;");
+
     document.getElementById("timeslotStart").disabled = true;
+    document.getElementById("timeslotStartLabel").setAttribute("style", "color: #ccc;");
+
     document.getElementById("showTimeslotsButton").disabled = true;
   } else {
     document.getElementById("timeslotFrequency").disabled = false;
+    document.getElementById("timeslotFrequencyLabel").setAttribute("style", "color: black;");
+
     document.getElementById("timeslotStart").disabled = false;
+    document.getElementById("timeslotStartLabel").setAttribute("style", "color: black;");
+
     document.getElementById("showTimeslotsButton").disabled = false;
   }
 
@@ -68,7 +76,6 @@ function showTimeslots() {
 
   //Set the clock to zero
   var clock = new TimeString();
-  //clock.setHours(0, 0, 0);
   clock.setHours(0, parseInt(document.getElementById("timeslotStart").value), 0);
 
   //Get text box value then calculate number of timeslots for the day
@@ -79,11 +86,13 @@ function showTimeslots() {
   var toggleElement = document.createElement("input");
   toggleElement.type = "checkbox";
   toggleElement.id = "toggleTimeslots";
+  toggleElement.name = "toggleTimeslots";
   submitButton.before(form.appendChild(toggleElement));
 
   var toggleLabelElement = document.createElement("LABEL");
   var toggleLabelText = document.createTextNode("Select All/None");
   toggleLabelElement.setAttribute("for", "toggleTimeslots");
+  toggleLabelElement.setAttribute("name", "toggleTimeslots");
   toggleLabelElement.setAttribute("style", "font-weight: bold;");
   toggleLabelElement.appendChild(toggleLabelText);
   submitButton.before(form.appendChild(toggleLabelElement));
@@ -121,4 +130,34 @@ function showTimeslots() {
     clock.setMinutes(clock.getMinutes() + selection);
   }
 
+}
+
+// For the edit page, this checks/ticks only those checked in db record
+function editPage() {
+  //First days of the week...
+
+  //Form checkboxes
+  var daysCheckboxes = document.getElementsByName("days[]");
+
+  for (var i = 0, n = daysCheckboxes.length; i < n; i++) {
+    daysCheckboxes[i].checked = dbResultsDays.includes(daysCheckboxes[i].value);
+  }
+
+  //Now timeslots...
+
+  //Is all day currently set in db?
+  if (dbResultsTimes[0] == "All Day") {
+    document.getElementById("daily").checked = true;
+    allDay();
+  } else {
+    //Firstly show the blank checkboxes
+    showTimeslots();
+
+    //Now get the checkboxes and check the relevent ones
+    var timesCheckboxes = document.getElementsByName("timeslot[]");
+
+    for (var i = 0, n = timesCheckboxes.length; i < n; i++) {
+      timesCheckboxes[i].checked = dbResultsTimes.includes(timesCheckboxes[i].value);
+    }
+  }
 }
