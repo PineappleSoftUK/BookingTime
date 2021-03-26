@@ -2,6 +2,7 @@ Notes:
 
 TODO:
 * Populate the form fields -- to include timeslot times/frequencies
+  this needs to be a new attribute of asset!
 * Process form
 
 <?php
@@ -40,7 +41,7 @@ if (isset($_POST['assetID'])) {
 $location = $coord->getALocation($locationID);
 $asset = $coord->getAnAsset($location, $assetID);
 
-//Blank span
+//Blank span for reporting sucess/failure folliwing form processing
 $span = "";
 
 //If edit asset form is submitted..
@@ -192,10 +193,9 @@ if (isset($_POST['restoreSubmit'])) {
     <br id="submitBreak">
     <input type="submit" name="submit" value="Submit">
 
-    <!--<input type="button" value="Test" onclick="editPage()"><br>-->
   </form>
 
-  <!-- As this is  the edit page, the following will mark the appropriate
+  <!-- As this is the edit page, the following will mark the appropriate
 checkboxes using the function in timeslot.js-->
   <script>editPage();</script>
 </body>
