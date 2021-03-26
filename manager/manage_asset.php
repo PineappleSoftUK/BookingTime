@@ -124,15 +124,15 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <br>
 
-    <input type="checkbox" id="daily" name="allDayCheckbox" onChange="allDay()">
+    <input type="checkbox" id="daily" name="daily" onChange="allDay()">
     <label for="daily">All day</label>
 
     <br><br>
 
-    <label for="timeslotFrequency">Length of each timeslot (in minutes):</label>
+    <label for="timeslotFrequency" id="timeslotFrequencyLabel">Length of each timeslot (in minutes):</label>
     <input type="number" id="timeslotFrequency" min="1" max="1440" value="60"><br>
 
-    <label for="timeslotStart">Start timeslots at (minutes past the hour):</label>
+    <label for="timeslotStart" id="timeslotStartLabel">Start timeslots at (minutes past the hour):</label>
     <input type="number" id="timeslotStart" min="0" max="59" value="0"><br>
 
     <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()"><br>
@@ -144,6 +144,7 @@ $assetArray = $coord->getAllAssets($selectedLocation);
     <br id="submitBreak">
     <input type="submit" name="submit" value="Submit">
   </form>
+
 
   <h2>Existing assets</h2>
 
