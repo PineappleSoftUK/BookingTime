@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
   }
 
   //Set timeslots, or mark arr[0] as 'all day'
-  if (isset($_POST['allDayCheckbox'])) {
+  if (isset($_POST['daily'])) {
     $times[0] = "All Day";
   } else {
     foreach ($_POST['timeslot']  as $key => $value) {
