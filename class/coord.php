@@ -125,9 +125,9 @@ class Coord
   * Edit an asset
   *
   */
-  public function editAsset($locationForAsset, $asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTime)
+  public function editAsset($locationForAsset, $asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTimes)
   {
-    $locationForAsset->editAsset($asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTime);
+    $locationForAsset->editAsset($asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTimes);
   }
 
 
