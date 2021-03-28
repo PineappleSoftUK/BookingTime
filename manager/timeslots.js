@@ -45,16 +45,16 @@ function allDay() {
 
   //Disable the input and button
   if (document.getElementById("daily").checked) {
-    document.getElementById("timeslotFrequency").disabled = true;
-    document.getElementById("timeslotFrequencyLabel").setAttribute("style", "color: #ccc;");
+    document.getElementById("timeslotLength").disabled = true;
+    document.getElementById("timeslotLengthLabel").setAttribute("style", "color: #ccc;");
 
     document.getElementById("timeslotStart").disabled = true;
     document.getElementById("timeslotStartLabel").setAttribute("style", "color: #ccc;");
 
     document.getElementById("showTimeslotsButton").disabled = true;
   } else {
-    document.getElementById("timeslotFrequency").disabled = false;
-    document.getElementById("timeslotFrequencyLabel").setAttribute("style", "color: black;");
+    document.getElementById("timeslotLength").disabled = false;
+    document.getElementById("timeslotLengthLabel").setAttribute("style", "color: black;");
 
     document.getElementById("timeslotStart").disabled = false;
     document.getElementById("timeslotStartLabel").setAttribute("style", "color: black;");
@@ -79,7 +79,7 @@ function showTimeslots() {
   clock.setHours(0, parseInt(document.getElementById("timeslotStart").value), 0);
 
   //Get text box value then calculate number of timeslots for the day
-  var selection = parseInt(document.getElementById("timeslotFrequency").value);
+  var selection = parseInt(document.getElementById("timeslotLength").value);
   var numberOfTimeslots = 1440 / selection;
 
   //Add toggle
