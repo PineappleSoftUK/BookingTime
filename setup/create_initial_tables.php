@@ -16,7 +16,7 @@ $includes = TRUE;
 $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, status TEXT)');
 
 //Assets table
-$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, days TEXT, times TEXT, status TEXT)');
+$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, timeslotLength INTEGER, timeslotStart INTEGER, days TEXT, times TEXT, status TEXT)');
 
 //Bookings table
 $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, status TEXT)');

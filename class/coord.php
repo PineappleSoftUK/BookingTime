@@ -27,32 +27,6 @@ class Coord
     $this->bookingSystem = new BookingSystem($this->db);
   }
 
-  // Settings...
-
-  /**
-  * Set time slot duration.
-  *
-  * This passes the time slot duration to the BookingSystem object
-  *
-  */
-  public function setTimeSlotDuration($timeSlotDuration)
-  {
-    //Pass the object to the booking system to update its attribute
-    $this->bookingSystem->setTimeSlotDuration($timeSlotDuration);
-  }
-
-  /**
-  * Get time slot duration.
-  *
-  * This returns the time slot duration to the GUI
-  *
-  */
-  public function getTimeSlotDuration()
-  {
-    //Pass the object to the booking system to update its attribute
-    return $this->bookingSystem->getTimeSlotDuration();
-  }
-
   // LOCATIONS...
 
   /**
@@ -122,9 +96,9 @@ class Coord
   * Asks the location object to add an asset
   *
   */
-  public function newAsset($name, $locationForAsset, $capacity, $days, $times)
+  public function newAsset($name, $locationForAsset, $capacity, $timeslotLength, $timeSlotDuration, $days, $times)
   {
-    $locationForAsset->newAsset($name, $capacity, $days, $times);
+    $locationForAsset->newAsset($name, $capacity, $timeslotLength, $timeSlotDuration, $days, $times);
   }
 
   /**
@@ -151,9 +125,9 @@ class Coord
   * Edit an asset
   *
   */
-  public function editAsset($locationForAsset, $asset, $updatedAssetName, $updatedCapacity)
+  public function editAsset($locationForAsset, $asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTime)
   {
-    $locationForAsset->editAsset($asset, $updatedAssetName, $updatedCapacity);
+    $locationForAsset->editAsset($asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTime);
   }
 
 

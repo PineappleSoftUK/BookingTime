@@ -17,17 +17,21 @@ class Asset
   public $name;
   public $location;
   public $capacity;
+  public $timeslotLength;
+  public $timeslotStart;
   public $days;
   public $times;
   public $status;
 
-  public function __construct($db, $id, $name, $location, $capacity, $days, $times, $status)
+  public function __construct($db, $id, $name, $location, $capacity, $timeslotLength, $timeslotStart, $days, $times, $status)
   {
     $this->db = $db;
     $this->id = $id;
     $this->name = $name;
     $this->location = $location;
     $this->capacity = $capacity;
+    $this->timeslotLength = $timeslotLength;
+    $this->timeslotStart = $timeslotStart;
     $this->days = $days;
     $this->times = $times;
     $this->status = $status;
@@ -105,6 +109,43 @@ class Asset
   {
     return $this->capacity;
   }
+
+  /**
+  * Setter for timeslotLength.
+  *
+  */
+  public function setTimeslotLength($timeslotLength)
+  {
+    $this->timeslotLength = $timeslotLength;
+  }
+
+  /**
+  * Getter for timeslotLength.
+  *
+  */
+  public function getTimeslotLength()
+  {
+    return $this->timeslotLength;
+  }
+
+  /**
+  * Setter for timeslotStart.
+  *
+  */
+  public function setTimeslotStart($timeslotStart)
+  {
+    $this->timeslotStart = $timeslotStart;
+  }
+
+  /**
+  * Getter for timeslotStart.
+  *
+  */
+  public function getTimeslotStart()
+  {
+    return $this->timeslotStart;
+  }
+
 
   /**
   * Setter for days.

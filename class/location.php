@@ -84,10 +84,12 @@ class Location
   */
   public function newAsset($name, $capacity, $days, $times)
   {
-    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, days, times, status) VALUES (:name, :location, :capacity, :days, :times, "Live")');
+    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, timeslotLength, timeslotStart, days, times, status) VALUES (:name, :location, :capacity, :days, :times, "Live")');
     $stmt->bindValue(':name', $name);
     $stmt->bindValue(':location', $this->id);
     $stmt->bindValue(':capacity', $capacity);
+    $stmt->bindValue(':timeslotLength', $timeslotLength);
+    $stmt->bindValue(':timeslotStart', $timeslotStart);
     $stmt->bindValue(':days', serialize($days));
     $stmt->bindValue(':times', serialize($times));
     $result = $stmt->execute();
@@ -106,7 +108,7 @@ class Location
     $stmt->bindValue(':location', $this->id);
     $res = $stmt->execute();
     while ($row = $res->fetchArray()) {
-      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity'], unserialize($row['days']), unserialize($row['times']), $row['status']);
+      $object = new Asset($this->db, $row['id'], $row['name'], $row['location'], $row['capacity'], $row['timeslotLength'], $row['timeslotStart'], unserialize($row['days']), unserialize($row['times']), $row['status']);
       array_push($assetArray, $object);
     }
     return $assetArray;
@@ -124,7 +126,7 @@ class Location
    $stmt->bindValue(':id', $assetID);
    $result = $stmt->execute();
    $array = $result->fetchArray();
-   $asset = new asset($this->db, $array['id'], $array['name'], $array['location'], $array['capacity'], unserialize($array['days']), unserialize($array['times']), $array['status']);
+   $asset = new asset($this->db, $array['id'], $array['name'], $array['location'], $array['capacity'], $array['timeslotLength'], $array['timeslotStart'], unserialize($array['days']), unserialize($array['times']), $array['status']);
    return $asset;
  }
 
@@ -134,11 +136,16 @@ class Location
  * Updated the atributes of a location.
  *
  */
- public function editAsset($asset, $updatedAssetName, $updatedCapacity)
+ public function editAsset($asset, $updatedAssetName, $updatedCapacity, $updatedTimeslotLength, $updatedTimeslotStart, $updatedDays, $updatedTimes)
  {
-   $stmt = $this->db->prepare('UPDATE assets SET name = :name, capacity = :capacity WHERE id = :id');
+   $stmt = $this->db->prepare('UPDATE assets SET name = :name, capacity = :capacity, timeslotLength = :timeslotLength, timeslotStart = :timeslotStart, days = :days, times = :times WHERE id = :id');
    $stmt->bindValue(':name', $updatedAssetName);
    $stmt->bindValue(':capacity', $updatedCapacity);
+   $stmt->bindValue(':timeslotLength', $updatedTimeslotLength);
+   $stmt->bindValue(':timeslotStart', $updatedTimeslotStart);
+   $stmt->bindValue(':days', serialize($updatedDays));
+   $stmt->bindValue(':times', serialize($updatedTimes));
+
    $stmt->bindValue(':id', $asset->getID());
    $result = $stmt->execute();
  }
