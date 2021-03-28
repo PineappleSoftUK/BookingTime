@@ -82,9 +82,9 @@ class Location
   * Adds the asset provided to the database
   *
   */
-  public function newAsset($name, $capacity, $days, $times)
+  public function newAsset($name, $capacity, $timeslotLength, $timeslotStart, $days, $times)
   {
-    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, timeslotLength, timeslotStart, days, times, status) VALUES (:name, :location, :capacity, :days, :times, "Live")');
+    $stmt = $this->db->prepare('INSERT INTO assets (name, location, capacity, timeslotLength, timeslotStart, days, times, status) VALUES (:name, :location, :capacity, :timeslotLength, :timeslotStart, :days, :times, "Live")');
     $stmt->bindValue(':name', $name);
     $stmt->bindValue(':location', $this->id);
     $stmt->bindValue(':capacity', $capacity);

@@ -35,6 +35,8 @@ if (isset($_POST['submit'])) {
   $selectedLocation = $coord->getALocation($formLocation);//Retrieve this as object
 
   $assetCapacity = $_POST['capacity'];
+  $timeslotLength = $_POST['timeslotLength'];
+  $timeslotStart = $_POST['timeslotStart'];
 
   //Set days of the week
   foreach ($_POST['days']  as $key => $value) {
@@ -51,7 +53,7 @@ if (isset($_POST['submit'])) {
   }
 
   //Create the object
-  $coord->newAsset($assetName, $selectedLocation, $assetCapacity, $days, $times);
+  $coord->newAsset($assetName, $selectedLocation, $assetCapacity, $timeslotLength, $timeslotStart, $days, $times);
   $span = "<p class='green'>Asset has been added successfully</p>";
 }
 
@@ -129,11 +131,11 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <br><br>
 
-    <label for="timeslotFrequency" id="timeslotFrequencyLabel">Length of each timeslot (in minutes):</label>
-    <input type="number" id="timeslotFrequency" min="1" max="1440" value="60"><br>
+    <label for="timeslotLength" id="timeslotLengthLabel">Length of each timeslot (in minutes):</label>
+    <input type="number" id="timeslotLength" name="timeslotLength" min="1" max="1440" value="60"><br>
 
     <label for="timeslotStart" id="timeslotStartLabel">Start timeslots at (minutes past the hour):</label>
-    <input type="number" id="timeslotStart" min="0" max="59" value="0"><br>
+    <input type="number" id="timeslotStart" name="timeslotStart" min="0" max="59" value="0"><br>
 
     <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()"><br>
 
