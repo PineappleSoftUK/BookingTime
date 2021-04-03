@@ -35,8 +35,13 @@ if (isset($_POST['submit'])) {
   $selectedLocation = $coord->getALocation($formLocation);//Retrieve this as object
 
   $assetCapacity = $_POST['capacity'];
-  $timeslotLength = $_POST['timeslotLength'];
-  $timeslotStart = $_POST['timeslotStart'];
+  if (isset($_POST['daily'])) {
+    $timeslotLength = 0;
+    $timeslotStart = 0;
+  } else {
+    $timeslotLength = $_POST['timeslotLength'];
+    $timeslotStart = $_POST['timeslotStart'];
+  }
 
   //Set days of the week
   foreach ($_POST['days']  as $key => $value) {
@@ -47,8 +52,12 @@ if (isset($_POST['submit'])) {
   if (isset($_POST['daily'])) {
     $times[0] = "All Day";
   } else {
-    foreach ($_POST['timeslot']  as $key => $value) {
-      $times[$key] = $value;
+    $timeslotsArr = $_POST['timeslot'];
+
+    foreach ($timeslotsArr as $dayName => $dayArr) {
+      foreach ($dayArr as $key => $value) {
+        $times[$dayName][$key] = $value;
+      }
     }
   }
 
