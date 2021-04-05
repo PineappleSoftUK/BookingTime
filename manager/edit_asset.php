@@ -107,6 +107,17 @@ function buildString($arr) {
   return $string;
 }
 
+//Now set the js string variable using the php array
+$timesArr = $asset->getTimes();
+
+//If all day is set use implode, else use the above builder function
+if(isset($timesArr[0]) && $timesArr[0] == "All Day") {
+  $timeString = "'" . implode ( "', '", $asset->getTimes() ) . "'";
+} else {
+  $timeString = buildString($asset->getTimes());
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +134,7 @@ function buildString($arr) {
 
   <script>
     var dbResultsDays = [<?php echo "'" . implode ( "', '", $asset->getDays() ) . "'";?>];
-    var dbResultsTimes = [<?php echo buildString($asset->getTimes());?>];
+    var dbResultsTimes = [<?php echo $timeString;?>];
   </script>
   <script src="timeslots.js"></script>
 </head>
