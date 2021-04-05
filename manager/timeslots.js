@@ -207,7 +207,7 @@ function writeCheckboxes(form, selection, numberOfTimeslots, clock, day) {
   //The checkbox
   var inputElement = document.createElement("input");
   inputElement.type = "checkbox";
-  inputElement.name = 'timeslot["' + day + '"][]';
+  inputElement.name = "timeslot[" + day + "][]";
   inputElement.value = checkboxTime;
   inputElement.id = checkboxTime;
   submitButton.before(form.appendChild(inputElement));
@@ -250,14 +250,34 @@ function editPage() {
     document.getElementById("daily").checked = true;
     allDay();
   } else {
-    //Firstly show the blank checkboxes
-    showTimeslots();
+    //Firstly, are different timeslots for each day set
+    if (dbResultsTimes[0][0] != "week") {
+      document.getElementById("radioYes").checked = true;
 
-    //Now get the checkboxes and check the relevent ones
-    var timesCheckboxes = document.getElementsByName("timeslot[]");
+      showTimeslots();
 
-    for (var i = 0, n = timesCheckboxes.length; i < n; i++) {
-      timesCheckboxes[i].checked = dbResultsTimes.includes(timesCheckboxes[i].value);
+      //Now get the checkboxes and check the relevent ones
+
+      var timesCheckboxes;
+
+      //Loop through the days marked in db, then for each day loop through checkboxes and mark them
+      for (var i = 0, n = dbResultsDays.length; i < n; i++) {
+        timesCheckboxes = document.getElementsByName('timeslot[' + dbResultsDays[i] + '][]');
+
+        for (var j = 0, m = timesCheckboxes.length; j < m; j++) {
+          timesCheckboxes[j].checked = dbResultsTimes[i][1].includes(timesCheckboxes[j].value);
+        }
+      }
+    } else {
+      //Next show the blank checkboxes
+      showTimeslots();
+
+      //Now get the checkboxes and check the relevent ones
+      var timesCheckboxes = document.getElementsByName('timeslot["week"][]');
+
+      for (var i = 0, n = timesCheckboxes.length; i < n; i++) {
+        timesCheckboxes[i].checked = dbResultsTimes[0][1].includes(timesCheckboxes[i].value);
+      }
     }
   }
 }
