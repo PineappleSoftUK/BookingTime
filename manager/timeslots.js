@@ -273,7 +273,7 @@ function editPage() {
       showTimeslots();
 
       //Now get the checkboxes and check the relevent ones
-      var timesCheckboxes = document.getElementsByName('timeslot["week"][]');
+      var timesCheckboxes = document.getElementsByName('timeslot[week][]');
 
       for (var i = 0, n = timesCheckboxes.length; i < n; i++) {
         timesCheckboxes[i].checked = dbResultsTimes[0][1].includes(timesCheckboxes[i].value);
