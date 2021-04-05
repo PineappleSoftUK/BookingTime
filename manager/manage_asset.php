@@ -35,8 +35,13 @@ if (isset($_POST['submit'])) {
   $selectedLocation = $coord->getALocation($formLocation);//Retrieve this as object
 
   $assetCapacity = $_POST['capacity'];
-  $timeslotLength = $_POST['timeslotLength'];
-  $timeslotStart = $_POST['timeslotStart'];
+  if (isset($_POST['daily'])) {
+    $timeslotLength = 0;
+    $timeslotStart = 0;
+  } else {
+    $timeslotLength = $_POST['timeslotLength'];
+    $timeslotStart = $_POST['timeslotStart'];
+  }
 
   //Set days of the week
   foreach ($_POST['days']  as $key => $value) {
@@ -47,8 +52,12 @@ if (isset($_POST['submit'])) {
   if (isset($_POST['daily'])) {
     $times[0] = "All Day";
   } else {
-    foreach ($_POST['timeslot']  as $key => $value) {
-      $times[$key] = $value;
+    $timeslotsArr = $_POST['timeslot'];
+
+    foreach ($timeslotsArr as $dayName => $dayArr) {
+      foreach ($dayArr as $key => $value) {
+        $times[$dayName][$key] = $value;
+      }
     }
   }
 
@@ -136,6 +145,14 @@ $assetArray = $coord->getAllAssets($selectedLocation);
 
     <label for="timeslotStart" id="timeslotStartLabel">Start timeslots at (minutes past the hour):</label>
     <input type="number" id="timeslotStart" name="timeslotStart" min="0" max="59" value="0"><br>
+
+    <input type="radio" id="radioYes" name="radio">
+    <label for="radioYes" id="radioYesLabel">Yes</label>
+
+    <input type="radio" id="radioNo" name="radio" checked>
+    <label for="radioNo" id="radioNoLabel">No</label>
+
+    <br>
 
     <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()"><br>
 

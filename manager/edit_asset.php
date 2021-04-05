@@ -85,6 +85,39 @@ if (isset($_POST['restoreSubmit'])) {
   $location = $coord->getALocation($locationID);
   $asset = $coord->getAnAsset($location, $assetID);
 }
+
+//Build a js string out of php array (apologies this is messy)
+//This is for where timeslots differ by day.
+function buildString($arr) {
+  $string = "";
+  foreach ($arr as $keya => $valuea) {
+    $string .= "['";
+    $string .= $keya;
+    $string .= "', [";
+    foreach ($valuea as $keyb => $valueb) {
+      $string .= "'";
+      $string .= $valueb;
+      $string .= "', ";
+    }
+    $string = substr($string, 0, -2);
+    $string .= "]], ";
+  }
+  $string = substr($string, 0, -2);
+  //$string .= "";
+  return $string;
+}
+
+//Now set the js string variable using the php array
+$timesArr = $asset->getTimes();
+
+//If all day is set use implode, else use the above builder function
+if(isset($timesArr[0]) && $timesArr[0] == "All Day") {
+  $timeString = "'" . implode ( "', '", $asset->getTimes() ) . "'";
+} else {
+  $timeString = buildString($asset->getTimes());
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +134,7 @@ if (isset($_POST['restoreSubmit'])) {
 
   <script>
     var dbResultsDays = [<?php echo "'" . implode ( "', '", $asset->getDays() ) . "'";?>];
-    var dbResultsTimes = [<?php echo "'" . implode ( "', '", $asset->getTimes() ) . "'";?>];
+    var dbResultsTimes = [<?php echo $timeString;?>];
   </script>
   <script src="timeslots.js"></script>
 </head>
@@ -202,6 +235,14 @@ if (isset($_POST['restoreSubmit'])) {
 
     <label for="timeslotStart" id="timeslotStartLabel">Start timeslots at (minutes past the hour):</label>
     <input type="number" id="timeslotStart" name="timeslotStart" min="0" max="59" value="<?php echo $asset->getTimeslotStart(); ?>"><br>
+
+    <input type="radio" id="radioYes" name="radio">
+    <label for="radioYes" id="radioYesLabel">Yes</label>
+
+    <input type="radio" id="radioNo" name="radio" checked>
+    <label for="radioNo" id="radioNoLabel">No</label>
+
+    <br>
 
     <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()"><br>
 
