@@ -207,7 +207,7 @@ function writeCheckboxes(form, selection, numberOfTimeslots, clock, day) {
   //The checkbox
   var inputElement = document.createElement("input");
   inputElement.type = "checkbox";
-  inputElement.name = "timeslot[" + day + "][]";
+  inputElement.name = 'timeslot["' + day + '"][]';
   inputElement.value = checkboxTime;
   inputElement.id = checkboxTime;
   submitButton.before(form.appendChild(inputElement));
