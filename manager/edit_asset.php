@@ -38,7 +38,7 @@ $asset = $coord->getAnAsset($location, $assetID);
 $span = "";
 
 //If edit asset form is submitted..
-if (isset($_POST['editSubmit'])) {
+if (isset($_POST['capacity'])) {
   $updatedAssetName = $_POST['assetName'];
   $updatedCapacity = $_POST['capacity'];
   $updatedTimeslotLength = $_POST['timeslotLength'];
@@ -194,41 +194,61 @@ if(isset($timesArr[0]) && $timesArr[0] == "All Day") {
   <h2>Edit</h2>
 
   <form id="form" action="edit_asset.php" method="post">
+    <p>Please give the asset a name:</p>
     <label for="assetName">Asset Name:</label>
     <input type="text" id="assetName" name="assetName" value="<?php echo $asset->getName(); ?>"><br>
 
+    <hr>
+
+    <p>How many concequtive bookings can take place at the same time:</p>
     <label for="capacity">Asset capacity:</label>
     <input type="number" id="capacity" name="capacity" value="<?php echo $asset->getCapacity(); ?>"><br>
 
-    <input type="hidden" id="assetID" name="assetID" value="<?php echo $asset->getID(); ?>">
-    <input type="hidden" id="locationID" name="locationID" value="<?php echo $location->getID(); ?>">
+    <hr>
 
+    <p>What days of the week should this asset be available to book:</p>
+
+    <fieldset>
+      <legend>
+        Days of the week
+      </legend>
+
+      <input type="hidden" id="assetID" name="assetID" value="<?php echo $asset->getID(); ?>">
+      <input type="hidden" id="locationID" name="locationID" value="<?php echo $location->getID(); ?>">
+
+      <br>
+
+      <input type="checkbox" onClick="toggle(this, 'days[]')" id="toggleDays" checked>
+      <label for="toggleDays"> <b>Select All/None</b></label><br>
+
+      <input type="checkbox" id="monday" name="days[]" value="Monday">
+      <label for="monday"> Monday</label><br>
+      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday">
+      <label for="tuesday"> Tuesday</label><br>
+      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday">
+      <label for="wednesday"> Wednesday</label><br>
+      <input type="checkbox" id="thursday" name="days[]" value="Thursday">
+      <label for="thursday"> Thursday</label><br>
+      <input type="checkbox" id="friday" name="days[]" value="Friday">
+      <label for="friday"> Friday</label><br>
+      <input type="checkbox" id="saturday" name="days[]" value="Saturday">
+      <label for="saturday"> Saturday</label><br>
+      <input type="checkbox" id="sunday" name="days[]" value="Sunday">
+      <label for="sunday"> Sunday</label><br>
+    </fieldset>
     <br>
 
-    <input type="checkbox" onClick="toggle(this, 'days[]')" id="toggleDays" checked>
-    <label for="toggleDays"> <b>Select All/None</b></label><br>
+    <hr>
 
-    <input type="checkbox" id="monday" name="days[]" value="monday">
-    <label for="monday"> Monday</label><br>
-    <input type="checkbox" id="tuesday" name="days[]" value="tuesday">
-    <label for="tuesday"> Tuesday</label><br>
-    <input type="checkbox" id="wednesday" name="days[]" value="wednesday">
-    <label for="wednesday"> Wednesday</label><br>
-    <input type="checkbox" id="thursday" name="days[]" value="thursday">
-    <label for="thursday"> Thursday</label><br>
-    <input type="checkbox" id="friday" name="days[]" value="friday">
-    <label for="friday"> Friday</label><br>
-    <input type="checkbox" id="saturday" name="days[]" value="saturday">
-    <label for="saturday"> Saturday</label><br>
-    <input type="checkbox" id="sunday" name="days[]" value="sunday">
-    <label for="sunday"> Sunday</label><br>
-
-    <br>
+    <p>Will bookings be made per day or for a specific amount of time in a day:</p>
 
     <input type="checkbox" id="daily" name="daily" onChange="allDay()">
     <label for="daily">All day</label>
 
-    <br><br>
+    <br>
+
+    <p name="timeslotText">Or:</p>
+
 
     <label for="timeslotLength" id="timeslotLengthLabel">Length of each timeslot (in minutes):</label>
     <input type="number" id="timeslotLength" name="timeslotLength" min="1" max="1440" value="<?php echo $asset->getTimeslotLength(); ?>"><br>
@@ -236,20 +256,35 @@ if(isset($timesArr[0]) && $timesArr[0] == "All Day") {
     <label for="timeslotStart" id="timeslotStartLabel">Start timeslots at (minutes past the hour):</label>
     <input type="number" id="timeslotStart" name="timeslotStart" min="0" max="59" value="<?php echo $asset->getTimeslotStart(); ?>"><br>
 
-    <input type="radio" id="radioYes" name="radio">
-    <label for="radioYes" id="radioYesLabel">Yes</label>
+    <p name="timeslotText">Will these timeslots differ throughout the week, on a day-by-day basis:</p>
 
-    <input type="radio" id="radioNo" name="radio" checked>
-    <label for="radioNo" id="radioNoLabel">No</label>
+    <fieldset>
+
+      <legend name="timeslotText">
+        Timeslots differ each day?
+      </legend>
+
+      <input type="radio" id="radioYes" name="radio">
+      <label for="radioYes" id="radioYesLabel">Yes</label>
+
+      <input type="radio" id="radioNo" name="radio" checked>
+      <label for="radioNo" id="radioNoLabel">No</label>
+
+    </fieldset>
 
     <br>
 
-    <input type="button" id="showTimeslotsButton" value="Show Timeslots" onclick="showTimeslots()"><br>
+    <p name="timeslotText">Now click the 'Show Timelots' button to choose which times the asset should be available to book:</p>
+
+    <input type="button" id="showTimeslotsButton" value="Show Timeslots"  onclick="dayCheck()"><br>
 
     <!-- Timeslots generated by JS will go here -->
 
-    <br id="submitBreak">
-    <input type="submit" name="editSubmit" value="Submit">
+    <hr id="submitBreak">
+
+    <p>Click the 'Submit' button to save and create this asset</p>
+
+    <input type="button" name="submitBtn" value="Submit"  onclick="submitCheck()">
 
   </form>
 
