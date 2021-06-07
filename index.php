@@ -50,5 +50,6 @@ $coord = new System\Coord($db);
   <p><a href="manager/index.php">Visit manager hub</a></p>
 
   <h2>Client</h2>
+  <p><a href="client/index.php">Visit client hub</a></p>
 </body>
 </html>
