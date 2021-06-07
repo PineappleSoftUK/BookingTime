@@ -20,6 +20,9 @@
 
  //Blank span for error/success message on form processing
  $span = "";
+
+ //Get all locations
+ $locationArray = $coord->getAllLocations();
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +37,8 @@
 
   <link rel="stylesheet" href="../styles/main.css">
 
-  <!--
-    <script src="script.js"></script>
-  -->
+  <script src="newbooking.js"></script>
+
 </head>
 
 <body>
@@ -49,6 +51,23 @@
   </ul>
 
   <h2>New booking</h2>
+
+  <span id="message"></span>
+
+  <form>
+    <label for="locations">Choose a location:</label>
+    <select id="locations" name="locations" onchange="updateAssetList()">
+      <?php
+      foreach ($locationArray as $value) {
+      ?>
+
+      <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
+
+      <?php
+      }
+      ?>
+    </select>
+  </form>
 
 
 </body>
