@@ -1,7 +1,8 @@
 <?php
 
 /**
- * The main booking page
+ * This file is called by the js on the booking page and provides
+ * responses from the system to populate the booking page.
  *
  */
 

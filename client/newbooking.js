@@ -1,8 +1,14 @@
 /*
+This is the js file to support the client booking page.
+*/
+
+
+/*
 
 Update asset list
 
-Updates the assets drop-down list based on location.
+Updates the assets drop-down with assets from the database/system, based on
+selected location.
 
 */
 function updateAssetList() {

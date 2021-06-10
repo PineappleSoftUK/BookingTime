@@ -3,6 +3,9 @@
 /**
  * Client menu
  *
+ * This page is used by clients and it lists their available pages that
+ * they can visit.
+ *
  */
 
 ?>

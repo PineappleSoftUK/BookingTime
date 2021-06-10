@@ -3,6 +3,8 @@
 /**
  * The main booking page
  *
+ * This page is used by clients to make a booking.
+ *
  */
 
  //Error reporting (Temporary during development)
@@ -54,6 +56,7 @@
 
   <span id="message"></span>
 
+  <!-- This is the form to select location and asset -->
   <form>
     <label for="locations">Choose a location:</label>
     <select id="locations" name="locations" onchange="updateAssetList()">
