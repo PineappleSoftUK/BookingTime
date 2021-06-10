@@ -19,11 +19,17 @@
  //Create the coordinator
  $coord = new System\Coord($db);
 
- //Get all assets
+/*
+* Get all assets
+*
+*/
  $locationID = filter_input(INPUT_GET, 'loc', FILTER_SANITIZE_SPECIAL_CHARS);
 
- $location = $coord->getALocation($locationID);
- $assetArray = $coord->getAllAssets($location);
+ if (isset($locationID)) {
 
- var_dump($assetArray);
+   $location = $coord->getALocation($locationID);
+   $assetArray = $coord->getAllAssets($location);
+
+   var_dump($assetArray);
+ }
 ?>
