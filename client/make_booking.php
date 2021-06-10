@@ -58,8 +58,8 @@
 
   <!-- This is the form to select location and asset -->
   <form>
-    <label for="locations">Choose a location:</label>
-    <select id="locations" name="locations" onchange="updateAssetList()">
+    <label for="locationsSelect">Choose a location:</label>
+    <select id="locationsSelect" name="locationsSelect" onchange="updateAssetList()">
       <?php
       foreach ($locationArray as $value) {
       ?>
@@ -69,6 +69,13 @@
       <?php
       }
       ?>
+    </select>
+
+    <br>
+
+    <label for="assetsSelect">Choose an asset:</label>
+    <select id="assetsSelect" name="assetsSelect" onchange="#">
+      <option value="">Please choose a location first</option>
     </select>
   </form>
 

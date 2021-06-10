@@ -12,7 +12,7 @@ selected location.
 
 */
 function updateAssetList() {
-  var locationSelected = document.getElementById("locations").value;
+  var locationSelected = document.getElementById("locationsSelect").value;
 
   function getAssets(locationSelected) {
     if (locationSelected == "") {
@@ -22,7 +22,26 @@ function updateAssetList() {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("message").textContent = this.responseText;
+
+          //Clear asset drop down list
+          var select = document.getElementById("assetsSelect");
+          var selectLength = select.options.length;
+          for (i = selectLength-1; i >= 0; i--) {
+            select.options[i] = null;
+          }
+
+          //Add assets to drop down list
+          //The array is parsed JSON that was encoded by the php call
+          var responseArray = JSON.parse(this.responseText);
+          var responseArrayLength = responseArray.length;
+
+          for (var i = 0; i < responseArrayLength; i++) {
+            var assetName = responseArray[i]['name'];
+
+            var option = document.createElement("option");
+            option.text = assetName;
+            select.add(option);
+          }
         }
       };
       xmlhttp.open("GET","system_calls.php?loc="+locationSelected,true);

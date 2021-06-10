@@ -30,6 +30,6 @@
    $location = $coord->getALocation($locationID);
    $assetArray = $coord->getAllAssets($location);
 
-   var_dump($assetArray);
+   echo json_encode($assetArray);
  }
 ?>
