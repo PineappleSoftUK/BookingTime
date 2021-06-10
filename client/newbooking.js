@@ -25,7 +25,7 @@ function updateAssetList() {
           document.getElementById("message").textContent = this.responseText;
         }
       };
-      xmlhttp.open("GET","get_assets.php?loc="+locationSelected,true);
+      xmlhttp.open("GET","system_calls.php?loc="+locationSelected,true);
       xmlhttp.send();
     }
   }
