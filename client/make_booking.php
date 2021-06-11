@@ -79,6 +79,15 @@
     </select>
   </form>
 
+  <!-- Implementation of timeslot follows, this is work in progress -->
+  <?php
+  $testLocation = $coord->getALocation(1);
+  $testAsset = $coord->getAnAsset($testLocation, 2);
+  $testDate = "01/01/2021";
+  var_dump($coord->getAvailableTimeSlots($testAsset, $testDate));
+
+  ?>
+
 
 </body>
 </html>

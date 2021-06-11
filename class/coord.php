@@ -187,10 +187,9 @@ class Coord
   * Get time slots
   *
   */
-  public function getListOfTimeSlots($assetForBooking, $aGivenDay)
+  public function getAvailableTimeSlots($assetForBooking, $aGivenDay)
   {
-    $timeSlotDuration = $this->getTimeSlotDuration();
-    return $assetForBooking->getListOfTimeSlots($aGivenDay, $timeSlotDuration);
+    return $assetForBooking->getAvailableTimeSlots($aGivenDay);
   }
 
 

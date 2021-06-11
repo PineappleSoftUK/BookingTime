@@ -269,40 +269,53 @@ class Asset
   * This returns a list of available time slots for a given day.
   *
   */
-  public function getListOfTimeSlots($aGivenDay, $timeSlotDuration)
+  public function getAvailableTimeSlots($aGivenDay)
   {
     $listOfTimeSlots = array();
-    $timeSlotDurationObject = new DateInterval('PT' . $timeSlotDuration . 'M');
-    $slotsInDay = 1440/$timeSlotDuration;
 
-    //Convert date to a DateTime object
+    //Convert given Day to a DateTime object
     $dateObject = new DateTime($aGivenDay);
 
-    //Get day of the week (MON=1)
-    $dayOfWeek = $dateObject->format('w');
+    //Get day of the week from date object (as lowercase text e.g "monday")
+    $dayOfWeek = strtolower($dateObject->format('l'));
 
-    //Perform check on day of week, if dissalowed return empty array.
-    // TODO
+    //Perform check on day of week against asset, if dissalowed return empty array.
+    if (!array_search($dayOfWeek, $this->getDays())) {
+      return $listOfTimeSlots;
+    }
 
     //Look up restricted days, i.e is this a bank holiday?
     // TODO
 
-    //Get a list of bookings and check timeslots against $capacity
+    //Get a list of current bookings and check timeslots against $capacity
     // TODO
 
-    //Create the time slot objects
-    $i = 1;
-    while($i <= $slotsInDay) {
-      //Create a new time slot object then add to list
+    //Create the timeslots...
+    $times = $this->getTimes();
 
-      $object = new TimeSlot($this->db, 0, 0, $dateObject);
-      array_push($listOfTimeSlots, $object);
-
-      //Increase the date object by the time slot $timeSlotDuration
-      $dateObject->add($timeSlotDurationObject);
-
-      $i++;
+    //Is it all day?
+    if (array_key_exists(0, $times) && $times[0] == "All day") {
+      $testing = "All day!";
+      return $testing;
     }
+
+    //Is it a week, i.e are the times the same on each day
+    if (array_key_exists("week", $times)) {
+      foreach ($times['week'] as $key => $value) {
+        //Create new timeslot object: time = $value (needs exploding and the $value adding to dateobject)
+        //and timeslot duration = $this->getTimeslotLength(). Add this timeslot object to the array for return
+
+        $time = explode(":", $value);
+
+        $dateObject->setTime($time[0], $time[1]);
+        $object = new TimeSlot($this->db, 0, 0, $dateObject);
+        array_push($listOfTimeSlots, $object);
+      }
+    }
+
+    // TODO Alter timeslot object to include duration
+
+    // TODO Timeslots on differing days
 
     return $listOfTimeSlots;
 
