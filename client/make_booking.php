@@ -38,8 +38,12 @@
   <meta name="author" content="PineappleSoft">
 
   <link rel="stylesheet" href="../styles/main.css">
-
   <script src="newbooking.js"></script>
+
+  <!-- for the calendar... -->
+  <link rel="stylesheet" href="calendar.css">
+  <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+  <script src="calendar.js"></script>
 
 </head>
 
@@ -78,6 +82,44 @@
       <option value="">Please choose a location first</option>
     </select>
   </form>
+
+  <div name="theCalendar">
+    <div class="month">
+      <ul>
+        <li class="prev"><a onclick="displayCalendar('p')">&#10094;</a></li>
+        <li class="next"><a onclick="displayCalendar('n')">&#10095;</a></li>
+        <li><span id="monthText"></span><br><span id="yearText"></span>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="weekdays">
+      <li>Mo</li>
+      <li>Tu</li>
+      <li>We</li>
+      <li>Th</li>
+      <li>Fr</li>
+      <li>Sa</li>
+      <li>Su</li>
+    </ul>
+
+    <ul id="days" class="days" >
+
+    </ul>
+    <script type="text/javascript">
+      displayCalendar("t");
+    </script>
+    <!-- Script to repsond to swipe: -->
+    <script type="text/javascript">
+      var element = document.getElementById('days');
+      var hammertime = Hammer(element).on("swipeleft", function(event) {
+        displayCalendar('n');
+      });
+      var hammertime = Hammer(element).on("swiperight", function(event) {
+        displayCalendar('p');
+      });
+    </script>
+  </div>
 
   <!-- Implementation of timeslot follows, this is work in progress -->
 
