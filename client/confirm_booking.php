@@ -80,12 +80,6 @@
   </form>
 
   <!-- Implementation of timeslot follows, this is work in progress -->
-
-  <!-- TODO  The below works in terms of generating the radios, this
-            now needs to done 'on-the-fly' by the JS though.
-
-            The file confirm_booking.php is a duplicate of this file
-            and needs editing to handle the form submit as below-->
   <?php
   $testLocation = $coord->getALocation(1);
   $testAsset = $coord->getAnAsset($testLocation, 2);
@@ -105,7 +99,6 @@
 
     <input type="submit" name="Submit" value="Submit">
   </form>
-
-
+  
 </body>
 </html>
