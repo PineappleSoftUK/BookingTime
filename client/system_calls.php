@@ -32,4 +32,21 @@
 
    echo json_encode($assetArray);
  }
+
+ /*
+ * Get all timeslots
+ *
+ */
+  $date = filter_input(INPUT_GET, 'date', FILTER_SANITIZE_SPECIAL_CHARS);
+  $locationID = filter_input(INPUT_GET, 'location', FILTER_SANITIZE_SPECIAL_CHARS);
+  $assetID = filter_input(INPUT_GET, 'asset', FILTER_SANITIZE_SPECIAL_CHARS);
+
+  if (isset($date)) {
+
+    $location = $coord->getALocation($locationID);
+    $asset = $coord->getAnAsset($location, $assetID);
+    $timeslotArray = $coord->getAvailableTimeSlots($asset, $date);
+
+    echo json_encode($timeslotArray);
+  }
 ?>

@@ -97,10 +97,10 @@ function displayCalendar(action) {
   }
 }
 
-//Below is the repsonse to the on click,
-//current code below is more of a placeholder
+//Below is the repsonse to the on click, it will call a function in newbooking.js
 function calendarAction(chosenDay) {
   var chosenMonth = today.getMonth() + 1;
   var chosenYear = today.getFullYear();
-  alert(chosenDay + "-" + chosenMonth + "-" + chosenYear);
+  var dateString = chosenMonth + "/" + chosenDay + "/" + chosenYear;
+  populateTimeslots(dateString);
 }

@@ -78,7 +78,7 @@
     <br>
 
     <label for="assetsSelect">Choose an asset:</label>
-    <select id="assetsSelect" name="assetsSelect" onchange="#">
+    <select id="assetsSelect" name="assetsSelect">
       <option value="">Please choose a location first</option>
     </select>
   </form>
@@ -136,16 +136,9 @@
   $arrayOfTimeslotObjects = $coord->getAvailableTimeSlots($testAsset, $testDate);
   ?>
 
-  <form action="confirm_booking.php" method="post">
-    <?php
-    // Loop through the timeslots and add a radio, the value will be the timeslot id.
-    foreach ($arrayOfTimeslotObjects as $value) {
-    ?>
-      <input type="radio" id="<?php echo $value->getTime();?>" name="timeslots" value="<?php echo $value->getTime();?>">
-      <label for="<?php echo $value->getTime();?>"><?php echo $value->getTime();?></label><br>
-    <?php }?>
-
-    <input type="submit" name="Submit" value="Submit">
+  <form id="form" action="confirm_booking.php" method="post">
+    <span id="submitBreak"></span>
+    <input type="submit" name="submitButton" value="Submit">
   </form>
 
 
