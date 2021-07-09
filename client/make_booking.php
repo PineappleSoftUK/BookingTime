@@ -126,7 +126,13 @@
 
   <form id="form" action="confirm_booking.php" method="post">
     <span id="submitBreak"></span>
-    <input type="submit" name="submitButton" value="Submit">
+
+    <input type="hidden" name="locationToSubmit" id="locationToSubmit">
+    <input type="hidden" name="assetToSubmit" id="assetToSubmit">
+    <input type="hidden" name="dateToSubmit" id="dateToSubmit">
+
+
+    <input type="button" name="submitButton" value="Submit" onclick="submitCheck()">
   </form>
 
 

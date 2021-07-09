@@ -126,4 +126,23 @@ function populateTimeslots(dateString) {
 
   getTimeslots(dateString, locationSelected, assetSelected);
 
+  //Set hidden form element for submitting the date
+  document.getElementById("dateToSubmit").value = dateString;
+
+}
+
+/*
+
+submitCheck
+
+This performs checks on the form then submits the form if ok or alerts users to errors
+
+*/
+function submitCheck() {
+
+  //Set the hidden form elements for submit
+  document.getElementById("locationToSubmit").value = document.getElementById("locationsSelect").value;
+  document.getElementById("assetToSubmit").value = document.getElementById("assetsSelect").value;
+
+  //document.getElementById("form").submit();
 }
