@@ -277,10 +277,11 @@ class Asset
     $dateObject = new DateTime($aGivenDay);
 
     //Get day of the week from date object (as lowercase text e.g "monday")
-    $dayOfWeek = strtolower($dateObject->format('l'));
+    $dayOfWeek = $dateObject->format('l');
 
     //Perform check on day of week against asset, if dissalowed return empty array.
-    if (!array_search($dayOfWeek, $this->getDays())) {
+    //Note: array search returns the key of result or false
+    if (array_search($dayOfWeek, $this->getDays()) === FALSE) {
       return $listOfTimeSlots;
     }
 
