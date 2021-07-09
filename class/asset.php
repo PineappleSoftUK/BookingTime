@@ -292,6 +292,7 @@ class Asset
     // TODO
 
     //Create the timeslots...
+
     $times = $this->getTimes();
 
     //Is it all day?
@@ -303,6 +304,17 @@ class Asset
     //Is it a week, i.e are the times the same on each day
     if (array_key_exists("week", $times)) {
       foreach ($times['week'] as $key => $value) {
+        //Create new timeslot object: time = $value (needs exploding and the $value adding to dateobject)
+        //and timeslot duration = $this->getTimeslotLength(). Add this timeslot object to the array for return
+
+        $time = explode(":", $value);
+
+        $dateObject->setTime($time[0], $time[1]);
+        $object = new TimeSlot($this->db, 0, 0, $dateObject);
+        array_push($listOfTimeSlots, $object);
+      }
+    } else {
+      foreach ($times[$dayOfWeek] as $key => $value) {
         //Create new timeslot object: time = $value (needs exploding and the $value adding to dateobject)
         //and timeslot duration = $this->getTimeslotLength(). Add this timeslot object to the array for return
 
