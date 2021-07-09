@@ -111,6 +111,11 @@ function populateTimeslots(dateString) {
             labelElement.setAttribute("name", "timeslot");
             labelElement.appendChild(labelText);
             submitButton.before(form.appendChild(labelElement));
+
+            //End with a br
+            var brElement = document.createElement("br");
+            brElement.setAttribute("name", "timeslot");
+            submitButton.before(form.appendChild(brElement));
           }
         }
       };
