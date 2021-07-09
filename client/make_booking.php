@@ -121,20 +121,7 @@
     </script>
   </div>
 
-  <!-- Implementation of timeslot follows, this is work in progress -->
-
-  <!-- TODO  The below works in terms of generating the radios, this
-            now needs to done 'on-the-fly' by the JS though.
-
-            The file confirm_booking.php is a duplicate of this file
-            and needs editing to handle the form submit as below-->
-  <?php
-  $testLocation = $coord->getALocation(1);
-  $testAsset = $coord->getAnAsset($testLocation, 2);
-  $testDate = "01/01/2021";
-
-  $arrayOfTimeslotObjects = $coord->getAvailableTimeSlots($testAsset, $testDate);
-  ?>
+  <!-- Form to show timeslots (populated by js on calendar click) -->
 
   <form id="form" action="confirm_booking.php" method="post">
     <span id="submitBreak"></span>
