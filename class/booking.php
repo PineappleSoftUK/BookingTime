@@ -11,6 +11,7 @@ class Booking
 {
   public $db;
   public $id;
+  public $client;
   public $asset;
   public $status;
 
@@ -18,6 +19,7 @@ class Booking
   {
     $this->db = $db;
     $this->id = $id;
+    $this->$client = 1; //Placeholder for future use
     $this->asset = $asset;
     $this->status = $status;
   }
