@@ -161,7 +161,7 @@ class Coord
   public function newBooking($assetForBooking)
   {
     $bookingID = $assetForBooking->newBooking();
-    return new Booking($this->db, $bookingID, $assetForBooking->getID(), "Live")
+    return new Booking($this->db, $bookingID, $assetForBooking->getID(), "Live");
   }
 
   /**
