@@ -154,12 +154,14 @@ class Coord
   /**
   * New booking function.
   *
-  * Asks the asset object to add a new booking
+  * Asks the asset object to add a new booking, retrieves row ID and creates,
+  * then returns the booking object.
   *
   */
   public function newBooking($assetForBooking)
   {
-    $assetForBooking->newBooking();
+    $bookingID = $assetForBooking->newBooking();
+    return new Booking($this->db, $bookingID, $assetForBooking->getID(), "Live")
   }
 
   /**
