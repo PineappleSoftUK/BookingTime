@@ -216,6 +216,7 @@ class Asset
     $stmt = $this->db->prepare('INSERT INTO bookings (asset, status) VALUES (:asset, "Live")');
     $stmt->bindValue(':asset', $this->id);
     $result = $stmt->execute();
+    return $this->db->lastInsertRowID();
   }
 
   /**
