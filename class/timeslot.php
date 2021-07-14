@@ -11,7 +11,9 @@ class TimeSlot
   public $db;
   public $id;
   public $bookingID;
+  public $date;
   public $time;
+  public $duration;
 
   public function __construct($db, $id, $bookingID, $dateTime)
   {
