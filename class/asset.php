@@ -286,6 +286,9 @@ class Asset
       return $listOfTimeSlots;
     }
 
+    //If today or earlier, do not past timeslots 
+    //TODO
+
     //Look up restricted days, i.e is this a bank holiday?
     // TODO
 
