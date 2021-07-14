@@ -145,5 +145,5 @@ function submitCheck() {
   document.getElementById("locationToSubmit").value = document.getElementById("locationsSelect").value;
   document.getElementById("assetToSubmit").value = document.getElementById("assetsSelect").value;
 
-  //document.getElementById("form").submit();
+  document.getElementById("form").submit();
 }
