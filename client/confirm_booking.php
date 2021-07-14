@@ -1,9 +1,9 @@
 <?php
 
 /**
- * The main booking page
+ * The confirm booking page
  *
- * This page is used by clients to make a booking.
+ * This page checks and submits the data and confirms a valid booking.
  *
  */
 
@@ -23,8 +23,24 @@
  //Blank span for error/success message on form processing
  $span = "";
 
- //Get all locations
- $locationArray = $coord->getAllLocations();
+ //Get the selected asset
+ $assetID = $_POST['assetToSubmit'];
+ $locationID = $_POST['locationToSubmit'];
+
+ $location = $coord->getALocation($locationID);
+ $asset = $coord->getAnAsset($location, $assetID);
+
+ //Create a new booking
+ $bookingObject = $coord->newBooking($asset);
+
+ //Get date and time of TimeSlot
+ $dateObject = new DateTime();
+
+ $time = explode(":", $_POST['timeslotRadio']);
+ $date = explode("/", $_POST['dateToSubmit']); // M/D/Y
+ $dateObject->setTime($time[0], $time[1]);
+ $dateObject->setDate($date[2], $date[0], $date[1]); // Y-M-D
+
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +55,6 @@
 
   <link rel="stylesheet" href="../styles/main.css">
 
-  <script src="newbooking.js"></script>
-
 </head>
 
 <body>
@@ -49,56 +63,13 @@
   <ul class="breadcrumb">
     <li><a href="../">Home</a></li>
     <li><a href="index.php">Client Hub</a></li>
-    <li>Make Booking</li>
+    <li><a href="make_booking.php">Make Booking</a></li>
+    <li>Confirm Booking</li>
   </ul>
 
-  <h2>New booking</h2>
+  <h2>Confirm booking</h2>
 
-  <span id="message"></span>
+  <span id="message"><?php echo $span; ?></span>
 
-  <!-- This is the form to select location and asset -->
-  <form>
-    <label for="locationsSelect">Choose a location:</label>
-    <select id="locationsSelect" name="locationsSelect" onchange="updateAssetList()">
-      <?php
-      foreach ($locationArray as $value) {
-      ?>
-
-      <option value="<?php echo $value->getID(); ?>"><?php echo $value->getName(); ?></option>
-
-      <?php
-      }
-      ?>
-    </select>
-
-    <br>
-
-    <label for="assetsSelect">Choose an asset:</label>
-    <select id="assetsSelect" name="assetsSelect" onchange="#">
-      <option value="">Please choose a location first</option>
-    </select>
-  </form>
-
-  <!-- Implementation of timeslot follows, this is work in progress -->
-  <?php
-  $testLocation = $coord->getALocation(1);
-  $testAsset = $coord->getAnAsset($testLocation, 2);
-  $testDate = "01/01/2021";
-
-  $arrayOfTimeslotObjects = $coord->getAvailableTimeSlots($testAsset, $testDate);
-  ?>
-
-  <form action="confirm_booking.php" method="post">
-    <?php
-    // Loop through the timeslots and add a radio, the value will be the timeslot id.
-    foreach ($arrayOfTimeslotObjects as $value) {
-    ?>
-      <input type="radio" id="<?php echo $value->getTime();?>" name="timeslots" value="<?php echo $value->getTime();?>">
-      <label for="<?php echo $value->getTime();?>"><?php echo $value->getTime();?></label><br>
-    <?php }?>
-
-    <input type="submit" name="Submit" value="Submit">
-  </form>
-  
 </body>
 </html>
