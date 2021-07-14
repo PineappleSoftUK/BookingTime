@@ -99,7 +99,8 @@ function populateTimeslots(dateString) {
             //The radio button
             var inputElement = document.createElement("input");
             inputElement.type = "radio";
-            inputElement.name = "timeslot[" + time + "][]";
+            //inputElement.name = "timeslot[" + time + "][]";
+            inputElement.name = "timeslotRadio";
             inputElement.value = time;
             inputElement.id = time;
             submitButton.before(form.appendChild(inputElement));
