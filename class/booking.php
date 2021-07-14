@@ -19,7 +19,7 @@ class Booking
   {
     $this->db = $db;
     $this->id = $id;
-    $this->$client = 1; //Placeholder for future use
+    $this->client = 1; //Placeholder for future use
     $this->asset = $asset;
     $this->status = $status;
   }
