@@ -182,8 +182,24 @@ class Coord
     $assetForBooking->deletebooking($bookingToDelete);
   }
 
+
   // Time Slots...
 
+
+  /**
+  * Create new timeslot
+  *
+  */
+  public function newTimeslot($asset, $bookingObject, $dateObject)
+  {
+    $timeslotObject = new Timeslot($this->db, 0, $bookingObject->getID(), $dateObject, $asset->getTimeslotLength());
+
+    if ($asset->checkTimeslotAvailability($timeslotObject)) {
+      return $bookingObject->newTimeslot($timeslotObject);
+    }
+
+    return false;
+  }
 
   /**
   * Get time slots

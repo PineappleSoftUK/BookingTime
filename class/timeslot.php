@@ -15,12 +15,14 @@ class TimeSlot
   public $time;
   public $duration;
 
-  public function __construct($db, $id, $bookingID, $dateTime)
+  public function __construct($db, $id, $bookingID, $dateTime, $duration)
   {
     $this->db = $db;
     $this->id = $id;
     $this->bookingID = $bookingID;
-    $this->time = $dateTime->format('H:i');
+    $this->date = $dateTime->format('Y-n-d'); //YYYY-MM-DD
+    $this->time = $dateTime->format('H:i'); //HH:MM
+    $this->duration = $duration;
   }
 
   /**
@@ -60,12 +62,41 @@ class TimeSlot
   }
 
   /**
+  * Getter for date.
+  * YYYY-MM-DD
+  *
+  */
+  public function getDate()
+  {
+    return $this->date;
+  }
+
+  /**
   * Getter for time
+  * HH:MM
   *
   */
   public function getTime()
   {
     return $this->time;
+  }
+
+  /**
+  * Setter for duration.
+  *
+  */
+  public function setDuration($duration)
+  {
+    $this->duration = $duration;
+  }
+
+  /**
+  * Get duration
+  *
+  */
+  public function getDuration()
+  {
+    return $this->duration;
   }
 
   /**

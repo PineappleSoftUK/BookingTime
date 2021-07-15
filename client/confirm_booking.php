@@ -41,6 +41,13 @@
  $dateObject->setTime($time[0], $time[1]);
  $dateObject->setDate($date[2], $date[0], $date[1]); // Y-M-D
 
+ //Create the TimeSlot and assign to booking
+ if ($coord->newTimeslot($asset, $bookingObject, $dateObject)) {
+   $span = "Success";
+ } else {
+   $span = "Fail";
+ }
+
 ?>
 
 <!DOCTYPE html>

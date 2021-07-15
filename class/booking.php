@@ -42,6 +42,24 @@ class Booking
     return $this->id;
   }
 
+  /**
+  * Setter for client.
+  *
+  */
+  public function setClient($client)
+  {
+    $this->client = $client;
+  }
+
+  /**
+  * Getter for client.
+  *
+  */
+  public function getClient()
+  {
+    return $this->client;
+  }
+
 
   /**
   * Setter for asset.
@@ -77,6 +95,24 @@ class Booking
   public function getStatus()
   {
     return $this->status;
+  }
+
+  /**
+  * New timeslot
+  *
+  * Adds a new timeslot to the database
+  *
+  */
+  public function newTimeslot($timeslotObject)
+  {
+    $stmt = $this->db->prepare('INSERT INTO timeslots (bookingID, timeslotDate, timeslotTime, timeslotLength, client, status) VALUES (:bookingID, :timeslotDate, :timeslotTime, :timeslotLength, :client, "Live")');
+    $stmt->bindValue(':bookingID', $this->id);
+    $stmt->bindValue(':timeslotDate', $timeslotObject->getDate());
+    $stmt->bindValue(':timeslotTime', $timeslotObject->getTime());
+    $stmt->bindValue(':timeslotLength', $timeslotObject->getDuration());
+    $stmt->bindValue(':timeslotLength', $this->getClient());
+    $result = $stmt->execute();
+    return $this->db->lastInsertRowID();
   }
 
   /**

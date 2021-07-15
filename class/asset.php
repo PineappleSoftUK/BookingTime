@@ -308,7 +308,7 @@ class Asset
         $time = explode(":", $value);
 
         $dateObject->setTime($time[0], $time[1]);
-        $object = new TimeSlot($this->db, 0, 0, $dateObject);
+        $object = new TimeSlot($this->db, 0, 0, $dateObject, 0);
         if ($this->checkTimeslotAvailability($object)) {
           array_push($listOfTimeSlots, $object);
         }
@@ -321,7 +321,7 @@ class Asset
         $time = explode(":", $value);
 
         $dateObject->setTime($time[0], $time[1]);
-        $object = new TimeSlot($this->db, 0, 0, $dateObject);
+        $object = new TimeSlot($this->db, 0, 0, $dateObject, 0);
         if ($this->checkTimeslotAvailability($object)) {
           array_push($listOfTimeSlots, $object);
         }
