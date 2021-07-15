@@ -286,13 +286,7 @@ class Asset
       return $listOfTimeSlots;
     }
 
-    //If today or earlier, do not past timeslots 
-    //TODO
-
     //Look up restricted days, i.e is this a bank holiday?
-    // TODO
-
-    //Get a list of current bookings and check timeslots against $capacity
     // TODO
 
     //Create the timeslots...
@@ -315,7 +309,9 @@ class Asset
 
         $dateObject->setTime($time[0], $time[1]);
         $object = new TimeSlot($this->db, 0, 0, $dateObject);
-        array_push($listOfTimeSlots, $object);
+        if ($this->checkTimeslotAvailability($object)) {
+          array_push($listOfTimeSlots, $object);
+        }
       }
     } else {
       foreach ($times[$dayOfWeek] as $key => $value) {
@@ -326,17 +322,35 @@ class Asset
 
         $dateObject->setTime($time[0], $time[1]);
         $object = new TimeSlot($this->db, 0, 0, $dateObject);
-        array_push($listOfTimeSlots, $object);
+        if ($this->checkTimeslotAvailability($object)) {
+          array_push($listOfTimeSlots, $object);
+        }
       }
     }
-
-    // TODO Alter timeslot object to include duration
-
-    // TODO Timeslots on differing days
-
     return $listOfTimeSlots;
+  }
+
+
+  /**
+  * Check timeslot availability
+  *
+  * This performs checks to determine whether a timeslot is valid and available
+  * prior to creation.
+  *
+  */
+  public function checkTimeslotAvailability($timeslotObject)
+  {
+
+    //If today or earlier, do not past timeslots
+    //TODO
+
+    //Get a list of current bookings and check timeslots against $capacity
+    // TODO
+
+    return true;
 
   }
+
 
   /**
   * toString method.
