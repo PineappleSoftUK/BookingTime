@@ -67,7 +67,7 @@ function populateTimeslots(dateString) {
   //First clear the form:
 
   //Find any element with the attribute: name="timeslot"
-  var timeSlotElements = document.querySelectorAll('[name="timeslot"],[name^="timeslot["]');
+  var timeSlotElements = document.querySelectorAll('[name="timeslot"],[name^="timeslot"]');
 
   //Loop through and remove the element
   for (var i = 0; i < timeSlotElements.length; i++) {
@@ -108,8 +108,8 @@ function populateTimeslots(dateString) {
             //The radio label
             var labelElement = document.createElement("LABEL");
             var labelText = document.createTextNode(time);
-            labelElement.setAttribute("for", time);
-            labelElement.setAttribute("name", "timeslot");
+            labelElement.setAttribute("for", "timeslotRadio");
+            labelElement.setAttribute("name", "timeslotRadioLabel");
             labelElement.appendChild(labelText);
             submitButton.before(form.appendChild(labelElement));
 
