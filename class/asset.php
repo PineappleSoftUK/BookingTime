@@ -9,6 +9,7 @@ namespace System;
 
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
 class Asset
 {
@@ -385,7 +386,16 @@ class Asset
   {
 
     //If today or earlier, do not past timeslots
-    //TODO
+    $timeNow = new DateTime('NOW', new DateTimeZone('Europe/London'));
+
+    $timeslotDateTime = new DateTime($timeslotObject->getDate(), new DateTimeZone('Europe/London'));
+    $timeslotDateTime->setTimezone(new DateTimeZone('Europe/London'));
+    $time = explode(":", $timeslotObject->getTime());
+    $timeslotDateTime->setTime($time[0], $time[1]);
+
+    if ($timeslotDateTime < $timeNow) {
+      return false;
+    }
 
     //Get a list of current bookings and check timeslots against $capacity
     $timeslotsBooked = $this->getTimeslotBookingsForTime($timeslotObject->getTime());
