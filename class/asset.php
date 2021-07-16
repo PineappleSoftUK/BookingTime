@@ -240,6 +240,22 @@ class Asset
   }
 
   /**
+  * Get a booking
+  *
+  * This returns one booking based on id provided.
+  *
+  */
+ public function getABooking($bookingID)
+ {
+   $stmt = $this->db->prepare('SELECT * FROM bookings WHERE id = :id');
+   $stmt->bindValue(':id', $bookingID);
+   $result = $stmt->execute();
+   $array = $result->fetchArray();
+   $booking = new Booking($this->db, $array['id'], $array['asset'], $array['clientID'], $array['status']);
+   return $booking;
+ }
+
+  /**
   * Delete booking function.
   *
   * This takes a booking object and removes it from the database.
@@ -265,8 +281,34 @@ class Asset
     $result = $stmt->execute();
   }
 
+
   /**
-  * Get list of timeslots
+  * Get timeslot bookings for time
+  *
+  * This returns an array of booked timeslots objects for a given time.
+  *
+  */
+  public function getTimeslotBookingsForTime($time)
+  {
+    $timeslotArray = array();
+    $stmt = $this->db->prepare('SELECT * FROM timeslots WHERE timeslotTime = :timeslotTime');
+    $stmt->bindValue(':timeslotTime', $time);
+    $res = $stmt->execute();
+    while ($row = $res->fetchArray()) {
+
+      $dateObject = new DateTime($row['timeslotDate']);
+
+      $time = explode(":", $row['timeslotTime']);
+      $dateObject->setTime($time[0], $time[1]);
+
+      $object = new TimeSlot($this->db, $row['id'], $row['bookingID'], $dateObject, $row['timeslotLength']);
+      array_push($timeslotArray, $object);
+    }
+    return $timeslotArray;
+  }
+
+  /**
+  * Get list of available timeslots
   *
   * This returns a list of available time slots for a given day.
   *
@@ -346,8 +388,12 @@ class Asset
     //TODO
 
     //Get a list of current bookings and check timeslots against $capacity
-    $bookingArray = $this->getAllbookings();
-    // TODO
+    $timeslotsBooked = $this->getTimeslotBookingsForTime($timeslotObject->getTime());
+    $timeslotsBookedCount = count($timeslotsBooked);
+
+    if($timeslotsBookedCount >= $this->getCapacity()) {
+      return false;
+    }
 
     return true;
 

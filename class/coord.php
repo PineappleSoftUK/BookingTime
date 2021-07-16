@@ -174,6 +174,17 @@ class Coord
   }
 
   /**
+  * Get a booking
+  *
+  * Returns a single booking from a given booking ID
+  *
+  */
+  public function getABooking($assetForBooking, $bookingID)
+  {
+    return $assetForBooking->getABooking($bookingID);
+  }
+
+  /**
   * Delete a booking
   *
   */
@@ -209,6 +220,21 @@ class Coord
   {
     return $assetForBooking->getAvailableTimeSlots($aGivenDay);
   }
+
+
+  // Ownerships...
+
+
+  /**
+  * Get timeslot's booking object
+  *
+  */
+  public function getTimeslotsBookingObject($asset, $aTimeslotObject)
+  {
+    return $this->getABooking($asset, $aTimeslotObject->getID());
+  }
+
+
 
 
   public function toString()
