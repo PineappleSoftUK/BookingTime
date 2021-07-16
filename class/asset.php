@@ -211,10 +211,11 @@ class Asset
   * Adds a new booking to the database
   *
   */
-  public function newBooking()
+  public function newBooking($clientID)
   {
-    $stmt = $this->db->prepare('INSERT INTO bookings (asset, status) VALUES (:asset, "Live")');
+    $stmt = $this->db->prepare('INSERT INTO bookings (asset, client, status) VALUES (:asset, :client, "Live")');
     $stmt->bindValue(':asset', $this->id);
+    $stmt->bindValue(':client', $clientID);
     $result = $stmt->execute();
     return $this->db->lastInsertRowID();
   }
@@ -225,14 +226,14 @@ class Asset
   * This returns an array of all booking objects linked this asset.
   *
   */
-  public function getAllbookings()
+  public function getAllBookings()
   {
     $bookingArray = array();
     $stmt = $this->db->prepare('SELECT * FROM bookings WHERE asset = :asset');
     $stmt->bindValue(':asset', $this->id);
     $res = $stmt->execute();
     while ($row = $res->fetchArray()) {
-      $object = new booking($this->db, $row['id'], $row['asset'], $row['status']);
+      $object = new booking($this->db, $row['id'], $row['asset'], $row['client'], $row['status']);
       array_push($bookingArray, $object);
     }
     return $bookingArray;
@@ -345,6 +346,7 @@ class Asset
     //TODO
 
     //Get a list of current bookings and check timeslots against $capacity
+    $bookingArray = $this->getAllbookings();
     // TODO
 
     return true;

@@ -11,16 +11,16 @@ class Booking
 {
   public $db;
   public $id;
-  public $client;
   public $asset;
+  public $client;
   public $status;
 
-  public function __construct($db, $id, $asset, $status)
+  public function __construct($db, $id, $asset, $clientID, $status)
   {
     $this->db = $db;
     $this->id = $id;
-    $this->client = 1; //Placeholder for future use
     $this->asset = $asset;
+    $this->client = $clientID;
     $this->status = $status;
   }
 

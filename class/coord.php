@@ -158,10 +158,10 @@ class Coord
   * then returns the booking object.
   *
   */
-  public function newBooking($assetForBooking)
+  public function newBooking($assetForBooking, $clientID)
   {
-    $bookingID = $assetForBooking->newBooking();
-    return new Booking($this->db, $bookingID, $assetForBooking->getID(), "Live");
+    $bookingID = $assetForBooking->newBooking($clientID);
+    return new Booking($this->db, $bookingID, $assetForBooking->getID(), $clientID, "Live");
   }
 
   /**

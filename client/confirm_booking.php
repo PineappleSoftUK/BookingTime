@@ -23,6 +23,10 @@
  //Blank span for error/success message on form processing
  $span = "";
 
+ //Get the client -- This can be adapted to link to existing
+ //                  member sytem, just reflect the client id.
+ $clientID = 1;
+
  //Get the selected asset
  $assetID = $_POST['assetToSubmit'];
  $locationID = $_POST['locationToSubmit'];
@@ -31,7 +35,7 @@
  $asset = $coord->getAnAsset($location, $assetID);
 
  //Create a new booking
- $bookingObject = $coord->newBooking($asset);
+ $bookingObject = $coord->newBooking($asset, $clientID);
 
  //Get date and time of TimeSlot
  $dateObject = new DateTime();
