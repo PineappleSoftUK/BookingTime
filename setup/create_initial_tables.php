@@ -22,6 +22,6 @@ $db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREME
 $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, client INTEGER, status TEXT)');
 
 //Timeslots table
-$db->exec('CREATE TABLE IF NOT EXISTS timeslots (id INTEGER PRIMARY KEY AUTOINCREMENT, bookingID INTEGER, timeslotDate TEXT, timeslotTime TEXT, timeslotLength INTEGER, client INTEGER, status TEXT)');
+$db->exec('CREATE TABLE IF NOT EXISTS timeslots (id INTEGER PRIMARY KEY AUTOINCREMENT, bookingID INTEGER, timeslotDate TEXT, timeslotTime TEXT, timeslotLength INTEGER, status TEXT)');
 
 ?>

@@ -105,12 +105,11 @@ class Booking
   */
   public function newTimeslot($timeslotObject)
   {
-    $stmt = $this->db->prepare('INSERT INTO timeslots (bookingID, timeslotDate, timeslotTime, timeslotLength, client, status) VALUES (:bookingID, :timeslotDate, :timeslotTime, :timeslotLength, :client, "Live")');
+    $stmt = $this->db->prepare('INSERT INTO timeslots (bookingID, timeslotDate, timeslotTime, timeslotLength, status) VALUES (:bookingID, :timeslotDate, :timeslotTime, :timeslotLength, "Live")');
     $stmt->bindValue(':bookingID', $this->id);
     $stmt->bindValue(':timeslotDate', $timeslotObject->getDate());
     $stmt->bindValue(':timeslotTime', $timeslotObject->getTime());
     $stmt->bindValue(':timeslotLength', $timeslotObject->getDuration());
-    $stmt->bindValue(':timeslotLength', $this->getClient());
     $result = $stmt->execute();
     return $this->db->lastInsertRowID();
   }
