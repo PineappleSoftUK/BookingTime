@@ -1,3 +1,17 @@
+/* GENERAL */
+
+body {
+  font-family: Georgia, Verdana, sans-serif;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
 /* BREADCRUMBS */
 
 /* Style the list */
