@@ -1,6 +1,6 @@
 <?php
 /**
- * Update
+ * Delete
  *
  * @author  PineappleSoft
  */
@@ -20,41 +20,33 @@ include_once __DIR__ . '/../users/validate_user.php';
 
 // include database and classes
 include_once __DIR__ . '/../config/database.php';
-include_once __DIR__ . '/../class/asset.php';
+include_once __DIR__ . '/../class/booking.php';
 
-$asset = new Asset($db);
+$booking = new Booking($db);;
 
-// get id of asset to be edited
+// get booking id
 $data = json_decode(file_get_contents("php://input"));
 
-// set ID property of asset to be edited
-$asset->id = $data->id;
+// set booking id to be deleted
+$booking->id = $data->id;
 
-// set asset property values
-$asset->name = $data->name;
-$asset->location = $data->location;
-$asset->capacity = $data->capacity;
-$asset->timeslots = $data->timeslots;
-$asset->status = $data->status;
-//$asset->modified = date('Y-m-d H:i:s');;
-
-// update the asset
-if($asset->update()){
+// delete the booking
+if($booking->delete()){
 
   // set response code - 200 ok
   http_response_code(200);
 
   // tell the user
-  echo json_encode(array("message" => "Asset was updated."));
+  echo json_encode(array("message" => "Booking was deleted."));
 }
 
-// if unable to update the asset, tell the user
+// if unable to delete the booking
 else{
 
   // set response code - 503 service unavailable
   http_response_code(503);
 
   // tell the user
-  echo json_encode(array("message" => "Unable to update asset."));
+  echo json_encode(array("message" => "Unable to delete booking."));
 }
 ?>

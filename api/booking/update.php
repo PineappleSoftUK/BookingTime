@@ -20,41 +20,38 @@ include_once __DIR__ . '/../users/validate_user.php';
 
 // include database and classes
 include_once __DIR__ . '/../config/database.php';
-include_once __DIR__ . '/../class/asset.php';
+include_once __DIR__ . '/../class/booking.php';
 
-$asset = new Asset($db);
+$booking = new Booking($db);
 
-// get id of asset to be edited
+// get id of booking to be edited
 $data = json_decode(file_get_contents("php://input"));
 
-// set ID property of asset to be edited
-$asset->id = $data->id;
+// set ID property of booking to be edited
+$booking->id = $data->id;
 
-// set asset property values
-$asset->name = $data->name;
-$asset->location = $data->location;
-$asset->capacity = $data->capacity;
-$asset->timeslots = $data->timeslots;
-$asset->status = $data->status;
-//$asset->modified = date('Y-m-d H:i:s');;
+// set booking property values
+$booking->client = $data->client;
+$booking->asset = $data->asset;
+$booking->status = $data->status;
 
-// update the asset
-if($asset->update()){
+// update the booking
+if($booking->update()){
 
   // set response code - 200 ok
   http_response_code(200);
 
   // tell the user
-  echo json_encode(array("message" => "Asset was updated."));
+  echo json_encode(array("message" => "Booking was updated."));
 }
 
-// if unable to update the asset, tell the user
+// if unable to update the booking, tell the user
 else{
 
   // set response code - 503 service unavailable
   http_response_code(503);
 
   // tell the user
-  echo json_encode(array("message" => "Unable to update asset."));
+  echo json_encode(array("message" => "Unable to update booking."));
 }
 ?>

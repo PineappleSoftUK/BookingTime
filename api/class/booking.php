@@ -1,8 +1,8 @@
 <?php
 /**
- * Location
+ * Booking
  *
- * A location that houses assets that can be booked.
+ * A booking of an asset containing timeslot(s).
  *
  * @author  PineappleSoft
  */
@@ -11,15 +11,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class Location{
+class Booking{
 
   // database connection and table name
   private $conn;
-  private $table_name = "locations";
+  private $table_name = "bookings";
 
   // object properties
   public $id;
-  public $name;
+  public $asset;
+  public $client;
   public $status;
   public $created;
 
@@ -38,9 +39,9 @@ class Location{
   function read(){
     // select all query
     $query = <<<SQL
-    SELECT id, name, status, created
+    SELECT id, asset, client, status, created
     FROM $this->table_name
-    ORDER BY name ASC
+    ORDER BY id ASC
     SQL;
 
     // prepare and execute query statement
@@ -60,20 +61,22 @@ class Location{
   function create(){
     // query to insert record
     $query = <<<SQL
-    INSERT INTO $this->table_name (name, status, created)
-    VALUES (:name, :status, :created)
+    INSERT INTO $this->table_name (client, asset, status, created)
+    VALUES (:client, :asset, :status, :created)
     SQL;
 
     // prepare query
     $stmt = $this->conn->prepare($query);
 
     // sanitize inputs
-    $this->name=htmlspecialchars(strip_tags($this->name));
+    $this->client=htmlspecialchars(strip_tags($this->client));
+    $this->asset=htmlspecialchars(strip_tags($this->asset));
     $this->status=htmlspecialchars(strip_tags($this->status));
     $this->created=htmlspecialchars(strip_tags($this->created));
 
     // bind values
-    $stmt->bindValue(":name", $this->name);
+    $stmt->bindValue(":client", $this->client);
+    $stmt->bindValue(":asset", $this->asset);
     $stmt->bindValue(":status", $this->status);
     $stmt->bindValue(":created", $this->created);
 
@@ -97,15 +100,15 @@ class Location{
 
     // query to read single record
     $query = <<<SQL
-    SELECT id, name, status, created
+    SELECT id, client, asset, name, status, created
     FROM $this->table_name
-    WHERE id = :locationID
+    WHERE id = :bookingID
     LIMIT 0,1
     SQL;
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
-    $stmt->bindValue(':locationID', $this->id);
+    $stmt->bindValue(':bookingID', $this->id);
 
     $result = $stmt->execute();
 
@@ -116,7 +119,8 @@ class Location{
     if(!empty($row)){
 
       // set values to object properties
-      $this->name = $row['name'];
+      $this->client = $row['client'];
+      $this->asset = $row['asset'];
       $this->status = $row['status'];
     }
   }
@@ -134,7 +138,8 @@ class Location{
     $query = <<<SQL
     UPDATE $this->table_name
     SET
-      name = :name,
+      client = :client,
+      asset = :asset,
       status = :status
     WHERE id = :id
     SQL;
@@ -143,12 +148,14 @@ class Location{
     $stmt = $this->conn->prepare($query);
 
     // sanitize
-    $this->name=htmlspecialchars(strip_tags($this->name));
+    $this->client=htmlspecialchars(strip_tags($this->client));
+    $this->asset=htmlspecialchars(strip_tags($this->asset));
     $this->status=htmlspecialchars(strip_tags($this->status));
     $this->id=htmlspecialchars(strip_tags($this->id));
 
     // bind new values
-    $stmt->bindValue(':name', $this->name);
+    $stmt->bindValue(':client', $this->client);
+    $stmt->bindValue(':asset', $this->asset);
     $stmt->bindValue(':status', $this->status);
     $stmt->bindValue(':id', $this->id);
 
@@ -205,10 +212,10 @@ class Location{
 
     // select all query
     $query = <<<SQL
-    SELECT id, name, status, created
+    SELECT id, client, asset, status, created
     FROM $this->table_name
-    WHERE name LIKE :name OR status LIKE :status
-    ORDER BY name ASC
+    WHERE client LIKE :client OR asset LIKE :asset
+    ORDER BY id ASC
     SQL;
 
     // prepare query statement
@@ -219,7 +226,8 @@ class Location{
     $keywords = "%{$keywords}%";
 
     // bind
-    $stmt->bindValue(':name', $keywords);
+    $stmt->bindValue(':client', $keywords);
+    $stmt->bindValue(':asset', $keywords);
     $stmt->bindValue(':status', $keywords);
 
     //Return results
@@ -242,7 +250,7 @@ class Location{
 
     // select query
     $query = <<<SQL
-    SELECT id, name, status, created
+    SELECT id, client, asset, status, created
     FROM $this->table_name
     ORDER BY created ASC
     LIMIT :fromNumber, :quantity
