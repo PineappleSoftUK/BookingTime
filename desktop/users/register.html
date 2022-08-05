@@ -39,12 +39,7 @@
 
   <script>
   $(function(){
-    var alertText = localStorage.getItem('alert_text');
-
-    if(alertText!=undefined && alertText!=null){
-       $("#response").val(alertText);
-    }
-    localStorage.removeItem('alert_text');
+    responseAlert();
   });
   </script>
   <!--end of alert bar-->
