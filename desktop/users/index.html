@@ -32,6 +32,23 @@
   </script>
   <!--end of Navigation bar-->
 
+  <!--Alert bar-->
+  <div id="response">
+
+  </div>
+
+  <script>
+  $(function(){
+    var alertText = localStorage.getItem('alert_text');
+
+    if(alertText!=undefined && alertText!=null){
+       $("#response").val(alertText);
+    }
+    localStorage.removeItem('alert_text');
+  });
+  </script>
+  <!--end of alert bar-->
+
   <h1>Booking Time</h1>
 
   <h2>Login</h2>

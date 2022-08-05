@@ -34,11 +34,12 @@ $(document).ready(function(){
       data : form_data,
       success : function(result) {
         // successful sign up, report response and clear inputs
+        localStorage.setItem('alert_type', 'success');
+        localStorage.setItem('alert_text', 'Registration was successful, welcome!');
         window.location.href = "index.html";
-        //responseAlert('success', 'Registration was successful, welcome!');
       },
       error: function(xhr, resp, text) {
-        responseAlert('error', 'Registration failed with the folllowing error: ' + xhr.responseJSON.message);
+        //responseAlert('error', 'Registration failed with the folllowing error: ' + xhr.responseJSON.message);
         console.log(xhr, resp, text);
       }
     });
@@ -71,6 +72,8 @@ $(document).ready(function(){
         setCookie("jwt", result.jwt, 1);
 
         // show home page & alert successful login
+        localStorage.setItem('alert_type', 'success');
+        localStorage.setItem('alert_text', 'Log in was successful, welcome!');
         window.location.href = "../index.html";
       },
       error: function(xhr, resp, text){

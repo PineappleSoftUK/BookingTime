@@ -17,10 +17,18 @@ function clearResponse(){
 }
 
 //Function to populate alert message box
-function responseAlert(alertType, message) {
+function responseAlert() {
   clearResponse();
-  var html = `<div class='alert ` + alertType + `'><span class='closebtn' onclick='clearResponse();'>&times;</span>` + message + `</div>`;
-  $('#response').html(html);
+  var alertType = localStorage.getItem('alert_type');
+  var alertText = localStorage.getItem('alert_text');
+
+  if(alertType!=undefined && alertType!=null){
+    var html = `<div class='alert ` + alertType + `'><span class='closebtn' onclick='clearResponse();'>&times;</span>` + alertText + `</div>`;
+    $('#response').html(html);
+
+    localStorage.removeItem('alert_type');
+    localStorage.removeItem('alert_text');
+  }
 }
 
 // function to make form values to json format
