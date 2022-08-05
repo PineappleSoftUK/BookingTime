@@ -1,3 +1,9 @@
+/*
+This is a selection of utilities that my be required across the system.
+ 
+All html pages should load this file.
+*/
+
 //Location of API
 let apiPath = "http://localhost/";
 

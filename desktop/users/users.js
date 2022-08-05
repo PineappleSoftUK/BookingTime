@@ -1,5 +1,5 @@
 /*
-      USER MANAGMENT UTILITIES
+      USER MANAGEMENT UTILITIES
 */
 $(document).ready(function(){
 
@@ -85,9 +85,5 @@ $(document).ready(function(){
     });
   return false;
   });
-
-
-
-
 
 });
