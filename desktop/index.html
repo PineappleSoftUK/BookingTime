@@ -17,16 +17,17 @@
 </head>
 
 <body>
-  <nav>
-    <div class="topnav" id="topnav">
-      <a href="/desktop/" class="active" id='home'>Home</a>
-      <a href="/desktop/users/account.html" id='update_account'>Account</a>
-      <a href="/desktop/users/logout.html" id='logout'>Logout</a>
-      <a href="/desktop/users/index.html" id='login'>Login</a>
-      <a href="/desktop/users/register.html" id='sign_up'>Sign Up</a>
-      <a href="javascript:void(0);" class="navIcon" onclick="expandNav()">&equiv;</a>
-    </div>
-  </nav>
+  <!--Navigation bar-->
+  <div id="nav-placeholder">
+
+  </div>
+
+  <script>
+  $(function(){
+    $("#nav-placeholder").load("nav.html");
+  });
+  </script>
+  <!--end of Navigation bar-->
 
   <h1>Home</h1>
 
