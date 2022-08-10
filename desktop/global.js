@@ -17,6 +17,17 @@ function expandNav() {
   }
 }
 
+//Change nav if logged in.
+function loggedInNav() {
+  var jwt = getCookie('jwt');
+
+  if (jwt !== '') {
+    $("#logout, #update_account").show();
+    $("#login, #sign_up").hide();
+  }
+
+}
+
 // remove any prompt messages
 function clearResponse(){
     $('#response').html('');

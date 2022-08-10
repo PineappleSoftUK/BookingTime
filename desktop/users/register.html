@@ -20,14 +20,26 @@
 </head>
 
 <body>
-  <!--Navigation bar-->
+  <!--
+  Navigation bar
+  -->
   <div id="nav-placeholder">
-
+    <nav>
+      <div class="topnav" id="topnav">
+        <a href="/desktop/" class="active" id='home'>Home</a>
+        <a href="/desktop/users/account.html" id='update_account' style='display: none;'>Account</a>
+        <a href="/desktop/users/logout.html" id='logout' style='display: none;'>Logout</a>
+        <a href="/desktop/users/index.html" id='login'>Login</a>
+        <a href="/desktop/users/register.html" id='sign_up'>Sign Up</a>
+        <a href="javascript:void(0);" class="navIcon" onclick="expandNav()">&equiv;</a>
+      </div>
+    </nav>
+    <!-- If user is logged in the nav will be replaced by the below script, the function is in global.js -->
   </div>
 
   <script>
   $(function(){
-    $("#nav-placeholder").load("../nav.html");
+    loggedInNav();
   });
   </script>
   <!--end of Navigation bar-->
