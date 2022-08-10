@@ -22,7 +22,9 @@ include_once __DIR__ . '/../libs/php-jwt-master/src/BeforeValidException.php';
 include_once __DIR__ . '/../libs/php-jwt-master/src/ExpiredException.php';
 include_once __DIR__ . '/../libs/php-jwt-master/src/SignatureInvalidException.php';
 include_once __DIR__ . '/../libs/php-jwt-master/src/JWT.php';
+include_once __DIR__ . '/../libs/php-jwt-master/src/Key.php';
 use \Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -36,7 +38,7 @@ if($jwt){
   // if decode succeed, show user details
   try {
     // decode jwt
-    $decoded = JWT::decode($jwt, $key, array('HS256'));
+    $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 
     // set response code
     http_response_code(200);
