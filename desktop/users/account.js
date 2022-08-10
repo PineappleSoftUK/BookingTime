@@ -29,9 +29,8 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
 })
 // on error/fail, alert user
 .fail(function(result){
-  localStorage.setItem('alert_type', 'error');
-  localStorage.setItem('alert_text', 'Please login to access this page.');
-  window.location.href = "../index.html";
+  var alertMessage = encodeURIComponent("Please login to access this page");
+  window.location.href = "../index.html?alert_type=error&alert_text=" + alertMessage;
 });
 
 
@@ -54,9 +53,8 @@ $(document).on('submit', '#update_account_form', function(){
     success : function(result) {
 
       // tell the user account was updated
-      localStorage.setItem('alert_type', 'success');
-      localStorage.setItem('alert_text', 'Account info updated successfully.');
-      window.location.href = "account.html";
+      var alertMessage = encodeURIComponent("Account info updated successfully");
+      window.location.href = "account.html?alert_type=success&alert_text=" + alertMessage;
 
       // store new jwt to coookie
       setCookie("jwt", result.jwt, 1);
@@ -66,15 +64,13 @@ $(document).on('submit', '#update_account_form', function(){
     error: function(xhr, resp, text){
       console.log(xhr, resp, text);
       if(xhr.responseJSON.message=="Unable to update user."){
-        localStorage.setItem('alert_type', 'error');
-        localStorage.setItem('alert_text', 'Unable to update account info');
-        window.location.href = "account.html";
+        var alertMessage = encodeURIComponent("Unable to update account info");
+        window.location.href = "account.html?alert_type=error&alert_text=" + alertMessage;
       }
 
       else if(xhr.responseJSON.message=="Access denied."){
-        localStorage.setItem('alert_type', 'error');
-        localStorage.setItem('alert_text', 'Please login to access this page.');
-        window.location.href = "index.html";
+        var alertMessage = encodeURIComponent("Please login to access this page");
+        window.location.href = "index.html?alert_type=error&alert_text=" + alertMessage;
       }
     }
   });

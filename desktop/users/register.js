@@ -17,13 +17,13 @@ $(document).on('submit', '#sign_up_form', function(){
     data : form_data,
     success : function(result) {
       // successful sign up, report response and clear inputs
-      localStorage.setItem('alert_type', 'success');
-      localStorage.setItem('alert_text', 'Registration was successful, welcome!');
-      window.location.href = "index.html";
+      var alertMessage = encodeURIComponent("Registration was successful, welcome!");
+      window.location.href = "index.html?alert_type=success&alert_text=" + alertMessage;
     },
     error: function(xhr, resp, text) {
       //responseAlert('error', 'Registration failed with the folllowing error: ' + xhr.responseJSON.message);
-      console.log(xhr, resp, text);
+      var alertMessage = encodeURIComponent("Registration failed with the folllowing error: " + xhr.responseJSON.message);
+      window.location.href = "index.html?alert_type=error&alert_text=" + alertMessage;
     }
   });
   return false;

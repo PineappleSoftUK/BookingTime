@@ -23,15 +23,13 @@ $(document).on('submit', '#login_form', function(){
       setCookie("jwt", result.jwt, 1);
 
       // show home page & alert successful login
-      localStorage.setItem('alert_type', 'success');
-      localStorage.setItem('alert_text', 'Log in was successful, welcome!');
-      window.location.href = "../index.html";
+      var alertMessage = encodeURIComponent("Log in was successful, welcome!");
+      window.location.href = "../index.html?alert_type=success&alert_text=" + alertMessage;
     },
     error: function(xhr, resp, text){
       // alert login failed & empty the input boxes
-      responseAlert('error', 'Login failed. Email or password may be incorrect.');
-      login_form.find('input').val('');
-      console.log(xhr, resp, text);
+      var alertMessage = encodeURIComponent("Login failed. Email or password may be incorrect.");
+      window.location.href = "index.html?alert_type=error&alert_text=" + alertMessage;
     }
   });
 return false;

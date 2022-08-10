@@ -1,6 +1,6 @@
 /*
 This is a selection of utilities that my be required across the system.
- 
+
 All html pages should load this file.
 */
 
@@ -25,15 +25,17 @@ function clearResponse(){
 //Function to populate alert message box
 function responseAlert() {
   clearResponse();
-  var alertType = localStorage.getItem('alert_type');
-  var alertText = localStorage.getItem('alert_text');
 
-  if(alertType!=undefined && alertType!=null){
+  //Check for alert details from url, if so render alert
+  var url = new URL(window.location.href);
+
+  //If found, render the alert
+  if(url.searchParams.has('alert_type')){
+    var alertType = decodeURIComponent(url.searchParams.get("alert_type"));
+    var alertText = decodeURIComponent(url.searchParams.get("alert_text"));
+
     var html = `<div class='alert ` + alertType + `'><span class='closebtn' onclick='clearResponse();'>&times;</span>` + alertText + `</div>`;
     $('#response').html(html);
-
-    localStorage.removeItem('alert_type');
-    localStorage.removeItem('alert_text');
   }
 }
 
