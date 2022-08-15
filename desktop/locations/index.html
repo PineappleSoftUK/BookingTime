@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Booking Time - Locations</title>
+
+  <meta name="description" content="Booking Time, Desktop">
+  <meta name="author" content="PineappleSoft">
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Load global utilities -->
+  <script src="../global.js"></script>
+
+</head>
+
+<body>
+  <!--
+  Navigation bar
+  -->
+  <div id="nav-placeholder">
+    <nav>
+      <div class="topnav" id="topnav">
+        <a href="/desktop/" class="active" id='home'>Home</a>
+        <a href="/desktop/locations/" id='locations'>Locations</a>
+        <a href="/desktop/assets/" id='assets'>Assets</a>
+        <a href="/desktop/bookings/" id='bookings'>Bookings</a>
+        <a href="/desktop/users/account.html" id='update_account' style='display: none;'>Account</a>
+        <a href="/desktop/users/logout.html" id='logout' style='display: none;'>Logout</a>
+        <a href="/desktop/users/index.html" id='login'>Login</a>
+        <a href="/desktop/users/register.html" id='sign_up'>Sign Up</a>
+        <a href="javascript:void(0);" class="navIcon" onclick="expandNav()">&equiv;</a>
+      </div>
+    </nav>
+    <!-- If user is logged in the nav will be replaced by the below script, the function is in global.js -->
+  </div>
+
+  <script>
+  $(function(){
+    loggedInNav();
+  });
+  </script>
+  <!--end of Navigation bar-->
+
+  <!--
+  Alert bar
+  -->
+  <div id="response">
+
+  </div>
+    <!-- This will be populated by below script, the function is in global.js -->
+  <script>
+  $(function(){
+    responseAlert();
+  });
+  </script>
+  <!--end of alert bar-->
+
+  <!--
+  Page content....
+  -->
+
+  <h1>Locations</h1>
+
+  <!--Content-->
+  <div id="content">
+    <!-- populated when page loads, function is in locations.js -->
+  </div>
+
+  <!-- Load user utilities -->
+  <script src="locations.js"></script>
+
+</body>
+</html>
