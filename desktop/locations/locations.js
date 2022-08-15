@@ -22,8 +22,8 @@ $.getJSON(apiPath + "api/location/read.php", function(data){
             <div id='list-item' class='list-item' data-id='` + val.id + `'>
               <p>
                 <span class='list-item-name'=>` + val.name + `</span>
-                <span class='list-item-category'>&lt` + val.status + `&gt</span>
-                <span class='list-item-attributes'>Buy: &pound` + val.category + `</span>
+                <span class='list-item-attributes'>Status: ` + val.status + `</span>
+                <span class='list-item-attributes'>Created: ` + val.created + `</span>
               </p>
             </div>`;
   });
@@ -33,4 +33,33 @@ $.getJSON(apiPath + "api/location/read.php", function(data){
 
   // inject to 'page-content' of our app
   $("#content").html(read_locations_html);
+});
+
+/*
+When record is clicked, display details 'read-one'
+*/
+$(document).on('click', '#list-item', function(){
+  var id = $(this).attr('data-id');
+  // read location record based on given ID
+  $.getJSON(apiPath + "api/location/read_one.php?id=" + id, function(data){
+    var read_one_location_html=`
+        <!-- Go back button -->
+        <button id='go-home-button' class='styledButton greyBtn'>
+          &lt; Go Back
+        </button>
+        <!-- Update button -->
+        <button id='update-location-button' class='styledButton greyBtn'  data-id='` + data.id + `'>
+          Update Location
+        </button>
+        <!-- Delete button -->
+        <button id='delete-location-button' class='styledButton greyBtn'  data-id='` + data.id + `'>
+          Delete Location
+        </button>
+        <p>Name: ` + data.name + `</p>
+        <p>Status: ` + data.status + `</p>
+        <p>Created: ` + data.created + `</p>
+        `
+    // inject html to 'page-content' of our app
+    $("#content").html(read_one_location_html);
+  });
 });
