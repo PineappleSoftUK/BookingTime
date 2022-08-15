@@ -118,6 +118,7 @@ class Location{
       // set values to object properties
       $this->name = $row['name'];
       $this->status = $row['status'];
+      $this->created = $row['created'];
     }
   }
 

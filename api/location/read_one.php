@@ -33,6 +33,7 @@ if($location->name!=null){
       "id" =>  $location->id,
       "name" => $location->name,
       "status" => $location->status,
+      "created" => $location->created
   );
 
   // set response code - 200 OK
