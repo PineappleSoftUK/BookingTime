@@ -30,8 +30,12 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
           <label for="update-form-name">Name</label>
           <input type='text' name='name' id="update-form-name" value="` + name + `" required />
 
-          <label for="update-form-name">Status</label>
-          <input type='text' name='status' id="update-form-status" value="` + status + `" required />
+          <label for="update-form-status">Status</label>
+          <select name='status' id="update-form-status">
+            <option selected value="` + status + `">` + status + `</option>
+            <option value="Live">Live</option>
+            <option value="Deleted">Deleted</option>
+          </select>
 
           <!-- hidden 'location id' to identify which record to update -->
           <input value=\"` + id + `\" name='id' type='hidden' />
