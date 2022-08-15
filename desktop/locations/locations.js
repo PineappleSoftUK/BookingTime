@@ -44,15 +44,15 @@ $(document).on('click', '#list-item', function(){
   $.getJSON(apiPath + "api/location/read_one.php?id=" + id, function(data){
     var read_one_location_html=`
         <!-- Go back button -->
-        <button id='go-home-button' class='styledButton greyBtn'>
+        <button id='go-home-button' class='styledButton greyBtn' onclick="location.href='index.html';">
           &lt; Go Back
         </button>
         <!-- Update button -->
-        <button id='update-location-button' class='styledButton greyBtn'  data-id='` + data.id + `'>
+        <button id='update-location-button' class='styledButton greyBtn' onclick="location.href='update.html?id=` + data.id + `';">
           Update Location
         </button>
         <!-- Delete button -->
-        <button id='delete-location-button' class='styledButton greyBtn'  data-id='` + data.id + `'>
+        <button id='delete-location-button' class='styledButton greyBtn'  onclick="location.href='delete.html?id=` + data.id + `';">
           Delete Location
         </button>
         <p>Name: ` + data.name + `</p>
