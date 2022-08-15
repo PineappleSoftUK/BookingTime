@@ -173,7 +173,9 @@ class Location{
 
     // delete query
     $query = <<<SQL
-    DELETE FROM $this->table_name
+    UPDATE $this->table_name
+    SET
+      status = :status
     WHERE id = :id
     SQL;
 
@@ -184,6 +186,7 @@ class Location{
     $this->id=htmlspecialchars(strip_tags($this->id));
 
     // bind id of record to delete
+    $stmt->bindValue(':status', "Deleted");
     $stmt->bindValue(':id', $this->id);
 
     // execute query
