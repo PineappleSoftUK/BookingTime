@@ -33,6 +33,7 @@ $location->id = $data->id;
 // set location property values
 $location->name = $data->name;
 $location->status = $data->status;
+$location->modified = date('Y-m-d H:i:s');
 
 // update the location
 if($location->update()){

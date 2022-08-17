@@ -36,7 +36,7 @@ $asset->location = $data->location;
 $asset->capacity = $data->capacity;
 $asset->timeslots = $data->timeslots;
 $asset->status = $data->status;
-//$asset->modified = date('Y-m-d H:i:s');;
+$asset->modified = date('Y-m-d H:i:s');
 
 // update the asset
 if($asset->update()){

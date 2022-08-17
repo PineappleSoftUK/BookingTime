@@ -34,6 +34,7 @@ $booking->id = $data->id;
 $booking->client = $data->client;
 $booking->asset = $data->asset;
 $booking->status = $data->status;
+$booking->modified = date('Y-m-d H:i:s');
 
 // update the booking
 if($booking->update()){

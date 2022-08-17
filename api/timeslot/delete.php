@@ -27,8 +27,9 @@ $timeslot = new Timeslot($db);;
 // get timeslot id
 $data = json_decode(file_get_contents("php://input"));
 
-// set timeslot id to be deleted
+// set timeslot id to be deleted and record time/date
 $timeslot->id = $data->id;
+$timeslot->modified = date('Y-m-d H:i:s');
 
 // delete the timeslot
 if($timeslot->delete()){

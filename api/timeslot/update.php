@@ -36,6 +36,7 @@ $timeslot->timeslotDate = $data->timeslotDate;
 $timeslot->timeslotTime = $data->timeslotTime;
 $timeslot->timeslotLength = $data->timeslotLength;
 $timeslot->status = $data->status;
+$timeslot->modified = date('Y-m-d H:i:s');
 
 // update the timeslot
 if($timeslot->update()){

@@ -27,8 +27,9 @@ $asset = new Asset($db);;
 // get asset id
 $data = json_decode(file_get_contents("php://input"));
 
-// set asset id to be deleted
+// set asset id to be deleted and record time/date
 $asset->id = $data->id;
+$asset->modified = date('Y-m-d H:i:s');
 
 // delete the asset
 if($asset->delete()){

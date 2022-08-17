@@ -27,8 +27,9 @@ $booking = new Booking($db);;
 // get booking id
 $data = json_decode(file_get_contents("php://input"));
 
-// set booking id to be deleted
+// set booking id to be deleted and record time/date
 $booking->id = $data->id;
+$booking->modified = date('Y-m-d H:i:s');
 
 // delete the booking
 if($booking->delete()){

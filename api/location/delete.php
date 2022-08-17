@@ -27,8 +27,9 @@ $location = new Location($db);;
 // get location id
 $data = json_decode(file_get_contents("php://input"));
 
-// set location id to be deleted
+// set location id to be deleted and record time/date
 $location->id = $data->id;
+$location->modified = date('Y-m-d H:i:s');
 
 // delete the location
 if($location->delete()){
