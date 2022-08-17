@@ -31,6 +31,7 @@ if($asset->name!=null){
   // create array
   $asset_arr = array(
       "id" =>  $asset->id,
+      "name" =>  $asset->name,
       "location" => $asset->location,
       "capacity" => $asset->capacity,
       "timeslots" => $asset->timeslots,
