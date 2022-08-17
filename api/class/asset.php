@@ -173,7 +173,7 @@ class Asset{
     $stmt->bindValue(":location", $this->location);
     $stmt->bindValue(":capacity", $this->capacity);
     $stmt->bindValue(":timeslots", $this->timeslots);
-    $stmt->bindValue(":status", $this->status);;
+    $stmt->bindValue(":status", $this->status);
     $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(':modified', $this->modified);
 
