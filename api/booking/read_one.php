@@ -33,7 +33,9 @@ if($booking->name!=null){
       "id" =>  $booking->id,
       "client" => $booking->client,
       "asset" => $booking->asset,
-      "status" => $booking->status,
+      "status" => $booking->status,,
+      "created" => $asset->created,
+      "modifed" => $asset->modified 
   );
 
   // set response code - 200 OK

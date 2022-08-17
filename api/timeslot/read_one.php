@@ -35,7 +35,9 @@ if($timeslot->name!=null){
       "timeslotDate" => $timeslot->timeslotDate,
       "timeslotTime" => $timeslot->timeslotTime,
       "timeslotLength" => $timeslot->timeslotLength,
-      "status" => $timeslot->status,
+      "status" => $timeslot->status,,
+      "created" => $asset->created,
+      "modifed" => $asset->modified 
   );
 
   // set response code - 200 OK
