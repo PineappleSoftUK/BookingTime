@@ -120,6 +120,7 @@ class Location{
       $this->name = $row['name'];
       $this->status = $row['status'];
       $this->created = $row['created'];
+      $this->modified = $row['modified'];
     }
   }
 

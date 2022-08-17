@@ -123,6 +123,8 @@ class Booking{
       $this->client = $row['client'];
       $this->asset = $row['asset'];
       $this->status = $row['status'];
+      $this->created = $row['created'];
+      $this->modified = $row['modified'];
     }
   }
 

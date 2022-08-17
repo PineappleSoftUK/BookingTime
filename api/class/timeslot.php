@@ -131,6 +131,8 @@ class Timeslot{
       $this->timeslotTime = $row['timeslotTime'];
       $this->timeslotLength = $row['timeslotLength'];
       $this->status = $row['status'];
+      $this->created = $row['created'];
+      $this->modified = $row['modified'];
     }
   }
 

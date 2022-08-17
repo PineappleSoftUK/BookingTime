@@ -132,6 +132,7 @@ class Asset{
       $this->timeslots = $row['timeslots'];
       $this->status = $row['status'];
       $this->created = $row['created'];
+      $this->modified = $row['modified'];
     }
   }
 
