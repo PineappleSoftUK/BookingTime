@@ -42,6 +42,13 @@ $(document).on('click', '#list-item', function(){
   var id = $(this).attr('data-id');
   // read location record based on given ID
   $.getJSON(apiPath + "api/location/read_one.php?id=" + id, function(data){
+
+    //Check if modifed in order to display correct date
+    var modified = data.modified;
+    if (typeof data.modified === 'undefined') {
+      modified = "Never modified"
+    }
+
     var read_one_location_html=`
         <!-- Go back button -->
         <button id='go-home-button' class='styledButton greyBtn' onclick="location.href='index.html';">
@@ -55,9 +62,11 @@ $(document).on('click', '#list-item', function(){
         <button id='delete-location-button' class='styledButton greyBtn'  onclick="location.href='delete.html?id=` + data.id + `';">
           Delete Location
         </button>
+        <p>Location ID: ` + data.id + `</p>
         <p>Name: ` + data.name + `</p>
         <p>Status: ` + data.status + `</p>
         <p>Created: ` + data.created + `</p>
+        <p>Modified: ` + modified + `</p>
         `
     // inject html to 'page-content' of our app
     $("#content").html(read_one_location_html);
