@@ -98,7 +98,7 @@ class Location{
 
     // query to read single record
     $query = <<<SQL
-    SELECT id, name, status, created
+    SELECT id, name, status, created, modified
     FROM $this->table_name
     WHERE id = :locationID
     LIMIT 0,1

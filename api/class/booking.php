@@ -101,7 +101,7 @@ class Booking{
 
     // query to read single record
     $query = <<<SQL
-    SELECT id, client, asset, name, status, created
+    SELECT id, client, asset, name, status, created, modified
     FROM $this->table_name
     WHERE id = :bookingID
     LIMIT 0,1

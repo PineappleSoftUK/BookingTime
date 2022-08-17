@@ -107,7 +107,7 @@ class Timeslot{
 
     // query to read single record
     $query = <<<SQL
-    SELECT bookingID, timeslotDate, timeslotTime, timeslotLength, status, created
+    SELECT bookingID, timeslotDate, timeslotTime, timeslotLength, status, created, modified
     FROM $this->table_name
     WHERE id = :timeslotID
     LIMIT 0,1

@@ -107,7 +107,7 @@ class Asset{
 
     // query to read single record
     $query = <<<SQL
-    SELECT id, name, location, capacity, timeslots, status, created
+    SELECT id, name, location, capacity, timeslots, status, created, modified
     FROM $this->table_name
     WHERE id = :assetID
     LIMIT 0,1
