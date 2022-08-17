@@ -23,6 +23,7 @@ class Booking{
   public $client;
   public $status;
   public $created;
+  public $modified;
 
   // constructor, $db as database connection
   public function __construct($db){
@@ -140,7 +141,8 @@ class Booking{
     SET
       client = :client,
       asset = :asset,
-      status = :status
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -152,12 +154,14 @@ class Booking{
     $this->asset=htmlspecialchars(strip_tags($this->asset));
     $this->status=htmlspecialchars(strip_tags($this->status));
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind new values
     $stmt->bindValue(':client', $this->client);
     $stmt->bindValue(':asset', $this->asset);
     $stmt->bindValue(':status', $this->status);
     $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute the query
     if($stmt->execute()){
@@ -179,7 +183,10 @@ class Booking{
 
     // delete query
     $query = <<<SQL
-    DELETE FROM $this->table_name
+    UPDATE $this->table_name
+    SET
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -188,9 +195,12 @@ class Booking{
 
     // sanitize
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind id of record to delete
+    $stmt->bindValue(':status', "Deleted");
     $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute query
     if($stmt->execute()){

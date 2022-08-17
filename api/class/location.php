@@ -22,6 +22,7 @@ class Location{
   public $name;
   public $status;
   public $created;
+  public $modified;
 
   // constructor, $db as database connection
   public function __construct($db){
@@ -136,7 +137,8 @@ class Location{
     UPDATE $this->table_name
     SET
       name = :name,
-      status = :status
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -147,11 +149,13 @@ class Location{
     $this->name=htmlspecialchars(strip_tags($this->name));
     $this->status=htmlspecialchars(strip_tags($this->status));
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind new values
     $stmt->bindValue(':name', $this->name);
     $stmt->bindValue(':status', $this->status);
     $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute the query
     if($stmt->execute()){
@@ -175,7 +179,8 @@ class Location{
     $query = <<<SQL
     UPDATE $this->table_name
     SET
-      status = :status
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -184,10 +189,12 @@ class Location{
 
     // sanitize
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind id of record to delete
     $stmt->bindValue(':status', "Deleted");
     $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute query
     if($stmt->execute()){

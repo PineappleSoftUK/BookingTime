@@ -21,6 +21,8 @@ class User{
   public $lastname;
   public $email;
   public $password;
+  public $created;
+  public $modified;
 
   // constructor, $db as database connection
   public function __construct($db){

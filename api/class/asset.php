@@ -25,6 +25,7 @@ class Asset{
   public $timeslots;
   public $status;
   public $created;
+  public $modified;
 
   // constructor, $db as database connection
   public function __construct($db){
@@ -151,7 +152,8 @@ class Asset{
       location = :location,
       capacity = :capacity,
       timeslots = :timeslots,
-      status = :status
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -164,6 +166,7 @@ class Asset{
     $this->capacity=htmlspecialchars(strip_tags($this->capacity));
     $this->timeslots=htmlspecialchars(strip_tags($this->timeslots));
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind new values
     $stmt->bindValue(":name", $this->name);
@@ -172,6 +175,7 @@ class Asset{
     $stmt->bindValue(":timeslots", $this->timeslots);
     $stmt->bindValue(":status", $this->status);;
     $stmt->bindValue(":id", $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute the query
     if($stmt->execute()){
@@ -193,7 +197,10 @@ class Asset{
 
     // delete query
     $query = <<<SQL
-    DELETE FROM $this->table_name
+    UPDATE $this->table_name
+    SET
+      status = :status,
+      modified = :modified
     WHERE id = :id
     SQL;
 
@@ -202,9 +209,12 @@ class Asset{
 
     // sanitize
     $this->id=htmlspecialchars(strip_tags($this->id));
+    $this->modified=htmlspecialchars(strip_tags($this->modified));
 
     // bind id of record to delete
+    $stmt->bindValue(':status', "Deleted");
     $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':modified', $this->modified);
 
     // execute query
     if($stmt->execute()){
