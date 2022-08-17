@@ -37,7 +37,7 @@ if($asset->name!=null){
       "timeslots" => $asset->timeslots,
       "status" => $asset->status,
       "created" => $asset->created,
-      "modifed" => $asset->modified
+      "modified" => $asset->modified
   );
 
   // set response code - 200 OK
