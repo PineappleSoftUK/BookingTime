@@ -68,6 +68,7 @@ $(document).on('click', '#list-item', function(){
         <p>Status: ` + data.status + `</p>
         <p>Created: ` + data.created + `</p>
         <p>Modified: ` + modified + `</p>
+        <p>Timeslots: ` + data.timeslots + `</p>
         `
     // inject html to 'page-content'
     $("#content").html(read_one_asset_html);
