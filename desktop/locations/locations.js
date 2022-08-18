@@ -45,8 +45,8 @@ $(document).on('click', '#list-item', function(){
 
     //Check if modifed in order to display correct date
     var modified = data.modified;
-    if (typeof data.modified === 'undefined') {
-      modified = "Never modified"
+    if (!data.modified) {
+      modified = "Never modified";
     }
 
     var read_one_location_html=`
