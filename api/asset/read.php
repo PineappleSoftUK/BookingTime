@@ -38,6 +38,8 @@ if($numOfColumns>0){
       "name" => $name,
       "location" => $location,
       "capacity" => $capacity,
+      "timeslotStart" => $timeslotStart,
+      "timeslotLength" => $timeslotLength,
       "timeslots" => $timeslots,
       "status" => html_entity_decode($status),
       "created" => html_entity_decode($created)

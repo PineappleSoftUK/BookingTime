@@ -18,7 +18,7 @@ $db->exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMEN
 $db->exec('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, status TEXT, created TEXT, modified TEXT)');
 
 //Assets table
-$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, timeslots TEXT, status TEXT, created TEXT, modified TEXT)');
+$db->exec('CREATE TABLE IF NOT EXISTS assets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, location INTEGER, capacity INTEGER, timeslotStart INTEGER, timeslotLength INTEGER, timeslots TEXT, status TEXT, created TEXT, modified TEXT)');
 
 //Bookings table
 $db->exec('CREATE TABLE IF NOT EXISTS bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, asset INTEGER, client INTEGER, status TEXT, created TEXT, modified TEXT)');

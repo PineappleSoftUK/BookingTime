@@ -22,6 +22,8 @@ class Asset{
   public $name;
   public $location;
   public $capacity;
+  public $timeslotStart;
+  public $timeslotLength;
   public $timeslots;
   public $status;
   public $created;
@@ -42,7 +44,7 @@ class Asset{
   function read(){
     // select all query
     $query = <<<SQL
-    SELECT id, name, location, capacity, timeslots, status, created
+    SELECT id, name, location, capacity, timeslots, timeslotStart, timeslotLength, status, created
     FROM $this->table_name
     ORDER BY name ASC
     SQL;
@@ -64,8 +66,8 @@ class Asset{
   function create(){
     // query to insert record
     $query = <<<SQL
-    INSERT INTO $this->table_name (name, location, capacity, timeslots, status, created)
-    VALUES (:name, :location, :capacity, :timeslots, :status, :created)
+    INSERT INTO $this->table_name (name, location, capacity, timeslotStart, timeslotLength, timeslots, status, created)
+    VALUES (:name, :location, :capacity, :timeslotStart, :timeslotLength, :timeslots, :status, :created)
     SQL;
 
     // prepare query
@@ -75,6 +77,8 @@ class Asset{
     $this->name=htmlspecialchars(strip_tags($this->name));
     $this->location=htmlspecialchars(strip_tags($this->location));
     $this->capacity=htmlspecialchars(strip_tags($this->capacity));
+    $this->timeslotStart=htmlspecialchars(strip_tags($this->timeslotStart));
+    $this->timeslotLength=htmlspecialchars(strip_tags($this->timeslotLength));
     $this->timeslots=htmlspecialchars(strip_tags($this->timeslots));
     $this->status=htmlspecialchars(strip_tags($this->status));
     $this->created=htmlspecialchars(strip_tags($this->created));
@@ -83,6 +87,8 @@ class Asset{
     $stmt->bindValue(":name", $this->name);
     $stmt->bindValue(":location", $this->location);
     $stmt->bindValue(":capacity", $this->capacity);
+    $stmt->bindValue(":timeslotStart", $this->timeslotStart);
+    $stmt->bindValue(":timeslotLength", $this->timeslotLength);
     $stmt->bindValue(":timeslots", $this->timeslots);
     $stmt->bindValue(":status", $this->status);;
     $stmt->bindValue(":created", $this->created);
@@ -107,7 +113,7 @@ class Asset{
 
     // query to read single record
     $query = <<<SQL
-    SELECT id, name, location, capacity, timeslots, status, created, modified
+    SELECT id, name, location, capacity, timeslotStart, timeslotLength, timeslots, status, created, modified
     FROM $this->table_name
     WHERE id = :assetID
     LIMIT 0,1
@@ -129,6 +135,8 @@ class Asset{
       $this->name = $row['name'];
       $this->location = $row['location'];
       $this->capacity = $row['capacity'];
+      $this->timeslotStart = $row['timeslotStart'];
+      $this->timeslotLength = $row['timeslotLength'];
       $this->timeslots = $row['timeslots'];
       $this->status = $row['status'];
       $this->created = $row['created'];
@@ -152,6 +160,8 @@ class Asset{
       name = :name,
       location = :location,
       capacity = :capacity,
+      timeslotStart = :timeslotStart,
+      timeslotLength = :timeslotLength,
       timeslots = :timeslots,
       status = :status,
       modified = :modified
@@ -165,18 +175,22 @@ class Asset{
     $this->name=htmlspecialchars(strip_tags($this->name));
     $this->location=htmlspecialchars(strip_tags($this->location));
     $this->capacity=htmlspecialchars(strip_tags($this->capacity));
+    $this->timeslotStart=htmlspecialchars(strip_tags($this->timeslotStart));
+    $this->timeslotLength=htmlspecialchars(strip_tags($this->timeslotLength));
     $this->timeslots=htmlspecialchars(strip_tags($this->timeslots));
-    $this->id=htmlspecialchars(strip_tags($this->id));
     $this->modified=htmlspecialchars(strip_tags($this->modified));
+    $this->id=htmlspecialchars(strip_tags($this->id));
 
     // bind new values
     $stmt->bindValue(":name", $this->name);
     $stmt->bindValue(":location", $this->location);
     $stmt->bindValue(":capacity", $this->capacity);
+    $stmt->bindValue(":timeslotStart", $this->timeslotStart);
+    $stmt->bindValue(":timeslotLength", $this->timeslotLength);
     $stmt->bindValue(":timeslots", $this->timeslots);
     $stmt->bindValue(":status", $this->status);
-    $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(':modified', $this->modified);
+    $stmt->bindValue(":id", $this->id);
 
     // execute the query
     if($stmt->execute()){
