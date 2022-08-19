@@ -21,7 +21,7 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
 
         <input type="hidden" id="status" name="status" value="Live">
 
-        <button type='submit'>Save Changes</button>
+        <button type='submit'>Create</button>
 
       </form>`;
 

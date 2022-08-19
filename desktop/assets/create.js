@@ -118,7 +118,7 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
             <!--JS will populate checkboxes here-->
           </div>
 
-          <button type='submit'>Save Changes</button>
+          <button type='submit'>Create</button>
 
         </form>`;
 
