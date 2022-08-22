@@ -60,8 +60,8 @@ function showTimeslots() {
       var checkboxTime = clock.timeAsString();
 
       $('#timeslotsContainer')
-        .append('<input type="checkbox" name="' + i + '" value="' + checkboxTime + '">')
-        .append('<label for="' + i + '">' + checkboxTime + '</label></div>')
+        .append('<input class ="' + dayName + '" type="checkbox" name="' + i + '_' + checkboxTime + '" value="' + checkboxTime + '">')
+        .append('<label for="' + i + '_' + checkboxTime + '">' + checkboxTime + '</label></div>')
         .append('<br>');
 
       //Increment the clock by the timeslot duration
@@ -136,26 +136,27 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
 // will run if create asset form was submitted
 $(document).on('submit', '#create-asset-form', function(){
 
-  var timeslotArr = [];
-  timeslotArr[0] = []; //Monday
-  timeslotArr[1] = []; //Tuesday
-  timeslotArr[2] = []; //Wednesday
-  timeslotArr[3] = []; //Thursday
-  timeslotArr[4] = []; //Friday
-  timeslotArr[5] = []; //Saturday
-  timeslotArr[6] = []; //Sunday
+  var timeslotsObj = {
+    Monday: [],
+    Tuesday: [],
+    Wednesday: [],
+    Thursday: [],
+    Friday: [],
+    Saturday: [],
+    Sunday: []
+  };
 
-  //This will loop through the checkboxes and add selected values to a multidimensional array
+  //This will loop through the checkboxes and add selected values to timeslotJSON
   $(":checkbox").each(function() {
     if ($(this).is(':checked')) {
-      timeslotArr[parseInt($(this).attr("name"))].push($(this).val()); //Get arr index from checbox 'name' and push the value to that index
+      timeslotsObj[$(this).prop('className')].push($(this).val()); //Get checkbox class name then push the value to that index
     }
   });
 
   //Now add this array to the form 'post' data by way of a hidden element:
   var input = $("<input>")
     .attr("type", "hidden")
-    .attr("name", "timeslots").val(JSON.stringify(timeslotArr));
+    .attr("name", "timeslots").val(JSON.stringify(timeslotsObj));
   $('#create-asset-form').append(input);
 
   // get form data
