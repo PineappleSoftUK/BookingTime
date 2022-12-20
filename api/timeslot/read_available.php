@@ -45,11 +45,11 @@ $asset->readOne();
   $timeslotsForGivenDayArr = $timeslotsForAsset->$dayName;
 
   //Loop through timeslots available for given cal_days_in_month
-  foreach ($timeslotsForGivenDayArr as $value) {
-    echo "$value <br>";
-  }
+  //foreach ($timeslotsForGivenDayArr as $value) {
+  //  echo "$value <br>";
+  //}
 
-  
+
 
     //TODO
     //Step 3 remove any from array that are booked.
@@ -59,7 +59,8 @@ $asset->readOne();
   // set response code - 200 OK
   http_response_code(200);
 
-
+  //Results:
+  echo json_encode($timeslotsForGivenDayArr);
 
 } else {
 

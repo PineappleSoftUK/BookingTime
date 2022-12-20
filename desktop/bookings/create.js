@@ -6,10 +6,35 @@ Bookings, create a booking
 var jwt = getCookie('jwt');
 $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).done(function(result) {
 
-  // Start to build the form
-  var selectedDate = new Date();
+  //Function to Add timeslot checkboxes to form based on selected date
+  function showTimeslots(asset, date) {
+    // Clean date
+    var selectedDate = new Date(date);
+
+    $.getJSON(apiPath + "api/timeslot/read_available.php?id=" + asset + "&date=" + selectedDate.toISOString())
+      .done(function(result) {
+
+        $.each(result, function(key, val) {
+          $('#timeslotsContainer')
+          .append('<input class ="" type="checkbox" name="" value="' + val + '">')
+          .append('<label for="">' + val + '</label></div>')
+          .append('<br>');
+        })
+
+      })
+      .fail(function(xhr, resp, text) {
+        var alertMessage = encodeURIComponent("Create booking failed: " + xhr.responseJSON.message);
+        window.location.href = "index.html?alert_type=error&alert_text=" + alertMessage;
+      });
+  }
+
+
+
 
   // get available timeslots for selected date
+  var assetVal = $('#create-form-asset').val();
+  var dateVal = $('#create-form-date').val();
+
   var create_booking_html=`
 
       <!-- Go back button -->
@@ -19,10 +44,20 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
       <!-- 'create booking' html form -->
       <form id='create-booking-form' action='#' method='post' border='0'>
 
-        <label for="create-form-name">Name</label>
-        <input type='text' name='name' id="create-form-name" required />
+        <label for="create-form-client">Client Name</label>
+        <input type='text' name='client' id="create-form-client" required />
+
+        <label for="create-form-asset">Asset</label>
+        <input type='text' name='asset' id="create-form-asset" required onchange="showTimeslots(` + assetVal + `, ` + dateVal + `)"/>
 
         <input type="hidden" id="status" name="status" value="Live">
+
+        <label for="create-form-date">Date</label>
+        <input type='date' name='date' id="create-form-date" required />
+
+        <div id="timeslotsContainer">
+          <!--JS will populate checkboxes here-->
+        </div>
 
         <button type='submit'>Create</button>
 
@@ -35,7 +70,7 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt })).do
 // show login page on error
 .fail(function(result){
   var alertMessage = encodeURIComponent("Please login to access this page");
-  window.booking.href = "../users/index.html?alert_type=error&alert_text=" + alertMessage;
+  window.location.href = "../users/index.html?alert_type=error&alert_text=" + alertMessage;
 });
 
 
@@ -57,12 +92,12 @@ $(document).on('submit', '#create-booking-form', function(){
     success : function(result) {
       // booking was created, go back to bookings list
       var alertMessage = encodeURIComponent("Booking successfully added");
-      window.booking.href = "index.html?alert_type=success&alert_text=" + alertMessage;
+      window.location.href = "index.html?alert_type=success&alert_text=" + alertMessage;
     },
     error: function(xhr, resp, text) {
       // show error to console
       var alertMessage = encodeURIComponent("Create booking failed: " + xhr.responseJSON.message);
-      window.booking.href = "index.html?alert_type=error&alert_text=" + alertMessage;
+      window.location.href = "index.html?alert_type=error&alert_text=" + alertMessage;
     }
   });
   return false;
