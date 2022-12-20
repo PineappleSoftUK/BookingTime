@@ -33,15 +33,25 @@ $asset->readOne();
   if($asset->name!=null){
 
   //Get the date
-  $queryDate = isset($_GET['day']) ? $_GET['day'] : die();
+  $queryDate = isset($_GET['date']) ? $_GET['date'] : die();
+  $queryDateObj = new DateTime($queryDate);
+  $dayName = date("l", $queryDateObj->getTimestamp());
 
   //Get timeslots
   $timeslotsForAsset = $asset->timeslots;
+  //Decode and convert to object
+  $timeslotsForAsset = json_decode(html_entity_decode($timeslotsForAsset));
+  //Get timeslots for given day.
+  $timeslotsForGivenDayArr = $timeslotsForAsset->$dayName;
 
+  //Loop through timeslots available for given cal_days_in_month
+  foreach ($timeslotsForGivenDayArr as $value) {
+    echo "$value <br>";
+  }
 
+  
 
-    //Step 1 obtain the date and lookup day.
-    //Step 2 look up asset and find timeslots for set date. Add to an array
+    //TODO
     //Step 3 remove any from array that are booked.
     //Step 4 return the list.
 
@@ -49,7 +59,6 @@ $asset->readOne();
   // set response code - 200 OK
   http_response_code(200);
 
-  var_dump($timeslotsForAsset);
 
 
 } else {
