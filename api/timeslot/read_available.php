@@ -19,46 +19,38 @@ header('Content-Type: application/json');
 
 // include database and classes
 include_once __DIR__ . '/../config/database.php';
+include_once __DIR__ . '/../class/asset.php';
 include_once __DIR__ . '/../class/timeslot.php';
 
+//Create the objects
 $timeslot = new Timeslot($db);
+$asset = new Asset($db);
 
-// set ID property of record to read
-$queryDate = isset($_GET['id']) ? $_GET['id'] : die();
+//Set the asset
+$asset->id = isset($_GET['id']) ? $_GET['id'] : die();
+$asset->readOne();
 
-// query timeslots and return an SQLiteResult object
-$result = $timeslot->read();
-$numOfColumns = $result->numColumns();
+  if($asset->name!=null){
 
-// check if records are returned
-if($numOfColumns>0){
-  // timeslots array
-  $timeslots_arr=array();
-  $timeslots_arr["records"]=array();
+  //Get the date
+  $queryDate = isset($_GET['day']) ? $_GET['day'] : die();
 
-  // retrieve table contents
-  while ($row = $result->fetchArray(SQLITE3_ASSOC)){
-    // extract row (this will make $row['name'] to just $name only)
-    extract($row);
+  //Get timeslots
+  $timeslotsForAsset = $asset->timeslots;
 
-    $timeslot_item=array(
-      "id" =>  $id,
-      "bookingID" => $bookingID,
-      "timeslotDate" => $timeslotDate,
-      "timeslotTime" => $timeslotTime,
-      "timeslotLength" => $timeslotLength,
-      "status" => html_entity_decode($status),
-      "created" => html_entity_decode($created)
-    );
 
-    array_push($timeslots_arr["records"], $timeslot_item);
-  }
+
+    //Step 1 obtain the date and lookup day.
+    //Step 2 look up asset and find timeslots for set date. Add to an array
+    //Step 3 remove any from array that are booked.
+    //Step 4 return the list.
+
 
   // set response code - 200 OK
   http_response_code(200);
 
-  // show timeslots data in json format
-  echo json_encode($timeslots_arr);
+  var_dump($timeslotsForAsset);
+
 
 } else {
 
