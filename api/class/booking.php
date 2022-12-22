@@ -83,7 +83,8 @@ class Booking{
 
     // execute query
     if($stmt->execute()){
-        return true;
+      $this->id = $this->conn->lastInsertRowID();
+      return true;
     }
 
     return false;

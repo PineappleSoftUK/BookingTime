@@ -32,7 +32,7 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt }))
       });
     }
 
-    function renderPage(locations, assets) {
+    function renderPage(locations, assets, timeslotLength) {
 
       //Make the html page...
       var create_booking_html=`
@@ -52,8 +52,10 @@ $.post(apiPath + "api/users/validate_token.php", JSON.stringify({ jwt:jwt }))
 
             <input type="hidden" id="status" name="status" value="Live">
 
+            <input type="hidden" id="client" name="client" value="1">
+
             <label for="create-form-date">Choose a date to view available timeslots</label>
-            <input type='date' name='date' id="create-form-date" required onchange="showTimeslots()"/>
+            <input type='date' name='timeslotDate' id="create-form-date" required onchange="showTimeslots()"/>
 
             <br><br>
 
@@ -92,7 +94,7 @@ function showTimeslots() {
       } else {
         $.each(result, function(key, val) {
           $('#timeslotsContainer')
-          .append('<input class ="" type="radio" name="" value="' + val + '">')
+          .append('<input class ="" type="radio" name="timeslotTime" value="' + val + '">')
           .append('<label for="">' + val + '</label></div>')
           .append('<br>');
         })

@@ -21,9 +21,13 @@ include_once __DIR__ . '/../users/validate_user.php';
 
 // include database and classes
 include_once __DIR__ . '/../config/database.php';
+include_once __DIR__ . '/../class/asset.php';
 include_once __DIR__ . '/../class/booking.php';
+include_once __DIR__ . '/../class/timeslot.php';
 
 $booking = new Booking($db);
+$timeslot = new Timeslot($db);
+$asset = new Asset($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -34,14 +38,28 @@ if(
   !empty($data->status)
 ){
 
+  // set asset
+  $asset->id = $data->asset;
+  $asset->readOne();
+
   // set booking property values
   $booking->client = $data->client;
   $booking->asset = $data->asset;
   $booking->status = $data->status;
   $booking->created = date('Y-m-d H:i:s');
 
+  $booking->create();
+
+  // set timeslot property values
+  $timeslot->bookingID = $booking->id;
+  $timeslot->timeslotDate = $data->timeslotDate;
+  $timeslot->timeslotTime = $data->timeslotTime;
+  $timeslot->timeslotLength = $asset->timeslotLength;
+  $timeslot->status = $data->status;
+  $timeslot->created = date('Y-m-d H:i:s');
+
   // create the booking
-  if($booking->create()){
+  if($timeslot->create()){
 
     // set response code - 201 created
     http_response_code(201);
