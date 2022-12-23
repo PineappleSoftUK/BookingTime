@@ -349,5 +349,35 @@ class Timeslot{
     return $resultArr;
   }
 
+  /**
+   * Read By Booking
+   *
+   * Reads and returns all items in database by given booking
+   *
+   * @return array
+   */
+  function readByBooking($bookingID){
+    // select all query
+    $query = <<<SQL
+    SELECT id, bookingID, timeslotDate, timeslotTime, timeslotLength, status, created
+    FROM $this->table_name
+    WHERE bookingID = :bookingID
+    ORDER BY id ASC
+    SQL;
+
+    // prepare and execute query statement
+    $stmt = $this->conn->prepare($query);
+
+    // sanitize
+    $bookingID=htmlspecialchars(strip_tags($bookingID));
+
+    // bind values
+    $stmt->bindValue(':bookingID', $bookingID);
+
+    $result = $stmt->execute();
+
+    return $result;
+  }
+
 }
 ?>
