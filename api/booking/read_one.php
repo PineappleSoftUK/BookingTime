@@ -27,15 +27,15 @@ $booking->id = isset($_GET['id']) ? $_GET['id'] : die();
 // read the details of booking to be edited
 $booking->readOne();
 
-if($booking->name!=null){
+if($booking->id!=null){
   // create array
   $booking_arr = array(
       "id" =>  $booking->id,
       "client" => $booking->client,
       "asset" => $booking->asset,
-      "status" => $booking->status,,
-      "created" => $asset->created,
-      "modifed" => $asset->modified 
+      "status" => $booking->status,
+      "created" => $booking->created,
+      "modifed" => $booking->modified
   );
 
   // set response code - 200 OK
