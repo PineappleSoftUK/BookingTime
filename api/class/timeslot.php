@@ -313,5 +313,41 @@ class Timeslot{
     return $row['total_rows'];
   }
 
+  /**
+   * Read By Date
+   *
+   * Reads and returns all items in database for a given date
+   *
+   * @return array
+   */
+  function readByDate($date){
+    // select all query
+    $query = <<<SQL
+    SELECT id, bookingID, timeslotDate, timeslotTime, timeslotLength, status, created
+    FROM $this->table_name
+    WHERE timeslotDate = :timeslotDate
+    ORDER BY id ASC
+    SQL;
+
+    // prepare query
+    $stmt = $this->conn->prepare($query);
+
+    // sanitize
+    $date=htmlspecialchars(strip_tags($date));
+
+    // bind values
+    $stmt->bindValue(':timeslotDate', $date);;
+
+    // execute and return
+    $resultArr = array();
+    $result = $stmt->execute();
+
+    while($row = $result->fetchArray(SQLITE3_ASSOC)){
+      array_push($resultArr,$row['timeslotTime']);
+    }
+
+    return $resultArr;
+  }
+
 }
 ?>

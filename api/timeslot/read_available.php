@@ -37,23 +37,35 @@ $asset->readOne();
   $queryDateObj = new DateTime($queryDate);
   $dayName = date("l", $queryDateObj->getTimestamp());
 
-  //Get timeslots
+  // Get available
+
+  //Get timeslots that are available as per asset setup
   $timeslotsForAsset = $asset->timeslots;
   //Decode and convert to object
   $timeslotsForAsset = json_decode(html_entity_decode($timeslotsForAsset));
   //Get timeslots for given day.
   $timeslotsForGivenDayArr = $timeslotsForAsset->$dayName;
 
-  //Loop through timeslots available for given cal_days_in_month
-  //foreach ($timeslotsForGivenDayArr as $value) {
-  //  echo "$value <br>";
-  //}
+  // Remove already booked
 
-
-
-    //TODO
-    //Step 3 remove any from array that are booked.
-    //Step 4 return the list.
+  //Get booked timeslots for given date.
+  $bookedTimeslotsArr = $timeslot->readByDate($queryDateObj->format('Y-m-d'));
+  if ($bookedTimeslotsArr) {//If there are booked timeslots...
+    //Get total counts for each timeslot/result and capacity of asset
+    $bookedTimeslotsCountsArr = array_count_values($bookedTimeslotsArr);
+    $assetCapacity = $asset->capacity;
+    //Loop through and compare booked vs available.
+    foreach ($timeslotsForGivenDayArr as $key => $value) {
+      $totalHits = 0;
+      if (array_key_exists($value, $bookedTimeslotsCountsArr)) {
+        $totalHits = $bookedTimeslotsCountsArr[$value];
+      }
+      if ($totalHits >= $assetCapacity) {
+        //Remove timeslot form available to book
+        unset($timeslotsForGivenDayArr[$key]);
+      }
+    }
+  }
 
 
   // set response code - 200 OK
